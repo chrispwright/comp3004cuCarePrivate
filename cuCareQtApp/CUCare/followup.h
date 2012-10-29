@@ -11,9 +11,9 @@ public:
 
 private:
     QString *consultationId;
-    QString *status;
+    QString *status; //Pending or complete
     QDate *dateTime;
-    QString *followUpType;
+    QString *followUpType; //Renewal, medical test, referral, returnConsult
 };
 
 #endif // FOLLOWUP_H

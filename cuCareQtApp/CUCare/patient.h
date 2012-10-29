@@ -10,13 +10,12 @@ public:
     Patient();
 
 private:
+    QString *patientId;
     QString *firstName;
     QString *lastName;
-    QString *primePhysician;
+    QString *physicianId;
     int numOfConsults;
     QDate *lastConsult;
-    QVector<QString> *consultationRecords;
-
 };
 
 #endif // PATIENT_H

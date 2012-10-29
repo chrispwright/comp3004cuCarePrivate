@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'loginscreen.ui'
 **
-** Created: Wed Oct 24 18:14:11 2012
+** Created: Sun Oct 28 20:02:05 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -44,8 +44,10 @@ public:
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         buttonBox = new QDialogButtonBox(LoginScreen);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setLayoutDirection(Qt::RightToLeft);
         buttonBox->setOrientation(Qt::Horizontal);
-        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+        buttonBox->setStandardButtons(QDialogButtonBox::Abort|QDialogButtonBox::Ok);
+        buttonBox->setCenterButtons(true);
 
         gridLayout_2->addWidget(buttonBox, 2, 0, 1, 1);
 
@@ -92,7 +94,7 @@ public:
 
     void retranslateUi(QDialog *LoginScreen)
     {
-        LoginScreen->setWindowTitle(QApplication::translate("LoginScreen", "Dialog", 0, QApplication::UnicodeUTF8));
+        LoginScreen->setWindowTitle(QApplication::translate("LoginScreen", "Login to cuCare", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("LoginScreen", "Password:", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("LoginScreen", "Username:", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("LoginScreen", "LOGIN", 0, QApplication::UnicodeUTF8));

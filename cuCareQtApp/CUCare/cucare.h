@@ -2,7 +2,8 @@
 #define CUCARE_H
 
 #include <QMainWindow>
-#include "loginscreen.h"
+#include "addeditconsultationwindow.h"
+#include "addeditpatientwindow.h"
 
 namespace Ui {
 class CuCare;
@@ -30,7 +31,8 @@ private slots:
     void manageUsersAct();
     
 private:
-    LoginScreen *loginView;
+    AddEditConsultationWindow *addEditConsultationView;
+    AddEditPatientWindow *addEditPatientView;
     QAction *createPatient;
     QAction *editPatient;
     QAction *deletePatient;

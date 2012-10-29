@@ -16,14 +16,20 @@ SOURCES += main.cpp\
     patient.cpp \
     user.cpp \
     consultation.cpp \
-    followup.cpp
+    followup.cpp \
+    addeditpatientwindow.cpp \
+    addeditconsultationwindow.cpp
 
 HEADERS  += cucare.h \
     loginscreen.h \
     patient.h \
     user.h \
     consultation.h \
-    followup.h
+    followup.h \
+    addeditpatientwindow.h \
+    addeditconsultationwindow.h
 
 FORMS    += cucare.ui \
-    loginscreen.ui
+    loginscreen.ui \
+    addeditpatientwindow.ui \
+    addeditconsultationwindow.ui

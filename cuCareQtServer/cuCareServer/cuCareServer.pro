@@ -17,8 +17,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     server.cpp \
-    connectionthread.cpp
+    connectionthread.cpp \
+    messagemanager.cpp
 
 HEADERS += \
     server.h \
-    connectionthread.h
+    connectionthread.h \
+    messagemanager.h

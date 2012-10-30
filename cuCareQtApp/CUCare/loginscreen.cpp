@@ -1,5 +1,6 @@
 #include "loginscreen.h"
 #include "ui_loginscreen.h"
+#include <QDebug>
 
 LoginScreen::LoginScreen(QWidget *parent) :
     QDialog(parent),

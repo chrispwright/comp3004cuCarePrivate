@@ -4,6 +4,9 @@
 #include <QThread>
 #include <QTcpSocket>
 #include <QDebug>
+#include <QString>
+#include <QStringList>
+#include "messagemanager.h"
 
 class ConnectionThread : public QThread
 {
@@ -22,6 +25,7 @@ public slots:
 private:
     QTcpSocket *socket;
     int socketDescriptor;
+    MessageManager *mmanager;
 
 
 };

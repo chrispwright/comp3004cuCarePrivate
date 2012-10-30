@@ -14,41 +14,21 @@
    <string>Login to cuCare</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="2" column="0">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="layoutDirection">
-      <enum>Qt::RightToLeft</enum>
-     </property>
+   <item row="1" column="2">
+    <spacer name="horizontalSpacer_2">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Abort|QDialogButtonBox::Ok</set>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
      </property>
-     <property name="centerButtons">
-      <bool>true</bool>
-     </property>
-    </widget>
+    </spacer>
    </item>
-   <item row="1" column="0">
+   <item row="1" column="1">
     <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_2">
-       <property name="maximumSize">
-        <size>
-         <width>125</width>
-         <height>16777215</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Password:</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="1">
       <widget class="QLineEdit" name="lineEdit">
        <property name="maximumSize">
@@ -68,10 +48,39 @@
      </item>
     </layout>
    </item>
-   <item row="0" column="0">
+   <item row="1" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="0" colspan="3">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Abort|QDialogButtonBox::Ok</set>
+     </property>
+     <property name="centerButtons">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="3">
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>LOGIN</string>
+      <string>Welcome to cuCare</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

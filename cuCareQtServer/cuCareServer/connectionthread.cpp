@@ -4,7 +4,6 @@ ConnectionThread::ConnectionThread(int ID, QObject *parent) :
     QThread(parent)
 {
     this->socketDescriptor = ID;
-
 }
 
 void ConnectionThread::run()
@@ -18,7 +17,7 @@ void ConnectionThread::run()
         return;
     }
 
-    connect(socket, SIGNAL(readyRead()), this, SLOT(readyReady()), Qt::DirectConnection);
+    connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()), Qt::DirectConnection);
     connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()), Qt::DirectConnection);
 
     qDebug() << socketDescriptor << "Client connected";

@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
         mainw.move(x, y);
         mainw.setFixedSize(mainw.width(), mainw.height());
     }
-
+    w.close();
     
     return a.exec();
 }

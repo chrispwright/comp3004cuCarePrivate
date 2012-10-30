@@ -8,6 +8,7 @@ class Patient
 {
 public:
     Patient();
+    QString getPatientId(); //returns patient id
 
 private:
     QString *patientId;

@@ -8,6 +8,17 @@ class FollowUp
 {
 public:
     FollowUp();
+    FollowUp(QString, QString, QDate, QString); //consultation id, status, date, and type of follow-up
+
+    QString getConsId(); //return the consultation id
+    QString getStatus(); //return pending or complete
+    QDate getDateTime();
+    QString getType(); //return renewal, medical test, referral, or returnConsult
+
+    void setConsId(QString);
+    void setStatus(QString);
+    void setDateTime(QDate);
+    void setType(QString);
 
 private:
     QString *consultationId;

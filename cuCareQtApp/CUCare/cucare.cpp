@@ -6,7 +6,11 @@ CuCare::CuCare(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CuCare)
 {
+
     ui->setupUi(this);
+    ui->menuFile->setVisible(true);
+
+    setUpComboBox();
 
     //Menu Actions
     connect(ui->actionAdd_Patient, SIGNAL(triggered()), this, SLOT(createPatientAct()));
@@ -19,6 +23,7 @@ CuCare::CuCare(QWidget *parent) :
     connect(ui->pushButton_EditConsultation, SIGNAL(clicked()), this, SLOT(editPatientRecordAct()));
 
     //Add signals for deleting patient and value changed for patient combobox
+
 }
 
 CuCare::~CuCare()
@@ -104,3 +109,24 @@ void CuCare::manageUsersAct(){
 void CuCare::contextMenuEvent(QContextMenuEvent *event){
 
 }
+
+void CuCare::setUpComboBox() {
+
+    QComboBox *test = ui->comboBox_Patients;
+
+    QStringList names;
+    names << tr("Calvin") << tr("Nick") << tr("Chris"); //make this a list of objects from server
+
+    for (int i=0; i<3; i++) {
+        test->addItem(names[i], 1);
+
+    }
+
+    //if (test->findData(1) or findText("patientName")  this finds which data the combo box is selected
+    //then perhaps make a function called updatePatient() that updates the text fields
+
+    ui->patFirstName->setText("Calvin");            //patient.getFirstName();
+    ui->patLastName->setText("Lewis");              //patient.getLastName();
+    ui->patPhoneNum->setText("(613)-407-1234");     //patient.getPhoneNum();
+}
+

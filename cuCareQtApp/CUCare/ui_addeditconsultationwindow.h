@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'addeditconsultationwindow.ui'
 **
-** Created: Sun Oct 28 20:02:05 2012
+** Created: Tue Oct 30 21:16:06 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -33,12 +33,12 @@ public:
     QGroupBox *groupBox;
     QGridLayout *gridLayout_3;
     QGridLayout *gridLayout_2;
-    QLineEdit *lineEdit;
+    QLineEdit *editOHIP;
     QLabel *label;
-    QLineEdit *lineEdit_2;
+    QLineEdit *editReason;
     QLabel *label_2;
     QLabel *label_3;
-    QPlainTextEdit *plainTextEdit;
+    QPlainTextEdit *editDiagnosis;
     QDialogButtonBox *buttonBox;
     QSpacerItem *verticalSpacer;
 
@@ -55,20 +55,20 @@ public:
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        lineEdit = new QLineEdit(groupBox);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        editOHIP = new QLineEdit(groupBox);
+        editOHIP->setObjectName(QString::fromUtf8("editOHIP"));
 
-        gridLayout_2->addWidget(lineEdit, 0, 1, 1, 1);
+        gridLayout_2->addWidget(editOHIP, 0, 1, 1, 1);
 
         label = new QLabel(groupBox);
         label->setObjectName(QString::fromUtf8("label"));
 
         gridLayout_2->addWidget(label, 0, 0, 1, 1);
 
-        lineEdit_2 = new QLineEdit(groupBox);
-        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
+        editReason = new QLineEdit(groupBox);
+        editReason->setObjectName(QString::fromUtf8("editReason"));
 
-        gridLayout_2->addWidget(lineEdit_2, 1, 1, 1, 1);
+        gridLayout_2->addWidget(editReason, 1, 1, 1, 1);
 
         label_2 = new QLabel(groupBox);
         label_2->setObjectName(QString::fromUtf8("label_2"));
@@ -80,10 +80,10 @@ public:
 
         gridLayout_2->addWidget(label_3, 2, 0, 1, 1);
 
-        plainTextEdit = new QPlainTextEdit(groupBox);
-        plainTextEdit->setObjectName(QString::fromUtf8("plainTextEdit"));
+        editDiagnosis = new QPlainTextEdit(groupBox);
+        editDiagnosis->setObjectName(QString::fromUtf8("editDiagnosis"));
 
-        gridLayout_2->addWidget(plainTextEdit, 2, 1, 1, 1);
+        gridLayout_2->addWidget(editDiagnosis, 2, 1, 1, 1);
 
 
         gridLayout_3->addLayout(gridLayout_2, 0, 0, 1, 1);

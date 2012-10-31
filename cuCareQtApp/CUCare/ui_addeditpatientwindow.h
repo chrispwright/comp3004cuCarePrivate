@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'addeditpatientwindow.ui'
 **
-** Created: Sun Oct 28 20:02:05 2012
+** Created: Tue Oct 30 21:16:06 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -32,9 +32,9 @@ public:
     QGroupBox *groupBox;
     QGridLayout *gridLayout_3;
     QGridLayout *gridLayout_2;
-    QLineEdit *lineEdit_3;
-    QLineEdit *lineEdit_2;
-    QLineEdit *lineEdit;
+    QLineEdit *editPhoneNum;
+    QLineEdit *editLastName;
+    QLineEdit *editFirstName;
     QLabel *label_3;
     QLabel *label_5;
     QLabel *label_2;
@@ -59,26 +59,26 @@ public:
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        lineEdit_3 = new QLineEdit(groupBox);
-        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
-        lineEdit_3->setEnabled(true);
-        lineEdit_3->setMaximumSize(QSize(125, 16777215));
+        editPhoneNum = new QLineEdit(groupBox);
+        editPhoneNum->setObjectName(QString::fromUtf8("editPhoneNum"));
+        editPhoneNum->setEnabled(true);
+        editPhoneNum->setMaximumSize(QSize(125, 16777215));
 
-        gridLayout_2->addWidget(lineEdit_3, 2, 1, 1, 1);
+        gridLayout_2->addWidget(editPhoneNum, 2, 1, 1, 1);
 
-        lineEdit_2 = new QLineEdit(groupBox);
-        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
-        lineEdit_2->setEnabled(true);
-        lineEdit_2->setMaximumSize(QSize(125, 16777215));
+        editLastName = new QLineEdit(groupBox);
+        editLastName->setObjectName(QString::fromUtf8("editLastName"));
+        editLastName->setEnabled(true);
+        editLastName->setMaximumSize(QSize(125, 16777215));
 
-        gridLayout_2->addWidget(lineEdit_2, 1, 1, 1, 1);
+        gridLayout_2->addWidget(editLastName, 1, 1, 1, 1);
 
-        lineEdit = new QLineEdit(groupBox);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setEnabled(true);
-        lineEdit->setMaximumSize(QSize(125, 16777215));
+        editFirstName = new QLineEdit(groupBox);
+        editFirstName->setObjectName(QString::fromUtf8("editFirstName"));
+        editFirstName->setEnabled(true);
+        editFirstName->setMaximumSize(QSize(125, 16777215));
 
-        gridLayout_2->addWidget(lineEdit, 0, 1, 1, 1);
+        gridLayout_2->addWidget(editFirstName, 0, 1, 1, 1);
 
         label_3 = new QLabel(groupBox);
         label_3->setObjectName(QString::fromUtf8("label_3"));
@@ -113,7 +113,7 @@ public:
     {
         AddEditPatientWindow->setWindowTitle(QApplication::translate("AddEditPatientWindow", "Dialog", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("AddEditPatientWindow", "Patient Info", 0, QApplication::UnicodeUTF8));
-        lineEdit_2->setText(QString());
+        editLastName->setText(QString());
         label_3->setText(QApplication::translate("AddEditPatientWindow", "Last Name:", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("AddEditPatientWindow", "Phone Number:", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("AddEditPatientWindow", "First Name:", 0, QApplication::UnicodeUTF8));

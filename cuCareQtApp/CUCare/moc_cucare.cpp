@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cucare.h'
 **
-** Created: Sun Oct 28 20:02:38 2012
+** Created: Tue Oct 30 20:54:57 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_CuCare[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -39,6 +39,7 @@ static const uint qt_meta_data_CuCare[] = {
      111,    7,    7,    7, 0x08,
      129,    7,    7,    7, 0x08,
      143,    7,    7,    7, 0x08,
+     160,    7,    7,    7, 0x08,
 
        0        // eod
 };
@@ -48,6 +49,7 @@ static const char qt_meta_stringdata_CuCare[] = {
     "deletePatientAct()\0createPatientRecordAct()\0"
     "editPatientRecordAct()\0viewPatientsAct()\0"
     "runQueryAct()\0manageUsersAct()\0"
+    "setUpComboBox()\0"
 };
 
 void CuCare::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -64,6 +66,7 @@ void CuCare::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 5: _t->viewPatientsAct(); break;
         case 6: _t->runQueryAct(); break;
         case 7: _t->manageUsersAct(); break;
+        case 8: _t->setUpComboBox(); break;
         default: ;
         }
     }
@@ -102,9 +105,9 @@ int CuCare::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }

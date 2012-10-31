@@ -5,6 +5,9 @@
 #include "addeditconsultationwindow.h"
 #include "addeditpatientwindow.h"
 
+class QStringListModel;
+class QStandardItem;
+
 namespace Ui {
 class CuCare;
 }
@@ -29,6 +32,7 @@ private slots:
     void viewPatientsAct();
     void runQueryAct();
     void manageUsersAct();
+    void setUpComboBox();
     
 private:
     AddEditConsultationWindow *addEditConsultationView;
@@ -42,6 +46,9 @@ private:
     QAction *runQuery;
     QAction *manageUsers;
     Ui::CuCare *ui;
+
+    QStringListModel *typeModel;
+
 };
 
 #endif // CUCARE_H

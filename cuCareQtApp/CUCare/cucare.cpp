@@ -76,7 +76,10 @@ void CuCare::readResponse()
             ui->textBrowser_AppOutput->append(appOutput->successfulLogin(this->cuCareUser));
 
             //Send request to server for patient data
-            connection->write("patientdatarequest|");
+            if(this->cuCareUser->getType() == "Physician" || this->cuCareUser->getType() == "AdminAssistant")
+                connection->write("patientdatarequest|");
+            else
+                this->ui->stackedWidget->setCurrentIndex(1);
         }
         else if(messageType == "invaliduser"){
             this->setHidden(true);
@@ -103,7 +106,7 @@ void CuCare::readResponse()
                 p->setFirstName(QString::fromLocal8Bit(patientInfo.at(2).toLocal8Bit()));
                 p->setLastName(QString::fromLocal8Bit(patientInfo.at(3).toLocal8Bit()));
                 p->setPhoneNumber(QString::fromLocal8Bit(patientInfo.at(4).toLocal8Bit()));
-                p->setPhysId(QString::fromLocal8Bit(patientInfo.at(5).toLocal8Bit()));
+                p->setPhys(QString::fromLocal8Bit(patientInfo.at(5).toLocal8Bit()));
                 QDate lastVisit = QDate::fromString(QString::fromLocal8Bit(patientInfo.at(6).toLocal8Bit()),"yyyyMMdd");
                 p->setLastConsult(lastVisit);
                 this->cuCarePatients.push_back(p);
@@ -304,8 +307,8 @@ void CuCare::comboBoxChanged(int value)
             ui->lineEdit_patLastName->setText(cuCarePatients[value]->getLastName());
             ui->lineEdit_patPhoneNum->setText(cuCarePatients[value]->getPhoneNumber());
             ui->dateEdit_PatLastConsult->setDate(cuCarePatients[value]->getLastConsult());
-            QString physId = cuCarePatients[value]->getPhysId();
-            //Find Physician and Load His Name
+            ui->lineEdit_PatPrimaryPhysician->setText(cuCarePatients[value]->getPhys());
+
         }
 
         //Update Consultation List

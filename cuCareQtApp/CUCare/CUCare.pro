@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     followup.cpp \
     addeditpatientwindow.cpp \
     addeditconsultationwindow.cpp \
-    outputmessages.cpp
+    outputmessages.cpp \
+    addeditfollowups.cpp
 
 HEADERS  += cucare.h \
     loginscreen.h \
@@ -30,9 +31,11 @@ HEADERS  += cucare.h \
     followup.h \
     addeditpatientwindow.h \
     addeditconsultationwindow.h \
-    outputmessages.h
+    outputmessages.h \
+    addeditfollowups.h
 
 FORMS    += cucare.ui \
     loginscreen.ui \
     addeditpatientwindow.ui \
-    addeditconsultationwindow.ui
+    addeditconsultationwindow.ui \
+    addeditfollowups.ui

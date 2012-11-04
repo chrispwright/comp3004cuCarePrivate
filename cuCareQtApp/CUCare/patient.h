@@ -13,7 +13,7 @@ public:
     QString getPatientId(); //returns patient id
     QString getFirstName(); //returns patient firstname
     QString getLastName(); //returns patient lastname
-    QString getPhysId(); //returns primary physician id
+    QString getPhys(); //returns primary physician id
     int getNumConsults(); //returns number of consults
     QDate getLastConsult(); //returns date of last consultation
     QString getPhoneNumber();
@@ -21,7 +21,7 @@ public:
     void setPatientId(QString); //sets patient id
     void setFirstName(QString); //sets patient firstname
     void setLastName(QString); //sets patient lastname
-    void setPhysId(QString); //sets primary physician id
+    void setPhys(QString); //sets primary physician id
     void setNumConsults(int); //sets number of consults
     void setLastConsult(QDate); //sets date of last consultation*/
     void setPhoneNumber(QString);
@@ -31,7 +31,7 @@ private:
     QString patientId;
     QString firstName;
     QString lastName;
-    QString physicianId;
+    QString primaryPhysician;
     int numOfConsults;
     QDate lastConsult;
     QString phoneNumber;

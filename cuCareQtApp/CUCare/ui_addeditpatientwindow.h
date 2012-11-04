@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'addeditpatientwindow.ui'
 **
-** Created: Tue Oct 30 21:16:06 2012
+** Created: Sun Nov 4 15:00:36 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

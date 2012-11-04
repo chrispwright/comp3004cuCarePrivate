@@ -32,7 +32,8 @@ HEADERS  += cucare.h \
     addeditpatientwindow.h \
     addeditconsultationwindow.h \
     outputmessages.h \
-    addeditfollowups.h
+    addeditfollowups.h \
+    staticdefinitions.h
 
 FORMS    += cucare.ui \
     loginscreen.ui \

@@ -1,6 +1,9 @@
 #include "addeditconsultationwindow.h"
 #include "ui_addeditconsultationwindow.h"
 
+static QString PHYSICIAN = "Physician";
+static QString ADMIN_ASSISTANT = "AdminAssistant";
+
 AddEditConsultationWindow::AddEditConsultationWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddEditConsultationWindow)
@@ -24,7 +27,7 @@ void AddEditConsultationWindow::updateFields()
     ui->dateTimeEdit->setDate(patientConsult->getDate());
     ui->dateTimeEdit->setTime(patientConsult->getTime());
     ui->editOHIP->setText(patientConsult->getOhip());
-    if(currentUser->getType() == "Physician"){
+    if(currentUser->getType() == PHYSICIAN){
         ui->editReason->setText(patientConsult->getReason());
         ui->editDiagnosis->setPlainText(patientConsult->getDiagnosis());
     }
@@ -32,7 +35,7 @@ void AddEditConsultationWindow::updateFields()
 
 void AddEditConsultationWindow::updateAccess()
 {
-    if(currentUser->getType() == "AdminAssistant"){
+    if(currentUser->getType() == ADMIN_ASSISTANT){
         ui->editReason->setReadOnly(true);
         ui->editDiagnosis->setReadOnly(true);
 
@@ -47,7 +50,7 @@ void AddEditConsultationWindow::saveConsultation()
     patientConsult->setTime(ui->dateTimeEdit->time());
     patientConsult->setOhip(ui->editOHIP->text());
 
-    if(currentUser->getType() == "Physician"){
+    if(currentUser->getType() == PHYSICIAN){
         patientConsult->setReason(ui->editReason->text());
         patientConsult->setDiagnosis(ui->editDiagnosis->toPlainText());
     }

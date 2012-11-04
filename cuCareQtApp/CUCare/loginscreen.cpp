@@ -4,6 +4,8 @@
 #include <QTcpSocket>
 #include <QTcpServer>
 
+static QString LOGIN_HEADER = "login|";
+
 LoginScreen::LoginScreen(QWidget *parent, QTcpSocket *conn) :
     QDialog(parent),
     ui(new Ui::LoginScreen)
@@ -13,7 +15,6 @@ LoginScreen::LoginScreen(QWidget *parent, QTcpSocket *conn) :
 
     connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(updateUsername()));
     connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-
 }
 
 User* LoginScreen::getUser(){ return cuCareUser; }
@@ -24,7 +25,7 @@ void LoginScreen::updateUsername()
 {
     setUsername(ui->editUsername->text());
     QByteArray data;
-    data.append("login|");
+    data.append(LOGIN_HEADER);
     data.append(getUsername());
     connection->write(data);
 }

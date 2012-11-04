@@ -32,6 +32,7 @@ CuCare::CuCare(QWidget *parent) :
 
     connection->connectToHost(QHostAddress::LocalHost, 8001);
     loginScreen = new LoginScreen(this, connection);
+    loginScreen->setFixedSize(loginScreen->width(), loginScreen->height());
     openLogin();
 }
 
@@ -39,12 +40,14 @@ CuCare::~CuCare()
 {
     delete ui;
     delete loginScreen;
+    delete connection;
+    delete appOutput;
 }
 
 void CuCare::openLogin()
 {
     if(loginScreen->exec() == 1){
-
+        loginScreen->close();
     }
     else{
         exit(0);
@@ -57,9 +60,9 @@ void CuCare::readResponse()
     QString message = QString::fromLocal8Bit(response);
     QStringList messageSplit;
     if(message != ""){
-        messageSplit = message.split("|");
+        messageSplit = message.split(PIPE_DELIMETER);
         QByteArray messageType = messageSplit.at(0).toLocal8Bit();
-        if(messageType == "validuser"){
+        if(messageType == VALID_USER_TYPE){
 
             this->setHidden(false);
             cuCareUser->setUserId(QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()));
@@ -73,15 +76,15 @@ void CuCare::readResponse()
 
             //Depending on the type of user setup the GUI appropriately and send proper requests to the server
             QString userType = cuCareUser->getType();
-            if(userType == "Physician" || userType == "AdminAssistant"){
-                connection->write("patientdatarequest|");
-                ui->stackedWidget->setCurrentIndex(1);
+            if(userType == PHYSICIAN || userType == ADMIN_ASSISTANT){
+                connection->write(PATIENT_DATA_REQUEST.toLocal8Bit());
+                ui->stackedWidget->setCurrentIndex(PHYS_ADMIN_PAGE);
             }
             else{
-                ui->stackedWidget->setCurrentIndex(2);
+                ui->stackedWidget->setCurrentIndex(SYS_ADMIN_PAGE);
             }
         }
-        else if(messageType == "invaliduser"){
+        else if(messageType == INVALID_USER_TYPE){
             this->setHidden(true);
             //Error message and cancel login
             QMessageBox messageBox;
@@ -91,38 +94,38 @@ void CuCare::readResponse()
 
             openLogin();
         }
-        else if(messageType == "patientdata"){
+        else if(messageType == PATIENT_DATA_TYPE){
             QStringList patientConsultSplit = message.split("\n");
 
-            QStringList patientSplit = QString::fromLocal8Bit(patientConsultSplit.at(0).toLocal8Bit()).split("~");
-            QStringList consultSplit = QString::fromLocal8Bit(patientConsultSplit.at(1).toLocal8Bit()).split("~");
+            QStringList patientSplit = QString::fromLocal8Bit(patientConsultSplit.at(0).toLocal8Bit()).split(TILDA_DELIMETER);
+            QStringList consultSplit = QString::fromLocal8Bit(patientConsultSplit.at(1).toLocal8Bit()).split(TILDA_DELIMETER);
 
             //Patient data
             for(int i = 0; i<patientSplit.size(); i++){
-                QStringList patientInfo = patientSplit.at(i).split("|");
+                QStringList patientInfo = patientSplit.at(i).split(PIPE_DELIMETER);
                 Patient *p = new Patient();
                 p->setPatientId(QString::fromLocal8Bit(patientInfo.at(1).toLocal8Bit()));
                 p->setFirstName(QString::fromLocal8Bit(patientInfo.at(2).toLocal8Bit()));
                 p->setLastName(QString::fromLocal8Bit(patientInfo.at(3).toLocal8Bit()));
                 p->setPhoneNumber(QString::fromLocal8Bit(patientInfo.at(4).toLocal8Bit()));
                 p->setPhys(QString::fromLocal8Bit(patientInfo.at(5).toLocal8Bit()));
-                QDate lastVisit = QDate::fromString(QString::fromLocal8Bit(patientInfo.at(6).toLocal8Bit()),"yyyyMMdd");
+                QDate lastVisit = QDate::fromString(QString::fromLocal8Bit(patientInfo.at(6).toLocal8Bit()),DATE_FORMAT);
                 p->setLastConsult(lastVisit);
                 cuCarePatients.push_back(p);
             }
 
             //Consultation data
             for(int i = 0; i<consultSplit.size(); i++){
-                QStringList consultInfo = consultSplit.at(i).split("|");
+                QStringList consultInfo = consultSplit.at(i).split(PIPE_DELIMETER);
                 Consultation *c = new Consultation();
                 c->setPatientId(QString::fromLocal8Bit(consultInfo.at(1).toLocal8Bit()));
                 c->setConsId(QString::fromLocal8Bit(consultInfo.at(2).toLocal8Bit()));
                 c->setOhip(QString::fromLocal8Bit(consultInfo.at(3).toLocal8Bit()));
                 c->setReason(QString::fromLocal8Bit(consultInfo.at(4).toLocal8Bit()));
                 c->setDiagnosis(QString::fromLocal8Bit(consultInfo.at(5).toLocal8Bit()));
-                QDate date = QDate::fromString(QString::fromLocal8Bit(consultInfo.at(6).toLocal8Bit()),"yyyyMMdd");
+                QDate date = QDate::fromString(QString::fromLocal8Bit(consultInfo.at(6).toLocal8Bit()),DATE_FORMAT);
                 c->setDate(date);
-                QTime time = QTime::fromString(QString::fromLocal8Bit(consultInfo.at(7).toLocal8Bit()),"hh:mm:ss");
+                QTime time = QTime::fromString(QString::fromLocal8Bit(consultInfo.at(7).toLocal8Bit()),TIME_FORMAT);
                 c->setTime(time);
                 cuCareConsultations.push_back(c);
             }
@@ -135,21 +138,21 @@ void CuCare::readResponse()
             ui->textBrowser_AppOutput->append(appOutput->dataRetrievalSuccess());
 
         }
-        else if(messageType == "consultationdata"){
+        else if(messageType == CONSULTATION_DATA_TYPE){
             int lastPatientIndex = ui->comboBox_Patients->currentIndex();
             cuCareConsultations.clear();
-            QStringList consultSplit = message.split("~");
+            QStringList consultSplit = message.split(TILDA_DELIMETER);
             for(int i = 0; i<consultSplit.size(); i++){
-                QStringList consultInfo = consultSplit.at(i).split("|");
+                QStringList consultInfo = consultSplit.at(i).split(PIPE_DELIMETER);
                 Consultation *c = new Consultation();
                 c->setPatientId(QString::fromLocal8Bit(consultInfo.at(1).toLocal8Bit()));
                 c->setConsId(QString::fromLocal8Bit(consultInfo.at(2).toLocal8Bit()));
                 c->setOhip(QString::fromLocal8Bit(consultInfo.at(3).toLocal8Bit()));
                 c->setReason(QString::fromLocal8Bit(consultInfo.at(4).toLocal8Bit()));
                 c->setDiagnosis(QString::fromLocal8Bit(consultInfo.at(5).toLocal8Bit()));
-                QDate date = QDate::fromString(QString::fromLocal8Bit(consultInfo.at(6).toLocal8Bit()),"yyyyMMdd");
+                QDate date = QDate::fromString(QString::fromLocal8Bit(consultInfo.at(6).toLocal8Bit()),DATE_FORMAT);
                 c->setDate(date);
-                QTime time = QTime::fromString(QString::fromLocal8Bit(consultInfo.at(7).toLocal8Bit()),"hh:mm:ss");
+                QTime time = QTime::fromString(QString::fromLocal8Bit(consultInfo.at(7).toLocal8Bit()),TIME_FORMAT);
                 c->setTime(time);
                 cuCareConsultations.push_back(c);
             }
@@ -163,7 +166,7 @@ void CuCare::readResponse()
             ui->textBrowser_AppOutput->append(appOutput->addConsultationRecord(currentPatient));
 
         }
-        else if(messageType == "editconsultationsuccessful"){
+        else if(messageType == EDIT_CONSULTATION_SUCCESSFUL_TYPE){
             ui->textBrowser_AppOutput->append(appOutput->editConsultationSuccess(currentPatient));
         }
     }
@@ -230,10 +233,6 @@ void CuCare::createPatientRecordAct()
         Consultation *newConsult = addEditConsultationView->getPatientConsult();
         newConsult->setPatientId(currentPatient->getPatientId());
 
-        if(currentPatient->getLastConsult() < newConsult->getDate() && newConsult->getDate() < QDate::currentDate()){
-            currentPatient->setLastConsult(newConsult->getDate());
-            ui->dateEdit_PatLastConsult->setDate(currentPatient->getLastConsult());
-        }
         //Send update to server
         QByteArray message = newConsult->getAddMessage().toLocal8Bit();
         connection->write(message);
@@ -260,11 +259,6 @@ void CuCare::editPatientRecordAct()
 
         //Update local copies of the consultation
         currentConsultation = addEditConsultationView->getPatientConsult();
-
-        if(currentPatient->getLastConsult() < currentConsultation->getDate() && currentConsultation->getDate() < QDate::currentDate()){
-            currentPatient->setLastConsult(currentConsultation->getDate());
-            ui->dateEdit_PatLastConsult->setDate(currentPatient->getLastConsult());
-        }
 
         //Send update to server
         QByteArray message = currentConsultation->getEditMessage().toLocal8Bit();

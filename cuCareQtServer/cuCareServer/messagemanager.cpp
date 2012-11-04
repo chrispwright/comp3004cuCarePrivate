@@ -263,4 +263,3 @@ QString MessageManager::handleEditConsultation(QString incomingMessage)
 
     return EDIT_CONSULTATION_SUCCESS;
 }
-

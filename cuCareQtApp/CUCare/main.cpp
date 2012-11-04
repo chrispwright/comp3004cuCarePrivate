@@ -8,9 +8,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     CuCare mainw;
 
-    //Should be doing a request to the server to check whether the username is valid
-    //For now just open the main cuCare Window
-
+    //Set size and center main window
     QDesktopWidget *desktop = QApplication::desktop();
 
     int screenWidth, width;

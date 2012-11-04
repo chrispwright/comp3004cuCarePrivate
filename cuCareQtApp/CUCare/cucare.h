@@ -12,6 +12,7 @@
 #include "patient.h"
 #include "consultation.h"
 #include "outputmessages.h"
+#include "staticdefinitions.h"
 
 class QStringListModel;
 class QStandardItem;

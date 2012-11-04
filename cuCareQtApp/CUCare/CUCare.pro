@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += network
 
 TARGET = CUCare
 TEMPLATE = app
@@ -18,7 +19,8 @@ SOURCES += main.cpp\
     consultation.cpp \
     followup.cpp \
     addeditpatientwindow.cpp \
-    addeditconsultationwindow.cpp
+    addeditconsultationwindow.cpp \
+    outputmessages.cpp
 
 HEADERS  += cucare.h \
     loginscreen.h \
@@ -27,7 +29,8 @@ HEADERS  += cucare.h \
     consultation.h \
     followup.h \
     addeditpatientwindow.h \
-    addeditconsultationwindow.h
+    addeditconsultationwindow.h \
+    outputmessages.h
 
 FORMS    += cucare.ui \
     loginscreen.ui \

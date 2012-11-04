@@ -2,8 +2,16 @@
 #define CUCARE_H
 
 #include <QMainWindow>
+#include <QTcpSocket>
+#include <QHostAddress>
+#include <QMessageBox>
 #include "addeditconsultationwindow.h"
 #include "addeditpatientwindow.h"
+#include "loginscreen.h"
+#include "user.h"
+#include "patient.h"
+#include "consultation.h"
+#include "outputmessages.h"
 
 class QStringListModel;
 class QStandardItem;
@@ -22,6 +30,10 @@ public:
 
 protected:
     void contextMenuEvent(QContextMenuEvent *event);
+    void openLogin();
+
+public slots:
+
 
 private slots:
     void createPatientAct();
@@ -33,6 +45,9 @@ private slots:
     void runQueryAct();
     void manageUsersAct();
     void setUpComboBox();
+    void comboBoxChanged(int);
+    void consultListChanged(int);
+    void readResponse();
     
 private:
     AddEditConsultationWindow *addEditConsultationView;
@@ -48,6 +63,17 @@ private:
     Ui::CuCare *ui;
 
     QStringListModel *typeModel;
+
+    LoginScreen *loginScreen;
+    User *cuCareUser;
+    QTcpSocket *connection;
+    OutputMessages *appOutput;
+    QVector<Patient*> cuCarePatients;
+    QVector<Consultation*> cuCareConsultations;
+    QVector<Consultation*> currentPatientConsultations;
+    Patient *currentPatient;
+    Consultation *currentConsultation;
+    int currentPatientIndex;
 
 };
 

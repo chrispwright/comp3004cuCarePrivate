@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QDate>
+#include <QTime>
 
 class Consultation
 {
@@ -15,22 +16,30 @@ public:
     QString getOhip(); //returns ohip number
     QString getReason(); //returns reason for visit
     QString getDiagnosis(); //returns diagnosis
-    QDate getDateOfCons(); //return date
+    QDate getDate(); //return date
+    QTime getTime();
 
     void setPatientId(QString); //sets patient id
     void setConsId(QString); //sets consultation id
     void setOhip(QString); //sets ohip number
     void setReason(QString); //sets reason for visit
     void setDiagnosis(QString); //sets diagnosis
-    void setDateOfCons(QDate); //sets date
+    void setDate(QDate); //sets date
+    void setTime(QTime);
+
+    QString getEditMessage();
+    QString getAddMessage();
+private slots:
+    QString toMessage();
 
 private:
-    QString *patientId;        //Unique identifier to a patient
-    QString *consultationId;   //Unique identifier for the consultation
-    QString *ohip;
-    QString *reasonForVisit;
-    QString *diagnosis;
-    QDate *dateTime;
+    QString patientId;        //Unique identifier to a patient
+    QString consultationId;   //Unique identifier for the consultation
+    QString ohip;
+    QString reasonForVisit;
+    QString diagnosis;
+    QDate date;
+    QTime time;
 };
 
 #endif // CONSULTATION_H

@@ -14,6 +14,7 @@ class ConnectionThread : public QThread
 
 public:
     explicit ConnectionThread(int ID, QObject *parent = 0);
+    ~ConnectionThread();
     void run();
 
 signals:
@@ -26,8 +27,6 @@ private:
     QTcpSocket *socket;
     int socketDescriptor;
     MessageManager *mmanager;
-
-
 };
 
 #endif // CONNECTIONTHREAD_H

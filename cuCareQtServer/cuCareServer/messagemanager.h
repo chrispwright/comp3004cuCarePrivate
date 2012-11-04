@@ -2,18 +2,21 @@
 #define MESSAGEMANAGER_H
 
 #include <QString>
-
+#include <QTcpSocket>
 class MessageManager
 {
 public:
-    MessageManager();
+   MessageManager();
+   ~MessageManager();
 
-    QString& handleLogin(QString username);
+   QByteArray dispatchHandler(QString message, QTcpSocket *socket);
+   QString handleLogin(QString username);
+   QString handleDataRequest(QTcpSocket *socket);
    //QString addpatient();
    //QString editpatient();
    //QString deletepatient();
-   //QString addconsultation();
-   //QString editconsultation();
+   QString handleAddConsultation(QString incomingMessage, QTcpSocket *socket);
+   QString handleEditConsultation(QString incomingMessage);
 
 };
 

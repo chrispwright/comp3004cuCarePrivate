@@ -7,6 +7,11 @@ ConnectionThread::ConnectionThread(int ID, QObject *parent) :
     this->mmanager = new MessageManager();
 }
 
+ConnectionThread::~ConnectionThread()
+{
+    delete mmanager;
+}
+
 void ConnectionThread::run()
 {
     //thread starts here
@@ -28,7 +33,7 @@ void ConnectionThread::run()
 
 void ConnectionThread::readyRead()
 {
-    QByteArray data = socket->readAll();
+    QByteArray data = socket->readAll().trimmed();
 
     qDebug() << socketDescriptor << "Data in:" << data;
 
@@ -37,45 +42,11 @@ void ConnectionThread::readyRead()
     QString incomingMessage = QString::fromUtf8(data);
     qDebug() << incomingMessage;
 
-    QStringList message = incomingMessage.split('|');
+    QByteArray result = mmanager->dispatchHandler(incomingMessage, socket);
 
-    for (int i = 0; i < message.size(); ++i)
-        qDebug() << message.at(i).toLocal8Bit().constData();
-
-    //Handler for each type of message
-
-    //Login Message Type
-    if(message.size() > 0){
-
-        QString type = QString::fromLocal8Bit(message.at(0).toLocal8Bit()); //Extract the type
-
-        if(type == "login"){
-            QString username = QString::fromLocal8Bit(message.at(1).toLocal8Bit());
-            qDebug() << "Testing login";
-            //Search for the username in the database of users
-            QString result = mmanager->handleLogin(username);
-            socket->write(result.toLocal8Bit());
-        }
-        else if(type == "addpatient"){
-
-        }
-        else if(type == "editpatient"){
-
-        }
-        else if(type == "deletepatient"){
-
-        }
-        else if(type == "addconsultation"){
-
-        }
-        else if(type == "editconsultation"){
-
-        }
-        else if(type == ""){
-
-        }
-    }
-
+    if(result != "" && result != "dataretrievalsuccessful" && result != "dataupdated")
+        socket->write(result);
+    qDebug() << result;
     //socket->write(data);
 }
 

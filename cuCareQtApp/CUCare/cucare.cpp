@@ -75,11 +75,15 @@ void CuCare::readResponse()
             //App output
             ui->textBrowser_AppOutput->append(appOutput->successfulLogin(this->cuCareUser));
 
-            //Send request to server for patient data
-            if(this->cuCareUser->getType() == "Physician" || this->cuCareUser->getType() == "AdminAssistant")
+            //Depending on the type of user setup the GUI appropriately and send proper requests to the server
+            QString userType = this->cuCareUser->getType();
+            if(userType == "Physician" || userType == "AdminAssistant"){
                 connection->write("patientdatarequest|");
-            else
                 this->ui->stackedWidget->setCurrentIndex(1);
+            }
+            else{
+                this->ui->stackedWidget->setCurrentIndex(2);
+            }
         }
         else if(messageType == "invaliduser"){
             this->setHidden(true);
@@ -218,6 +222,8 @@ void CuCare::createPatientRecordAct()
     addEditConsultationView->setModal(true);
     addEditConsultationView->setFixedSize(addEditConsultationView->width(), addEditConsultationView->height());
     addEditConsultationView->setPatientConsult(new Consultation());
+    addEditConsultationView->setCurrentUser(this->cuCareUser);
+    addEditConsultationView->updateAccess();
 
     //Need to be sending an object pointer for a new patient to the next window
     //so that information can be passed back for processing
@@ -242,7 +248,9 @@ void CuCare::editPatientRecordAct()
 
     //Get Index Of Selected Consultation
     addEditConsultationView->setPatientConsult(this->currentConsultation);
+    addEditConsultationView->setCurrentUser(this->cuCareUser);
     addEditConsultationView->updateFields();
+    addEditConsultationView->updateAccess();
     //Need to be sending an object pointer for a new patient to the next window
     //so that information can be passed back for processing
 

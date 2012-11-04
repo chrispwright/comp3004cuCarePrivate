@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'cucare.ui'
 **
-** Created: Sun Nov 4 00:57:37 2012
+** Created: Sun Nov 4 11:34:18 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -52,6 +52,7 @@ public:
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QStackedWidget *stackedWidget;
+    QWidget *page;
     QWidget *page_3;
     QGridLayout *gridLayout_10;
     QLabel *label;
@@ -94,6 +95,7 @@ public:
     QTimeEdit *timeEdit;
     QLabel *label_7;
     QSpacerItem *horizontalSpacer_2;
+    QPushButton *pushButton_4;
     QGroupBox *groupBox_4;
     QGridLayout *gridLayout_6;
     QTextBrowser *textBrowser;
@@ -137,6 +139,9 @@ public:
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         stackedWidget = new QStackedWidget(centralWidget);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
+        page = new QWidget();
+        page->setObjectName(QString::fromUtf8("page"));
+        stackedWidget->addWidget(page);
         page_3 = new QWidget();
         page_3->setObjectName(QString::fromUtf8("page_3"));
         gridLayout_10 = new QGridLayout(page_3);
@@ -328,9 +333,9 @@ public:
         gridLayout_11->setSpacing(6);
         gridLayout_11->setContentsMargins(11, 11, 11, 11);
         gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
-        verticalSpacer_2 = new QSpacerItem(20, 187, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer_2 = new QSpacerItem(20, 154, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_11->addItem(verticalSpacer_2, 1, 0, 1, 1);
+        gridLayout_11->addItem(verticalSpacer_2, 2, 0, 1, 1);
 
         gridLayout_9 = new QGridLayout();
         gridLayout_9->setSpacing(6);
@@ -351,6 +356,11 @@ public:
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout_11->addItem(horizontalSpacer_2, 0, 1, 1, 1);
+
+        pushButton_4 = new QPushButton(groupBox_6);
+        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
+
+        gridLayout_11->addWidget(pushButton_4, 1, 0, 1, 1);
 
 
         gridLayout_7->addWidget(groupBox_6, 0, 1, 1, 1);
@@ -446,6 +456,7 @@ public:
         pushButton_3->setText(QApplication::translate("CuCare", "Create...", 0, QApplication::UnicodeUTF8));
         groupBox_6->setTitle(QApplication::translate("CuCare", "Server Parameters", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("CuCare", "Daily Audit: ", 0, QApplication::UnicodeUTF8));
+        pushButton_4->setText(QApplication::translate("CuCare", "Save...", 0, QApplication::UnicodeUTF8));
         groupBox_4->setTitle(QApplication::translate("CuCare", "Application Output", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("CuCare", "Patients", 0, QApplication::UnicodeUTF8));
         menuPatient_Records->setTitle(QApplication::translate("CuCare", "Records", 0, QApplication::UnicodeUTF8));

@@ -74,7 +74,6 @@ private:
     Patient *currentPatient;
     Consultation *currentConsultation;
     int currentPatientIndex;
-
 };
 
 #endif // CUCARE_H

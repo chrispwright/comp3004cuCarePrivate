@@ -1,7 +1,11 @@
 /********************************************************************************
 ** Form generated from reading UI file 'loginscreen.ui'
 **
+<<<<<<< HEAD
 ** Created: Sun Nov 4 16:46:51 2012
+=======
+** Created: Sun Nov 4 15:00:36 2012
+>>>>>>> 9a62968976c20cb96a37c5fc54438a6b2a4463a2
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

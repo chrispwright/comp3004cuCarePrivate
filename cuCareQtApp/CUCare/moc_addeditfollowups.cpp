@@ -1,7 +1,11 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'addeditfollowups.h'
 **
+<<<<<<< HEAD
 ** Created: Sun Nov 4 16:47:16 2012
+=======
+** Created: Sun Nov 4 15:01:11 2012
+>>>>>>> 9a62968976c20cb96a37c5fc54438a6b2a4463a2
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!

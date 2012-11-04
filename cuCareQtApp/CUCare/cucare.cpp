@@ -63,7 +63,6 @@ void CuCare::readResponse()
         messageSplit = message.split(PIPE_DELIMETER);
         QByteArray messageType = messageSplit.at(0).toLocal8Bit();
         if(messageType == VALID_USER_TYPE){
-
             this->setHidden(false);
             cuCareUser->setUserId(QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()));
             cuCareUser->setUsername(QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()));

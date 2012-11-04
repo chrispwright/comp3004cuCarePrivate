@@ -1,7 +1,6 @@
 #include "cucare.h"
 #include "ui_cucare.h"
 
-
 CuCare::CuCare(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CuCare)
@@ -9,7 +8,9 @@ CuCare::CuCare(QWidget *parent) :
     ui->setupUi(this);
     ui->menuFile->setVisible(true);
 
-    setUpComboBox();
+    cuCareUser = new User();
+    connection = new QTcpSocket();
+    appOutput = new OutputMessages();
 
     //Menu Actions
     connect(ui->actionAdd_Patient, SIGNAL(triggered()), this, SLOT(createPatientAct()));
@@ -27,21 +28,17 @@ CuCare::CuCare(QWidget *parent) :
 
     //Add signals for deleting patient and value changed for patient combobox
 
-    //Open login screen
-    cuCareUser = new User();
-    connection = new QTcpSocket();
-    appOutput = new OutputMessages();
     connect(connection, SIGNAL(readyRead()), this, SLOT(readResponse()));
 
     connection->connectToHost(QHostAddress::LocalHost, 8001);
-
-    this->loginScreen = new LoginScreen(this, connection);
-    this->openLogin();
+    loginScreen = new LoginScreen(this, connection);
+    openLogin();
 }
 
 CuCare::~CuCare()
 {
     delete ui;
+    delete loginScreen;
 }
 
 void CuCare::openLogin()
@@ -52,7 +49,6 @@ void CuCare::openLogin()
     else{
         exit(0);
     }
-
 }
 
 void CuCare::readResponse()
@@ -66,23 +62,23 @@ void CuCare::readResponse()
         if(messageType == "validuser"){
 
             this->setHidden(false);
-            this->cuCareUser->setUserId(QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()));
-            this->cuCareUser->setUsername(QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()));
-            this->cuCareUser->setFirstName(QString::fromLocal8Bit(messageSplit.at(3).toLocal8Bit()));
-            this->cuCareUser->setLastName(QString::fromLocal8Bit(messageSplit.at(4).toLocal8Bit()));
-            this->cuCareUser->setType(QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()));
+            cuCareUser->setUserId(QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()));
+            cuCareUser->setUsername(QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()));
+            cuCareUser->setFirstName(QString::fromLocal8Bit(messageSplit.at(3).toLocal8Bit()));
+            cuCareUser->setLastName(QString::fromLocal8Bit(messageSplit.at(4).toLocal8Bit()));
+            cuCareUser->setType(QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()));
 
             //App output
-            ui->textBrowser_AppOutput->append(appOutput->successfulLogin(this->cuCareUser));
+            ui->textBrowser_AppOutput->append(appOutput->successfulLogin(cuCareUser));
 
             //Depending on the type of user setup the GUI appropriately and send proper requests to the server
-            QString userType = this->cuCareUser->getType();
+            QString userType = cuCareUser->getType();
             if(userType == "Physician" || userType == "AdminAssistant"){
                 connection->write("patientdatarequest|");
-                this->ui->stackedWidget->setCurrentIndex(1);
+                ui->stackedWidget->setCurrentIndex(1);
             }
             else{
-                this->ui->stackedWidget->setCurrentIndex(2);
+                ui->stackedWidget->setCurrentIndex(2);
             }
         }
         else if(messageType == "invaliduser"){
@@ -96,7 +92,6 @@ void CuCare::readResponse()
             openLogin();
         }
         else if(messageType == "patientdata"){
-            //"patientdata|1|Bob|Brant|1|20121103,patientdata|2|George|Cross|1|20121004,patientdata|3|Stacy|Williams|1|20121025"
             QStringList patientConsultSplit = message.split("\n");
 
             QStringList patientSplit = QString::fromLocal8Bit(patientConsultSplit.at(0).toLocal8Bit()).split("~");
@@ -113,10 +108,9 @@ void CuCare::readResponse()
                 p->setPhys(QString::fromLocal8Bit(patientInfo.at(5).toLocal8Bit()));
                 QDate lastVisit = QDate::fromString(QString::fromLocal8Bit(patientInfo.at(6).toLocal8Bit()),"yyyyMMdd");
                 p->setLastConsult(lastVisit);
-                this->cuCarePatients.push_back(p);
+                cuCarePatients.push_back(p);
             }
 
-            //3|6|1239501301|Indigestion|Take Pepto Bismal.|20121025|13:55:00
             //Consultation data
             for(int i = 0; i<consultSplit.size(); i++){
                 QStringList consultInfo = consultSplit.at(i).split("|");
@@ -130,20 +124,20 @@ void CuCare::readResponse()
                 c->setDate(date);
                 QTime time = QTime::fromString(QString::fromLocal8Bit(consultInfo.at(7).toLocal8Bit()),"hh:mm:ss");
                 c->setTime(time);
-                this->cuCareConsultations.push_back(c);
+                cuCareConsultations.push_back(c);
             }
 
             //Reload Combo Box
-            this->setUpComboBox();
-            if(this->currentPatientConsultations.size() > 0){
+            setUpComboBox();
+            if(currentPatientConsultations.size() > 0){
                 ui->consultationList->setCurrentRow(0);
             }
             ui->textBrowser_AppOutput->append(appOutput->dataRetrievalSuccess());
 
         }
         else if(messageType == "consultationdata"){
-            int lastPatientIndex = this->ui->comboBox_Patients->currentIndex();
-            this->cuCareConsultations.clear();
+            int lastPatientIndex = ui->comboBox_Patients->currentIndex();
+            cuCareConsultations.clear();
             QStringList consultSplit = message.split("~");
             for(int i = 0; i<consultSplit.size(); i++){
                 QStringList consultInfo = consultSplit.at(i).split("|");
@@ -157,20 +151,20 @@ void CuCare::readResponse()
                 c->setDate(date);
                 QTime time = QTime::fromString(QString::fromLocal8Bit(consultInfo.at(7).toLocal8Bit()),"hh:mm:ss");
                 c->setTime(time);
-                this->cuCareConsultations.push_back(c);
+                cuCareConsultations.push_back(c);
             }
             ui->comboBox_Patients->clear();
-            this->setUpComboBox();
-            this->ui->comboBox_Patients->setCurrentIndex(lastPatientIndex);
-            if(this->currentPatientConsultations.size() > 0){
+            setUpComboBox();
+            ui->comboBox_Patients->setCurrentIndex(lastPatientIndex);
+            if(currentPatientConsultations.size() > 0){
                 ui->consultationList->setCurrentRow(0);
             }
 
-            ui->textBrowser_AppOutput->append(appOutput->addConsultationRecord(this->currentPatient));
+            ui->textBrowser_AppOutput->append(appOutput->addConsultationRecord(currentPatient));
 
         }
         else if(messageType == "editconsultationsuccessful"){
-            ui->textBrowser_AppOutput->append(appOutput->editConsultationSuccess(this->currentPatient));
+            ui->textBrowser_AppOutput->append(appOutput->editConsultationSuccess(currentPatient));
         }
     }
 }
@@ -189,6 +183,7 @@ void CuCare::createPatientAct()
     if(addEditPatientView->exec() == 1){
 
     }
+    addEditPatientView->deleteLater();
 }
 
 void CuCare::editPatientAct()
@@ -208,6 +203,7 @@ void CuCare::editPatientAct()
     if(addEditPatientView->exec() == 1){
 
     }
+    addEditPatientView->deleteLater();
 }
 void CuCare::deletePatientAct()
 {
@@ -222,7 +218,7 @@ void CuCare::createPatientRecordAct()
     addEditConsultationView->setModal(true);
     addEditConsultationView->setFixedSize(addEditConsultationView->width(), addEditConsultationView->height());
     addEditConsultationView->setPatientConsult(new Consultation());
-    addEditConsultationView->setCurrentUser(this->cuCareUser);
+    addEditConsultationView->setCurrentUser(cuCareUser);
     addEditConsultationView->updateAccess();
 
     //Need to be sending an object pointer for a new patient to the next window
@@ -232,12 +228,17 @@ void CuCare::createPatientRecordAct()
     if(addEditConsultationView->exec() == 1){
 
         Consultation *newConsult = addEditConsultationView->getPatientConsult();
-        newConsult->setPatientId(this->currentPatient->getPatientId());
+        newConsult->setPatientId(currentPatient->getPatientId());
 
+        if(currentPatient->getLastConsult() < newConsult->getDate() && newConsult->getDate() < QDate::currentDate()){
+            currentPatient->setLastConsult(newConsult->getDate());
+            ui->dateEdit_PatLastConsult->setDate(currentPatient->getLastConsult());
+        }
         //Send update to server
         QByteArray message = newConsult->getAddMessage().toLocal8Bit();
-        this->connection->write(message);
+        connection->write(message);
     }
+    addEditConsultationView->deleteLater();
 }
 void CuCare::editPatientRecordAct()
 {
@@ -247,8 +248,8 @@ void CuCare::editPatientRecordAct()
     addEditConsultationView->setFixedSize(addEditConsultationView->width(), addEditConsultationView->height());
 
     //Get Index Of Selected Consultation
-    addEditConsultationView->setPatientConsult(this->currentConsultation);
-    addEditConsultationView->setCurrentUser(this->cuCareUser);
+    addEditConsultationView->setPatientConsult(currentConsultation);
+    addEditConsultationView->setCurrentUser(cuCareUser);
     addEditConsultationView->updateFields();
     addEditConsultationView->updateAccess();
     //Need to be sending an object pointer for a new patient to the next window
@@ -260,10 +261,16 @@ void CuCare::editPatientRecordAct()
         //Update local copies of the consultation
         currentConsultation = addEditConsultationView->getPatientConsult();
 
+        if(currentPatient->getLastConsult() < currentConsultation->getDate() && currentConsultation->getDate() < QDate::currentDate()){
+            currentPatient->setLastConsult(currentConsultation->getDate());
+            ui->dateEdit_PatLastConsult->setDate(currentPatient->getLastConsult());
+        }
+
         //Send update to server
         QByteArray message = currentConsultation->getEditMessage().toLocal8Bit();
-        this->connection->write(message);
+        connection->write(message);
     }
+    addEditConsultationView->deleteLater();
 }
 void CuCare::viewPatientsAct()
 {
@@ -285,7 +292,6 @@ void CuCare::contextMenuEvent(QContextMenuEvent *event)
 
 void CuCare::setUpComboBox()
 {
-
     QComboBox *comboBoxPatients = ui->comboBox_Patients;
 
     QStringList names;
@@ -293,18 +299,10 @@ void CuCare::setUpComboBox()
         QString name = cuCarePatients[i]->getFirstName() + " " + cuCarePatients[i]->getLastName();
         names << tr(name.toStdString().c_str());
     }
-    //names << tr("Calvin") << tr("Nick") << tr("Chris"); //make this a list of objects from server
 
     for (int i=0; i<names.size(); i++) {
         comboBoxPatients->addItem(names[i], 1);
     }
-
-    //if (test->findData(1) or findText("patientName")  this finds which data the combo box is selected
-    //then perhaps make a function called updatePatient() that updates the text fields
-
-    //ui->patFirstName->setText("Calvin");            //patient.getFirstName();
-    //ui->patLastName->setText("Lewis");              //patient.getLastName();
-    //ui->patPhoneNum->setText("(613)-407-1234");     //patient.getPhoneNum();
 }
 
 void CuCare::comboBoxChanged(int value)
@@ -321,7 +319,7 @@ void CuCare::comboBoxChanged(int value)
 
         //Update Consultation List
         ui->consultationList->clear();
-        this->currentPatientConsultations.clear();
+        currentPatientConsultations.clear();
         for(int i=0; i<cuCareConsultations.size(); i++){
             if(cuCareConsultations[i]->getPatientId() == cuCarePatients[value]->getPatientId()){
                 QString name = "Date: " + cuCareConsultations[i]->getDate().toString() + " Time: " + cuCareConsultations[i]->getTime().toString();
@@ -330,10 +328,10 @@ void CuCare::comboBoxChanged(int value)
             }
         }
 
-        currentPatient = this->cuCarePatients[value];
+        currentPatient = cuCarePatients[value];
         currentPatientIndex = value;
 
-        if(this->currentPatientConsultations.size() > 0){
+        if(currentPatientConsultations.size() > 0){
             ui->consultationList->setCurrentRow(0);
         }
     }
@@ -341,8 +339,8 @@ void CuCare::comboBoxChanged(int value)
 
 void CuCare::consultListChanged(int index)
 {
-    if(this->currentPatientConsultations.size() != 0 && index != -1){
-        this->currentConsultation = currentPatientConsultations[index];
+    if(currentPatientConsultations.size() != 0 && index != -1){
+        currentConsultation = currentPatientConsultations[index];
     }
 }
 

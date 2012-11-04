@@ -1,8 +1,14 @@
 #ifndef MESSAGEMANAGER_H
 #define MESSAGEMANAGER_H
 
-#include <QString>
+#include <QDebug>
 #include <QTcpSocket>
+#include <QFile>
+#include <QTextStream>
+#include <QString>
+#include <QStringList>
+#include "staticdefinitions.h"
+
 class MessageManager
 {
 public:

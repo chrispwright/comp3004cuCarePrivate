@@ -17,9 +17,9 @@ public:
     explicit AddEditConsultationWindow(QWidget *parent = 0);
     ~AddEditConsultationWindow();
 
-    Consultation* getPatientConsult(){ return this->patientConsult; }
-    void setPatientConsult(Consultation *pConsult) { this->patientConsult = pConsult; }
-    void setCurrentUser(User *user){ this->currentUser = user; }
+    Consultation* getPatientConsult();
+    void setPatientConsult(Consultation *pConsult);
+    void setCurrentUser(User *user);
 
     void updateFields();
     void updateAccess();

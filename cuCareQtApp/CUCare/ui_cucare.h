@@ -1,7 +1,11 @@
 /********************************************************************************
 ** Form generated from reading UI file 'cucare.ui'
 **
+<<<<<<< HEAD
 ** Created: Sun Nov 4 15:00:36 2012
+=======
+** Created: Sun Nov 4 15:14:01 2012
+>>>>>>> 84b94b1733172e9c1b9525594e57d34a864c1b70
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

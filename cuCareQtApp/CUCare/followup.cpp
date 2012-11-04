@@ -2,27 +2,30 @@
 
 FollowUp::FollowUp()
 {
-    QDate tempDate(0,0,0);
-    *consultationId = "NULL";
-    *status = "NULL";
-    *dateTime = tempDate;
-    *followUpType = "NULL";
+    consultationId = "NULL";
+    status = "NULL";
+    date = QDate::fromString("");
+    time = QTime::fromString("");
+    followUpType = "NULL";
 }
 
-FollowUp::FollowUp(QString cId, QString stat, QDate d, QString type)
+FollowUp::FollowUp(QString consId, QString stat, QDate d, QTime t, QString followType)
 {
-    *consultationId = cId;
-    *status = stat;
-    *dateTime = d;
-    *followUpType = type;
+    consultationId = consId;
+    status = stat;
+    date = d;
+    time = t;
+    followUpType = followType;
 }
 
-QString FollowUp::getConsId() { return *consultationId; }
-QString FollowUp::getStatus() { return *status; }
-QDate FollowUp::getDateTime() { return *dateTime; }
-QString FollowUp::getType() { return *followUpType; }
+QString FollowUp::getConsId() { return consultationId; }
+QString FollowUp::getStatus() { return status; }
+QDate FollowUp::getDate() { return date; }
+QTime FollowUp::getTime() { return time; }
+QString FollowUp::getType() { return followUpType; }
 
-void FollowUp::setConsId(QString cId) { *consultationId = cId; }
-void FollowUp::setStatus(QString stat) { *status = stat; }
-void FollowUp::setDateTime(QDate d) { *dateTime = d; }
-void FollowUp::setType(QString type) { *followUpType = type; }
+void FollowUp::setConsId(QString cId) { consultationId = cId; }
+void FollowUp::setStatus(QString stat) { status = stat; }
+void FollowUp::setDate(QDate d) { date = d; }
+void FollowUp::setTime(QTime t) { time = t; }
+void FollowUp::setType(QString type) { followUpType = type; }

@@ -32,9 +32,6 @@ protected:
     void contextMenuEvent(QContextMenuEvent *event);
     void openLogin();
 
-public slots:
-
-
 private slots:
     void createPatientAct();
     void editPatientAct();
@@ -50,8 +47,12 @@ private slots:
     void readResponse();
     
 private:
+    //Windows
     AddEditConsultationWindow *addEditConsultationView;
     AddEditPatientWindow *addEditPatientView;
+    LoginScreen *loginScreen;
+
+    //Actions
     QAction *createPatient;
     QAction *editPatient;
     QAction *deletePatient;
@@ -64,10 +65,12 @@ private:
 
     QStringListModel *typeModel;
 
-    LoginScreen *loginScreen;
-    User *cuCareUser;
+    //Utilities
     QTcpSocket *connection;
     OutputMessages *appOutput;
+
+    //Data
+    User *cuCareUser;
     QVector<Patient*> cuCarePatients;
     QVector<Consultation*> cuCareConsultations;
     QVector<Consultation*> currentPatientConsultations;

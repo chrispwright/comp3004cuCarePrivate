@@ -9,7 +9,7 @@ class Consultation
 {
 public:
     Consultation(); //default constructor
-    Consultation(QString, QString, QString, QString, QDate); //patient id, ohip number, reason, diagnosis, and date
+    Consultation(QString patId, QString ohipNum, QString reason, QString diag, QDate d, QTime t);
 
     QString getPatientId(); //returns patient id
     QString getConsId(); //returns consultation id

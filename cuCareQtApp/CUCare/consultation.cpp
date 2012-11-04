@@ -11,14 +11,15 @@ Consultation::Consultation()
     time = QTime::fromString("");
 }
 
-Consultation::Consultation(QString pId, QString ohipNum, QString reason, QString diag, QDate consDate)
+Consultation::Consultation(QString patId, QString ohipNum, QString reason, QString diag, QDate d, QTime t)
 {
-    patientId = pId;
+    patientId = patId;
     consultationId = "NULL";
     ohip = ohipNum;
     reasonForVisit = reason;
     diagnosis = diag;
-    date = consDate;
+    date = d;
+    time = t;
 }
 
 QString Consultation::getPatientId() { return patientId; }

@@ -7,6 +7,7 @@
 #include <QString>
 #include <QStringList>
 #include "messagemanager.h"
+#include "staticdefinitions.h"
 
 class ConnectionThread : public QThread
 {

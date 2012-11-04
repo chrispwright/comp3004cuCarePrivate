@@ -1,9 +1,4 @@
 #include "messagemanager.h"
-#include <QFile>
-#include <QTextStream>
-#include <QString>
-#include <QStringList>
-#include <QDebug>
 
 MessageManager::MessageManager()
 {
@@ -19,47 +14,41 @@ QByteArray MessageManager::dispatchHandler(QString incomingMessage, QTcpSocket *
 {
     QStringList message = incomingMessage.split('|');
 
-    for (int i = 0; i < message.size(); ++i)
-        qDebug() << message.at(i).toLocal8Bit().constData();
-
-    //Handler for each type of message
     if(message.size() > 0){
 
         QString messageType = QString::fromLocal8Bit(message.at(0).toLocal8Bit()); //Extract the type
 
-        if(messageType == "login"){
+        //Call Handler for each type of message
+        if(messageType == LOGIN_REQUEST){
             QString username = QString::fromLocal8Bit(message.at(1).toLocal8Bit());
-            qDebug() << "Testing login";
+
             //Search for the username in the database of users
-            QString result = this->handleLogin(username);
-            QByteArray resultData = result.toLocal8Bit();
-            return resultData;
-        }
-        else if(messageType == "patientdatarequest"){
-            QByteArray result = this->handleDataRequest(socket).toLocal8Bit();
+            QByteArray result = handleLogin(username).toLocal8Bit();
             return result;
         }
-        else if(messageType == "addpatient"){
-
-        }
-        else if(messageType == "editpatient"){
-
-        }
-        else if(messageType == "deletepatient"){
-
-        }
-        else if(messageType == "addconsultation"){
-            QByteArray result = this->handleAddConsultation(incomingMessage, socket).toLocal8Bit();
+        else if(messageType == PATIENT_DATA_REQUEST){
+            QByteArray result = handleDataRequest(socket).toLocal8Bit();
             return result;
         }
-        else if(messageType == "editconsultation"){
-            QByteArray result = this->handleEditConsultation(incomingMessage).toLocal8Bit();
+        else if(messageType == ADD_PATIENT_REQUEST){
+
+        }
+        else if(messageType == EDIT_PATIENT_REQUEST){
+
+        }
+        else if(messageType == DELETE_PATIENT_REQUEST){
+
+        }
+        else if(messageType == ADD_CONSULTATION_REQUEST){
+            QByteArray result = handleAddConsultation(incomingMessage, socket).toLocal8Bit();
             return result;
         }
-        else if(messageType == ""){
-
+        else if(messageType == EDIT_CONSULTATION_REQUEST){
+            QByteArray result = handleEditConsultation(incomingMessage).toLocal8Bit();
+            return result;
         }
     }
+    return INVALID_MESSAGE_TYPE.toLocal8Bit();
 }
 
 QString MessageManager::handleLogin(QString username)
@@ -67,7 +56,7 @@ QString MessageManager::handleLogin(QString username)
     bool userExists = false;
 
     //Read through the user database and check whether the user exists
-    QFile usersFile("users.database");
+    QFile usersFile(USERS_DATABASE_FILE);
     if(!usersFile.open(QIODevice::ReadOnly)) {
         qDebug() << "error" << usersFile.errorString();
     }
@@ -77,10 +66,8 @@ QString MessageManager::handleLogin(QString username)
     QString line;
     while(!usersFileIn.atEnd()) {
         line = usersFileIn.readLine();
-        QStringList userFields = line.split("|");
+        QStringList userFields = line.split(PIPE_DELIMETER);
         QString lineUName = QString::fromLocal8Bit(userFields.at(1).toLocal8Bit());
-        qDebug() << lineUName;
-        qDebug() << username;
         if(lineUName == username){
             userExists = true;
             break;
@@ -88,14 +75,14 @@ QString MessageManager::handleLogin(QString username)
     }
     usersFile.close();
 
-    //Return message saying no user with that name was found
+    //User found return the full user info
     if(userExists){
-        line.prepend("validuser|");
+        line.prepend(VALID_USER_HEADER);
         return line;
     }
-    //If they do exist then we need to actually return the user object itself and we will need to return all database data as well
+    //Invalid User
     else{
-        QString noUserMessage = "invaliduser|";
+        QString noUserMessage = INVALID_USER_HEADER;
         return noUserMessage;
     }
 }
@@ -105,7 +92,7 @@ QString MessageManager::handleDataRequest(QTcpSocket *socket)
     QByteArray returnData;
 
     //Patient Info
-    QFile patientsFile("patients.database");
+    QFile patientsFile(PATIENTS_DATABASE_FILE);
     if(!patientsFile.open(QIODevice::ReadOnly)) {
         qDebug() << "error" << patientsFile.errorString();
     }
@@ -115,15 +102,15 @@ QString MessageManager::handleDataRequest(QTcpSocket *socket)
     QString line;
     while(!patientsFileIn.atEnd()) {
         line = patientsFileIn.readLine();
-        line.prepend("patientdata|");
+        line.prepend(PATIENT_HEADER);
         returnData.append(line);
-        returnData.append("~");
+        returnData.append(TILDA_DELIMETER);
     }
     returnData.chop(1);
     returnData.append("\n");
 
     //Consultation Info
-    QFile consultsFile("consultations.database");
+    QFile consultsFile(CONSULTATIONS_DATABASE_FILE);
     if(!consultsFile.open(QIODevice::ReadOnly)) {
         qDebug() << "error" << consultsFile.errorString();
     }
@@ -133,16 +120,16 @@ QString MessageManager::handleDataRequest(QTcpSocket *socket)
     QString line2;
     while(!consultsFileIn.atEnd()) {
         line2 = consultsFileIn.readLine();
-        line2.prepend("consultationdata|");
+        line2.prepend(CONSULTATION_HEADER);
         returnData.append(line2);
-        returnData.append("~");
+        returnData.append(TILDA_DELIMETER);
     }
     returnData.chop(1);
 
     socket->write(returnData);
 
     consultsFile.close();
-    return "dataretrievalsuccessful";
+    return DATA_RETRIEVAL_SUCCESS;
 }
 
 QString MessageManager::handleAddConsultation(QString incomingMessage, QTcpSocket *socket)
@@ -150,7 +137,7 @@ QString MessageManager::handleAddConsultation(QString incomingMessage, QTcpSocke
     QString newConsultId; //New Unique Id for Consultation
 
     //Unique ID Access
-    QFile uniqueIdsFile("uniqueids.database");
+    QFile uniqueIdsFile(UNIQUEIDS_DATABASE_FILE);
     if(!uniqueIdsFile.open(QIODevice::ReadOnly)) {
         qDebug() << "error" << uniqueIdsFile.errorString();
     }
@@ -161,17 +148,14 @@ QString MessageManager::handleAddConsultation(QString incomingMessage, QTcpSocke
     QVector<QString> newIdFileContents;
     while(!uniqueIdsFileIn.atEnd()) {
         line = uniqueIdsFileIn.readLine();
-        QStringList split = line.split("|");
+        QStringList split = line.split(PIPE_DELIMETER);
         if(QString::fromLocal8Bit(split.at(0).toLocal8Bit()) == "consultationid"){
             newConsultId = QString::fromLocal8Bit(split.at(1).toLocal8Bit());
-            qDebug() << "THE CONSULT ID " << newConsultId;
-            line = "consultationid|";
+            line = CONSULTATION_ID_HEADER;
             int newConsultIdUpdated = newConsultId.toInt();
             newConsultIdUpdated++;
             QString newConsultIdUpdatedString = QString::number(newConsultIdUpdated);
-            qDebug() << "THE UPDATED CONSULT ID " << newConsultIdUpdatedString;
             line.append(newConsultIdUpdatedString);
-            qDebug() << line;
         }
         newIdFileContents.push_back(line);
     }
@@ -179,7 +163,7 @@ QString MessageManager::handleAddConsultation(QString incomingMessage, QTcpSocke
     uniqueIdsFile.close();
 
     //Update ID's
-    QFile uniqueIdsFileWrite("uniqueids.database");
+    QFile uniqueIdsFileWrite(UNIQUEIDS_DATABASE_FILE);
     if(!uniqueIdsFileWrite.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
         qDebug() << "error" << uniqueIdsFileWrite.errorString();
     }
@@ -192,11 +176,11 @@ QString MessageManager::handleAddConsultation(QString incomingMessage, QTcpSocke
 
     uniqueIdsFileWrite.close();
 
-    QStringList messageSplit = incomingMessage.split("|");
+    QStringList messageSplit = incomingMessage.split(PIPE_DELIMETER);
     messageSplit[2] = newConsultId;
 
     //Add consult
-    QFile consultsFile("consultations.database");
+    QFile consultsFile(CONSULTATIONS_DATABASE_FILE);
     if(!consultsFile.open(QIODevice::ReadWrite)) {
         qDebug() << "error" << consultsFile.errorString();
     }
@@ -209,9 +193,9 @@ QString MessageManager::handleAddConsultation(QString incomingMessage, QTcpSocke
         line2 = consultsFileIn.readLine();
         newFileContents.push_back(line2);
     }
-    QString addedConsultation = QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()) + "|" + QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()) + "|" +
-                                QString::fromLocal8Bit(messageSplit.at(3).toLocal8Bit()) + "|" + QString::fromLocal8Bit(messageSplit.at(4).toLocal8Bit()) + "|" +
-                                QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()) + "|" + QString::fromLocal8Bit(messageSplit.at(6).toLocal8Bit()) + "|" +
+    QString addedConsultation = QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()) + PIPE_DELIMETER +
+                                QString::fromLocal8Bit(messageSplit.at(3).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(4).toLocal8Bit()) + PIPE_DELIMETER +
+                                QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(6).toLocal8Bit()) + PIPE_DELIMETER +
                                 QString::fromLocal8Bit(messageSplit.at(7).toLocal8Bit());
 
     consultsFileIn << addedConsultation.toStdString().c_str();
@@ -224,24 +208,23 @@ QString MessageManager::handleAddConsultation(QString incomingMessage, QTcpSocke
     //Return message with all consults
     QString message;
     for(int i=0; i<newFileContents.size(); i++){
-        message.append("consultationdata|");
+        message.append(CONSULTATION_HEADER);
         message.append(newFileContents[i]);
-        message.append("~");
+        message.append(TILDA_DELIMETER);
     }
     message.chop(1);
 
     socket->write(message.toLocal8Bit());
-    return "dataupdated";
+    return DATA_UPDATED;
 }
-
 
 QString MessageManager::handleEditConsultation(QString incomingMessage)
 {
-    QStringList messageSplit = incomingMessage.split("|");
+    QStringList messageSplit = incomingMessage.split(PIPE_DELIMETER);
     QString consultationId = QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit());
 
     //Consultation Info
-    QFile consultsFile("consultations.database");
+    QFile consultsFile(CONSULTATIONS_DATABASE_FILE);
     if(!consultsFile.open(QIODevice::ReadOnly)) {
         qDebug() << "error" << consultsFile.errorString();
     }
@@ -252,24 +235,20 @@ QString MessageManager::handleEditConsultation(QString incomingMessage)
     QVector<QString> newFileContents;
     while(!consultsFileIn.atEnd()) {
         line = consultsFileIn.readLine();
-        QStringList fileLineSplit = line.split("|");
-        qDebug() << "GOT HERE BLAH1";
+        QStringList fileLineSplit = line.split(PIPE_DELIMETER);
         //If the consultation ids match then update the line
         if(QString::fromLocal8Bit(fileLineSplit.at(1).toLocal8Bit()) == consultationId){
-            line = QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()) + "|" +  QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()) + "|" +
-                   QString::fromLocal8Bit(messageSplit.at(3).toLocal8Bit()) + "|" +  QString::fromLocal8Bit(messageSplit.at(4).toLocal8Bit()) + "|" +
-                   QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()) + "|" +  QString::fromLocal8Bit(messageSplit.at(6).toLocal8Bit()) + "|" +
+            line = QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()) + PIPE_DELIMETER +
+                   QString::fromLocal8Bit(messageSplit.at(3).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(4).toLocal8Bit()) + PIPE_DELIMETER +
+                   QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(6).toLocal8Bit()) + PIPE_DELIMETER +
                    QString::fromLocal8Bit(messageSplit.at(7).toLocal8Bit());
         }
         newFileContents.push_back(line);
-        qDebug() << "GOT HERE BLAH3";
     }
 
     consultsFile.close();
 
-    qDebug() << "GOT HERE BLAH2";
-
-    QFile consultsFileWrite("consultations.database");
+    QFile consultsFileWrite(CONSULTATIONS_DATABASE_FILE);
     if(!consultsFileWrite.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
         qDebug() << "error" << consultsFileWrite.errorString();
     }
@@ -282,6 +261,6 @@ QString MessageManager::handleEditConsultation(QString incomingMessage)
 
     consultsFileWrite.close();
 
-    return "editconsultationsuccessful";
+    return EDIT_CONSULTATION_SUCCESS;
 }
 

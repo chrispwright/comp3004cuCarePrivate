@@ -37,17 +37,15 @@ void ConnectionThread::readyRead()
 
     qDebug() << socketDescriptor << "Data in:" << data;
 
-    //Will need to add dispatching to message type handlers here
-
     QString incomingMessage = QString::fromUtf8(data);
     qDebug() << incomingMessage;
 
+    //Dispatch Message to the manager class for processing
     QByteArray result = mmanager->dispatchHandler(incomingMessage, socket);
 
-    if(result != "" && result != "dataretrievalsuccessful" && result != "dataupdated")
+    if(result != "" && result != DATA_RETRIEVAL_SUCCESS && result != DATA_UPDATED)
         socket->write(result);
     qDebug() << result;
-    //socket->write(data);
 }
 
 void ConnectionThread::disconnected()

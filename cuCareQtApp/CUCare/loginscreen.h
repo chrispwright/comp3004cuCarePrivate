@@ -17,9 +17,8 @@ public:
     explicit LoginScreen(QWidget *parent = 0, QTcpSocket *conn = 0);
     ~LoginScreen();
 
-    QString getUsername(){ return username; }
-    void setUsername(QString uname){ this->username = uname; }
-    //void setUser(User u){ *this->cuCareUser = u; }
+    QString getUsername();
+    void setUsername(QString uname);
     User *getUser();
 
 public slots:

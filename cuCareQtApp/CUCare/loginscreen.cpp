@@ -16,16 +16,18 @@ LoginScreen::LoginScreen(QWidget *parent, QTcpSocket *conn) :
 
 }
 
+User* LoginScreen::getUser(){ return cuCareUser; }
+QString LoginScreen::getUsername(){ return username; }
+void LoginScreen::setUsername(QString uname){ username = uname; }
+
 void LoginScreen::updateUsername()
 {
-    this->setUsername(ui->editUsername->text());
+    setUsername(ui->editUsername->text());
     QByteArray data;
     data.append("login|");
-    data.append(this->getUsername());
+    data.append(getUsername());
     connection->write(data);
 }
-
-User* LoginScreen::getUser(){ return this->cuCareUser; }
 
 LoginScreen::~LoginScreen()
 {

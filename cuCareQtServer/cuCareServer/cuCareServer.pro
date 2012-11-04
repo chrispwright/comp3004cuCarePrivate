@@ -23,4 +23,5 @@ SOURCES += main.cpp \
 HEADERS += \
     server.h \
     connectionthread.h \
-    messagemanager.h
+    messagemanager.h \
+    staticdefinitions.h

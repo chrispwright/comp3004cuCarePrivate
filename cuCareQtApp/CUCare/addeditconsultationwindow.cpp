@@ -15,14 +15,18 @@ AddEditConsultationWindow::~AddEditConsultationWindow()
     delete ui;
 }
 
+Consultation* AddEditConsultationWindow::getPatientConsult(){ return patientConsult; }
+void AddEditConsultationWindow::setPatientConsult(Consultation *pConsult) { patientConsult = pConsult; }
+void AddEditConsultationWindow::setCurrentUser(User *user){ currentUser = user; }
+
 void AddEditConsultationWindow::updateFields()
 {
-    ui->dateTimeEdit->setDate(this->patientConsult->getDate());
-    ui->dateTimeEdit->setTime(this->patientConsult->getTime());
-    ui->editOHIP->setText(this->patientConsult->getOhip());
+    ui->dateTimeEdit->setDate(patientConsult->getDate());
+    ui->dateTimeEdit->setTime(patientConsult->getTime());
+    ui->editOHIP->setText(patientConsult->getOhip());
     if(currentUser->getType() == "Physician"){
-        ui->editReason->setText(this->patientConsult->getReason());
-        ui->editDiagnosis->setPlainText(this->patientConsult->getDiagnosis());
+        ui->editReason->setText(patientConsult->getReason());
+        ui->editDiagnosis->setPlainText(patientConsult->getDiagnosis());
     }
 }
 
@@ -39,13 +43,13 @@ void AddEditConsultationWindow::updateAccess()
 
 void AddEditConsultationWindow::saveConsultation()
 {
-    this->patientConsult->setDate(ui->dateTimeEdit->date());
-    this->patientConsult->setTime(ui->dateTimeEdit->time());
-    this->patientConsult->setOhip(ui->editOHIP->text());
+    patientConsult->setDate(ui->dateTimeEdit->date());
+    patientConsult->setTime(ui->dateTimeEdit->time());
+    patientConsult->setOhip(ui->editOHIP->text());
 
     if(currentUser->getType() == "Physician"){
-        this->patientConsult->setReason(ui->editReason->text());
-        this->patientConsult->setDiagnosis(ui->editDiagnosis->toPlainText());
+        patientConsult->setReason(ui->editReason->text());
+        patientConsult->setDiagnosis(ui->editDiagnosis->toPlainText());
     }
 }
 

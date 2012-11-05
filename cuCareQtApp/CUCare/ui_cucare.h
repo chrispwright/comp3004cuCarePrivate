@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'cucare.ui'
 **
-** Created: Sun Nov 4 17:10:22 2012
+** Created: Mon Nov 5 14:23:12 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -188,7 +188,7 @@ public:
         lineEdit_patFirstName = new QLineEdit(groupBox);
         lineEdit_patFirstName->setObjectName(QString::fromUtf8("lineEdit_patFirstName"));
         lineEdit_patFirstName->setEnabled(true);
-        lineEdit_patFirstName->setMaximumSize(QSize(125, 16777215));
+        lineEdit_patFirstName->setMaximumSize(QSize(16777215, 16777215));
         lineEdit_patFirstName->setReadOnly(true);
 
         gridLayout_2->addWidget(lineEdit_patFirstName, 0, 1, 1, 1);
@@ -201,7 +201,7 @@ public:
         lineEdit_patLastName = new QLineEdit(groupBox);
         lineEdit_patLastName->setObjectName(QString::fromUtf8("lineEdit_patLastName"));
         lineEdit_patLastName->setEnabled(true);
-        lineEdit_patLastName->setMaximumSize(QSize(125, 16777215));
+        lineEdit_patLastName->setMaximumSize(QSize(16777215, 16777215));
         lineEdit_patLastName->setReadOnly(true);
 
         gridLayout_2->addWidget(lineEdit_patLastName, 1, 1, 1, 1);
@@ -214,7 +214,7 @@ public:
         lineEdit_patPhoneNum = new QLineEdit(groupBox);
         lineEdit_patPhoneNum->setObjectName(QString::fromUtf8("lineEdit_patPhoneNum"));
         lineEdit_patPhoneNum->setEnabled(true);
-        lineEdit_patPhoneNum->setMaximumSize(QSize(125, 16777215));
+        lineEdit_patPhoneNum->setMaximumSize(QSize(16777215, 16777215));
         lineEdit_patPhoneNum->setReadOnly(true);
 
         gridLayout_2->addWidget(lineEdit_patPhoneNum, 2, 1, 1, 1);
@@ -264,7 +264,7 @@ public:
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
         consultationList = new QListWidget(groupBox_2);
         consultationList->setObjectName(QString::fromUtf8("consultationList"));
-        consultationList->setMinimumSize(QSize(250, 0));
+        consultationList->setMinimumSize(QSize(0, 0));
 
         gridLayout_5->addWidget(consultationList, 1, 0, 1, 2);
 

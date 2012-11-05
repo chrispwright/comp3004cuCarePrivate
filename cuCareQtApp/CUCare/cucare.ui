@@ -97,7 +97,7 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>125</width>
+                 <width>16777215</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -120,7 +120,7 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>125</width>
+                 <width>16777215</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -146,7 +146,7 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>125</width>
+                 <width>16777215</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -229,7 +229,7 @@
             <widget class="QListWidget" name="consultationList">
              <property name="minimumSize">
               <size>
-               <width>250</width>
+               <width>0</width>
                <height>0</height>
               </size>
              </property>

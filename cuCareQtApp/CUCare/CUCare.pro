@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     addeditpatientwindow.cpp \
     addeditconsultationwindow.cpp \
     outputmessages.cpp \
-    addeditfollowups.cpp
+    addeditfollowups.cpp \
+    patientlistview.cpp
 
 HEADERS  += cucare.h \
     loginscreen.h \
@@ -33,10 +34,12 @@ HEADERS  += cucare.h \
     addeditconsultationwindow.h \
     outputmessages.h \
     addeditfollowups.h \
-    staticdefinitions.h
+    staticdefinitions.h \
+    patientlistview.h
 
 FORMS    += cucare.ui \
     loginscreen.ui \
     addeditpatientwindow.ui \
     addeditconsultationwindow.ui \
-    addeditfollowups.ui
+    addeditfollowups.ui \
+    patientlistview.ui

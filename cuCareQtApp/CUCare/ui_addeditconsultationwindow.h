@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'addeditconsultationwindow.ui'
 **
-** Created: Sun Nov 4 17:10:22 2012
+** Created: Fri Nov 30 13:58:23 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -37,18 +37,20 @@ public:
     QGridLayout *gridLayout_3;
     QGridLayout *gridLayout_2;
     QLineEdit *editReason;
-    QLabel *label;
-    QLabel *label_4;
-    QLabel *label_3;
-    QLabel *label_2;
     QDateTimeEdit *dateTimeEdit;
     QLineEdit *editOHIP;
+    QLabel *label_4;
+    QLabel *label;
     QPlainTextEdit *editDiagnosis;
-    QGroupBox *groupBox_2;
+    QLabel *label_2;
+    QLabel *label_3;
+    QLabel *label_5;
+    QLineEdit *editActualReason;
+    QGroupBox *groupBox_FollowUps;
     QGridLayout *gridLayout_4;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QListWidget *listWidget;
+    QPushButton *pushButton_CreateFollowUp;
+    QPushButton *pushButton_EditFollowUp;
+    QListWidget *listWidget_FollowUps;
     QSpacerItem *verticalSpacer;
     QDialogButtonBox *buttonBox;
 
@@ -71,26 +73,6 @@ public:
 
         gridLayout_2->addWidget(editReason, 2, 1, 1, 1);
 
-        label = new QLabel(groupBox);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        gridLayout_2->addWidget(label, 1, 0, 1, 1);
-
-        label_4 = new QLabel(groupBox);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-
-        gridLayout_2->addWidget(label_4, 0, 0, 1, 1);
-
-        label_3 = new QLabel(groupBox);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        gridLayout_2->addWidget(label_3, 3, 0, 1, 1);
-
-        label_2 = new QLabel(groupBox);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        gridLayout_2->addWidget(label_2, 2, 0, 1, 1);
-
         dateTimeEdit = new QDateTimeEdit(groupBox);
         dateTimeEdit->setObjectName(QString::fromUtf8("dateTimeEdit"));
 
@@ -101,11 +83,41 @@ public:
 
         gridLayout_2->addWidget(editOHIP, 1, 1, 1, 1);
 
+        label_4 = new QLabel(groupBox);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        gridLayout_2->addWidget(label_4, 0, 0, 1, 1);
+
+        label = new QLabel(groupBox);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        gridLayout_2->addWidget(label, 1, 0, 1, 1);
+
         editDiagnosis = new QPlainTextEdit(groupBox);
         editDiagnosis->setObjectName(QString::fromUtf8("editDiagnosis"));
         editDiagnosis->setEnabled(true);
 
-        gridLayout_2->addWidget(editDiagnosis, 3, 1, 1, 1);
+        gridLayout_2->addWidget(editDiagnosis, 4, 1, 1, 1);
+
+        label_2 = new QLabel(groupBox);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        gridLayout_2->addWidget(label_2, 2, 0, 1, 1);
+
+        label_3 = new QLabel(groupBox);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        gridLayout_2->addWidget(label_3, 4, 0, 1, 1);
+
+        label_5 = new QLabel(groupBox);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+
+        gridLayout_2->addWidget(label_5, 3, 0, 1, 1);
+
+        editActualReason = new QLineEdit(groupBox);
+        editActualReason->setObjectName(QString::fromUtf8("editActualReason"));
+
+        gridLayout_2->addWidget(editActualReason, 3, 1, 1, 1);
 
 
         gridLayout_3->addLayout(gridLayout_2, 0, 0, 1, 1);
@@ -113,28 +125,31 @@ public:
 
         gridLayout->addWidget(groupBox, 0, 0, 1, 1);
 
-        groupBox_2 = new QGroupBox(AddEditConsultationWindow);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setEnabled(false);
-        gridLayout_4 = new QGridLayout(groupBox_2);
+        groupBox_FollowUps = new QGroupBox(AddEditConsultationWindow);
+        groupBox_FollowUps->setObjectName(QString::fromUtf8("groupBox_FollowUps"));
+        groupBox_FollowUps->setEnabled(true);
+        gridLayout_4 = new QGridLayout(groupBox_FollowUps);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        pushButton = new QPushButton(groupBox_2);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton_CreateFollowUp = new QPushButton(groupBox_FollowUps);
+        pushButton_CreateFollowUp->setObjectName(QString::fromUtf8("pushButton_CreateFollowUp"));
+        pushButton_CreateFollowUp->setEnabled(true);
 
-        gridLayout_4->addWidget(pushButton, 1, 0, 1, 1);
+        gridLayout_4->addWidget(pushButton_CreateFollowUp, 1, 0, 1, 1);
 
-        pushButton_2 = new QPushButton(groupBox_2);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_EditFollowUp = new QPushButton(groupBox_FollowUps);
+        pushButton_EditFollowUp->setObjectName(QString::fromUtf8("pushButton_EditFollowUp"));
+        pushButton_EditFollowUp->setEnabled(true);
 
-        gridLayout_4->addWidget(pushButton_2, 1, 1, 1, 1);
+        gridLayout_4->addWidget(pushButton_EditFollowUp, 1, 1, 1, 1);
 
-        listWidget = new QListWidget(groupBox_2);
-        listWidget->setObjectName(QString::fromUtf8("listWidget"));
+        listWidget_FollowUps = new QListWidget(groupBox_FollowUps);
+        listWidget_FollowUps->setObjectName(QString::fromUtf8("listWidget_FollowUps"));
+        listWidget_FollowUps->setEnabled(true);
 
-        gridLayout_4->addWidget(listWidget, 0, 0, 1, 2);
+        gridLayout_4->addWidget(listWidget_FollowUps, 0, 0, 1, 2);
 
 
-        gridLayout->addWidget(groupBox_2, 0, 1, 1, 1);
+        gridLayout->addWidget(groupBox_FollowUps, 0, 1, 1, 1);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -159,13 +174,14 @@ public:
     {
         AddEditConsultationWindow->setWindowTitle(QApplication::translate("AddEditConsultationWindow", "Dialog", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("AddEditConsultationWindow", "Consultation Info", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("AddEditConsultationWindow", "OHIP #:", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("AddEditConsultationWindow", "Date/Time:", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("AddEditConsultationWindow", "Diagnosis:", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("AddEditConsultationWindow", "OHIP #:", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("AddEditConsultationWindow", "Reason for Visit:", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("AddEditConsultationWindow", "Follow Ups", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("AddEditConsultationWindow", "Create...", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("AddEditConsultationWindow", "Edit...", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("AddEditConsultationWindow", "Diagnosis:", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("AddEditConsultationWindow", "Actual Reason:", 0, QApplication::UnicodeUTF8));
+        groupBox_FollowUps->setTitle(QApplication::translate("AddEditConsultationWindow", "Follow Ups", 0, QApplication::UnicodeUTF8));
+        pushButton_CreateFollowUp->setText(QApplication::translate("AddEditConsultationWindow", "Create...", 0, QApplication::UnicodeUTF8));
+        pushButton_EditFollowUp->setText(QApplication::translate("AddEditConsultationWindow", "Edit...", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

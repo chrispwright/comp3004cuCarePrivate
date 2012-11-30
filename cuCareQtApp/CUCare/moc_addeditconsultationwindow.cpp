@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'addeditconsultationwindow.h'
 **
-** Created: Sun Nov 4 17:10:45 2012
+** Created: Fri Nov 30 14:00:27 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_AddEditConsultationWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,13 +32,18 @@ static const uint qt_meta_data_AddEditConsultationWindow[] = {
 
  // slots: signature, parameters, type, tag, flags
       27,   26,   26,   26, 0x08,
+      46,   26,   26,   26, 0x08,
+      66,   26,   26,   26, 0x08,
+      90,   84,   26,   26, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_AddEditConsultationWindow[] = {
     "AddEditConsultationWindow\0\0"
-    "saveConsultation()\0"
+    "saveConsultation()\0createFollowUpAct()\0"
+    "editFollowUpAct()\0index\0"
+    "followUpListChanged(int)\0"
 };
 
 void AddEditConsultationWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -48,10 +53,12 @@ void AddEditConsultationWindow::qt_static_metacall(QObject *_o, QMetaObject::Cal
         AddEditConsultationWindow *_t = static_cast<AddEditConsultationWindow *>(_o);
         switch (_id) {
         case 0: _t->saveConsultation(); break;
+        case 1: _t->createFollowUpAct(); break;
+        case 2: _t->editFollowUpAct(); break;
+        case 3: _t->followUpListChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObjectExtraData AddEditConsultationWindow::staticMetaObjectExtraData = {
@@ -86,9 +93,9 @@ int AddEditConsultationWindow::qt_metacall(QMetaObject::Call _c, int _id, void *
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 4;
     }
     return _id;
 }

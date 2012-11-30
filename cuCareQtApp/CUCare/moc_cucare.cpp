@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cucare.h'
 **
-** Created: Sun Nov 4 17:10:40 2012
+** Created: Fri Nov 30 14:00:25 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_CuCare[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -36,13 +36,14 @@ static const uint qt_meta_data_CuCare[] = {
       44,    7,    7,    7, 0x08,
       63,    7,    7,    7, 0x08,
       88,    7,    7,    7, 0x08,
-     111,    7,    7,    7, 0x08,
-     129,    7,    7,    7, 0x08,
-     143,    7,    7,    7, 0x08,
-     160,    7,    7,    7, 0x08,
-     176,    7,    7,    7, 0x08,
-     197,    7,    7,    7, 0x08,
-     221,    7,    7,    7, 0x08,
+     113,    7,    7,    7, 0x08,
+     136,    7,    7,    7, 0x08,
+     154,    7,    7,    7, 0x08,
+     168,    7,    7,    7, 0x08,
+     185,    7,    7,    7, 0x08,
+     201,    7,    7,    7, 0x08,
+     222,    7,    7,    7, 0x08,
+     246,    7,    7,    7, 0x08,
 
        0        // eod
 };
@@ -50,6 +51,7 @@ static const uint qt_meta_data_CuCare[] = {
 static const char qt_meta_stringdata_CuCare[] = {
     "CuCare\0\0createPatientAct()\0editPatientAct()\0"
     "deletePatientAct()\0createPatientRecordAct()\0"
+    "showFullPatientListing()\0"
     "editPatientRecordAct()\0viewPatientsAct()\0"
     "runQueryAct()\0manageUsersAct()\0"
     "setUpComboBox()\0comboBoxChanged(int)\0"
@@ -66,14 +68,15 @@ void CuCare::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 1: _t->editPatientAct(); break;
         case 2: _t->deletePatientAct(); break;
         case 3: _t->createPatientRecordAct(); break;
-        case 4: _t->editPatientRecordAct(); break;
-        case 5: _t->viewPatientsAct(); break;
-        case 6: _t->runQueryAct(); break;
-        case 7: _t->manageUsersAct(); break;
-        case 8: _t->setUpComboBox(); break;
-        case 9: _t->comboBoxChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 10: _t->consultListChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 11: _t->readResponse(); break;
+        case 4: _t->showFullPatientListing(); break;
+        case 5: _t->editPatientRecordAct(); break;
+        case 6: _t->viewPatientsAct(); break;
+        case 7: _t->runQueryAct(); break;
+        case 8: _t->manageUsersAct(); break;
+        case 9: _t->setUpComboBox(); break;
+        case 10: _t->comboBoxChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 11: _t->consultListChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 12: _t->readResponse(); break;
         default: ;
         }
     }
@@ -111,9 +114,9 @@ int CuCare::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 13;
     }
     return _id;
 }

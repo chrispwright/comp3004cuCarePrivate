@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'cucare.ui'
 **
-** Created: Mon Nov 5 14:23:12 2012
+** Created: Fri Nov 30 12:18:13 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -73,6 +73,7 @@ public:
     QLabel *label_6;
     QDateEdit *dateEdit_PatLastConsult;
     QSpacerItem *horizontalSpacer;
+    QPushButton *pushButton_FullPatientListing;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_5;
     QListWidget *consultationList;
@@ -162,7 +163,7 @@ public:
 
         pushButton = new QPushButton(page_3);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setEnabled(false);
+        pushButton->setEnabled(true);
 
         gridLayout_10->addWidget(pushButton, 0, 3, 1, 1);
 
@@ -249,6 +250,11 @@ public:
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout_3->addItem(horizontalSpacer, 1, 1, 1, 1);
+
+        pushButton_FullPatientListing = new QPushButton(groupBox);
+        pushButton_FullPatientListing->setObjectName(QString::fromUtf8("pushButton_FullPatientListing"));
+
+        gridLayout_3->addWidget(pushButton_FullPatientListing, 3, 0, 1, 1);
 
 
         gridLayout_10->addWidget(groupBox, 1, 0, 1, 3);
@@ -419,7 +425,7 @@ public:
 
         retranslateUi(CuCare);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(CuCare);
@@ -447,6 +453,7 @@ public:
         label_5->setText(QApplication::translate("CuCare", "Phone Number:", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("CuCare", "Primary Physician: ", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("CuCare", "Last Consult:", 0, QApplication::UnicodeUTF8));
+        pushButton_FullPatientListing->setText(QApplication::translate("CuCare", "Full Patient Listing", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QApplication::translate("CuCare", "Consultation Records", 0, QApplication::UnicodeUTF8));
         pushButton_AddConsultation->setText(QApplication::translate("CuCare", "Create...", 0, QApplication::UnicodeUTF8));
         pushButton_EditConsultation->setText(QApplication::translate("CuCare", "Edit...", 0, QApplication::UnicodeUTF8));

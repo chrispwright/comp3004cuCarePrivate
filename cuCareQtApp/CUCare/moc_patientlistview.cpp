@@ -1,15 +1,15 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'server.h'
+** Meta object code from reading C++ file 'patientlistview.h'
 **
-** Created: Fri Nov 30 12:06:13 2012
+** Created: Thu Nov 29 16:44:34 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "server.h"
+#include "patientlistview.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'server.h' doesn't include <QObject>."
+#error "The header file 'patientlistview.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63
 #error "This file was generated using the moc from 4.8.1. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -17,7 +17,7 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-static const uint qt_meta_data_Server[] = {
+static const uint qt_meta_data_PatientListView[] = {
 
  // content:
        6,       // revision
@@ -33,11 +33,11 @@ static const uint qt_meta_data_Server[] = {
        0        // eod
 };
 
-static const char qt_meta_stringdata_Server[] = {
-    "Server\0"
+static const char qt_meta_stringdata_PatientListView[] = {
+    "PatientListView\0"
 };
 
-void Server::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void PatientListView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -45,35 +45,35 @@ void Server::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
     Q_UNUSED(_a);
 }
 
-const QMetaObjectExtraData Server::staticMetaObjectExtraData = {
+const QMetaObjectExtraData PatientListView::staticMetaObjectExtraData = {
     0,  qt_static_metacall 
 };
 
-const QMetaObject Server::staticMetaObject = {
-    { &QTcpServer::staticMetaObject, qt_meta_stringdata_Server,
-      qt_meta_data_Server, &staticMetaObjectExtraData }
+const QMetaObject PatientListView::staticMetaObject = {
+    { &QDialog::staticMetaObject, qt_meta_stringdata_PatientListView,
+      qt_meta_data_PatientListView, &staticMetaObjectExtraData }
 };
 
 #ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &Server::getStaticMetaObject() { return staticMetaObject; }
+const QMetaObject &PatientListView::getStaticMetaObject() { return staticMetaObject; }
 #endif //Q_NO_DATA_RELOCATION
 
-const QMetaObject *Server::metaObject() const
+const QMetaObject *PatientListView::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
 
-void *Server::qt_metacast(const char *_clname)
+void *PatientListView::qt_metacast(const char *_clname)
 {
     if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_Server))
-        return static_cast<void*>(const_cast< Server*>(this));
-    return QTcpServer::qt_metacast(_clname);
+    if (!strcmp(_clname, qt_meta_stringdata_PatientListView))
+        return static_cast<void*>(const_cast< PatientListView*>(this));
+    return QDialog::qt_metacast(_clname);
 }
 
-int Server::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int PatientListView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QTcpServer::qt_metacall(_c, _id, _a);
+    _id = QDialog::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     return _id;

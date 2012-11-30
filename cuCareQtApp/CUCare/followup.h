@@ -9,12 +9,13 @@ class FollowUp
 {
 public:
     FollowUp();
-    FollowUp(QString consId, QString stat, QDate d, QTime t, QString followType); //consultation id, status, date, and type of follow-up
+    FollowUp(QString consId, QString stat, QDate d, QTime t, QString followType, QString det); //consultation id, status, date, and type of follow-up
 
     QString getConsId(); //return the consultation id
     QString getStatus(); //return pending or complete
     QDate getDate();
     QTime getTime();
+    QString getDetails();
     QString getType(); //return renewal, medical test, referral, or returnConsult
 
     void setConsId(QString);
@@ -22,6 +23,7 @@ public:
     void setDate(QDate);
     void setTime(QTime);
     void setType(QString);
+    void setDetails(QString);
 
 private:
     QString consultationId;
@@ -29,6 +31,7 @@ private:
     QDate date;
     QTime time;
     QString followUpType; //Renewal, medical test, referral, returnConsult
+    QString details;
 };
 
 #endif // FOLLOWUP_H

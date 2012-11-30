@@ -2,7 +2,9 @@
 #define ADDEDITCONSULTATIONWINDOW_H
 
 #include <QDialog>
+#include "addeditfollowups.h"
 #include "consultation.h"
+#include "followup.h"
 #include "user.h"
 
 namespace Ui {
@@ -20,17 +22,29 @@ public:
     Consultation* getPatientConsult();
     void setPatientConsult(Consultation *pConsult);
     void setCurrentUser(User *user);
+    void setPatientConsultFollowUps(QVector<FollowUp*>);
 
     void updateFields();
     void updateAccess();
 
+    void loadFollowUps();
+
 private slots:
     void saveConsultation();
+    void createFollowUpAct();
+    void editFollowUpAct();
+
+public slots:
+    void followUpListChanged(int index);
     
 private:
     Ui::AddEditConsultationWindow *ui;
     Consultation *patientConsult;
     User *currentUser;
+    QVector<FollowUp*> patientConsultFollowUps;
+    FollowUp *currentFollowUp;
+
+    AddEditFollowUps *addEditFollowUpView;
 };
 
 #endif // ADDEDITCONSULTATIONWINDOW_H

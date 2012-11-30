@@ -21,7 +21,7 @@ CuCare::CuCare(QWidget *parent) :
     //Button Actions
     connect(ui->pushButton_AddConsultation, SIGNAL(clicked()), this, SLOT(createPatientRecordAct()));
     connect(ui->pushButton_EditConsultation, SIGNAL(clicked()), this, SLOT(editPatientRecordAct()));
-
+    connect(ui->pushButton_FullPatientListing, SIGNAL(clicked()), this, SLOT(showFullPatientListing()));
     //Combo Box Actions
     connect(ui->comboBox_Patients, SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxChanged(int)));
     connect(ui->consultationList, SIGNAL(currentRowChanged(int)), this, SLOT(consultListChanged(int)));
@@ -94,10 +94,11 @@ void CuCare::readResponse()
             openLogin();
         }
         else if(messageType == PATIENT_DATA_TYPE){
-            QStringList patientConsultSplit = message.split("\n");
+            QStringList patientConsultSplit = message.split("::");
 
             QStringList patientSplit = QString::fromLocal8Bit(patientConsultSplit.at(0).toLocal8Bit()).split(TILDA_DELIMETER);
             QStringList consultSplit = QString::fromLocal8Bit(patientConsultSplit.at(1).toLocal8Bit()).split(TILDA_DELIMETER);
+            QStringList followUpSplit = QString::fromLocal8Bit(patientConsultSplit.at(2).toLocal8Bit()).split(TILDA_DELIMETER);
 
             //Patient data
             for(int i = 0; i<patientSplit.size(); i++){
@@ -121,12 +122,26 @@ void CuCare::readResponse()
                 c->setConsId(QString::fromLocal8Bit(consultInfo.at(2).toLocal8Bit()));
                 c->setOhip(QString::fromLocal8Bit(consultInfo.at(3).toLocal8Bit()));
                 c->setReason(QString::fromLocal8Bit(consultInfo.at(4).toLocal8Bit()));
-                c->setDiagnosis(QString::fromLocal8Bit(consultInfo.at(5).toLocal8Bit()));
-                QDate date = QDate::fromString(QString::fromLocal8Bit(consultInfo.at(6).toLocal8Bit()),DATE_FORMAT);
+                c->setActualReason(QString::fromLocal8Bit(consultInfo.at(5).toLocal8Bit()));
+                c->setDiagnosis(QString::fromLocal8Bit(consultInfo.at(6).toLocal8Bit()));
+                QDate date = QDate::fromString(QString::fromLocal8Bit(consultInfo.at(7).toLocal8Bit()),DATE_FORMAT);
                 c->setDate(date);
-                QTime time = QTime::fromString(QString::fromLocal8Bit(consultInfo.at(7).toLocal8Bit()),TIME_FORMAT);
+                QTime time = QTime::fromString(QString::fromLocal8Bit(consultInfo.at(8).toLocal8Bit()),TIME_FORMAT);
                 c->setTime(time);
                 cuCareConsultations.push_back(c);
+            }
+
+            //FollowUp data
+            for(int i = 0; i<followUpSplit.size(); i++){
+                QStringList followUpInfo = followUpSplit.at(i).split(PIPE_DELIMETER);
+                FollowUp *f = new FollowUp();
+                f->setConsId(QString::fromLocal8Bit(followUpInfo.at(1).toLocal8Bit()));
+                f->setType(QString::fromLocal8Bit(followUpInfo.at(2).toLocal8Bit()));
+                QDate date = QDate::fromString(QString::fromLocal8Bit(followUpInfo.at(3).toLocal8Bit()),DATE_FORMAT);
+                f->setDate(date);
+                f->setStatus(QString::fromLocal8Bit(followUpInfo.at(4).toLocal8Bit()));
+                f->setDetails(QString::fromLocal8Bit(followUpInfo.at(5).toLocal8Bit()));
+                cuCareFollowUps.push_back(f);
             }
 
             //Reload Combo Box
@@ -148,10 +163,11 @@ void CuCare::readResponse()
                 c->setConsId(QString::fromLocal8Bit(consultInfo.at(2).toLocal8Bit()));
                 c->setOhip(QString::fromLocal8Bit(consultInfo.at(3).toLocal8Bit()));
                 c->setReason(QString::fromLocal8Bit(consultInfo.at(4).toLocal8Bit()));
-                c->setDiagnosis(QString::fromLocal8Bit(consultInfo.at(5).toLocal8Bit()));
-                QDate date = QDate::fromString(QString::fromLocal8Bit(consultInfo.at(6).toLocal8Bit()),DATE_FORMAT);
+                c->setActualReason(QString::fromLocal8Bit(consultInfo.at(5).toLocal8Bit()));
+                c->setDiagnosis(QString::fromLocal8Bit(consultInfo.at(6).toLocal8Bit()));
+                QDate date = QDate::fromString(QString::fromLocal8Bit(consultInfo.at(7).toLocal8Bit()),DATE_FORMAT);
                 c->setDate(date);
-                QTime time = QTime::fromString(QString::fromLocal8Bit(consultInfo.at(7).toLocal8Bit()),TIME_FORMAT);
+                QTime time = QTime::fromString(QString::fromLocal8Bit(consultInfo.at(8).toLocal8Bit()),TIME_FORMAT);
                 c->setTime(time);
                 cuCareConsultations.push_back(c);
             }
@@ -248,8 +264,9 @@ void CuCare::editPatientRecordAct()
     //Get Index Of Selected Consultation
     addEditConsultationView->setPatientConsult(currentConsultation);
     addEditConsultationView->setCurrentUser(cuCareUser);
-    addEditConsultationView->updateFields();
+    addEditConsultationView->setPatientConsultFollowUps(currentConsultationFollowUps);
     addEditConsultationView->updateAccess();
+    addEditConsultationView->updateFields();
     //Need to be sending an object pointer for a new patient to the next window
     //so that information can be passed back for processing
 
@@ -265,6 +282,28 @@ void CuCare::editPatientRecordAct()
     }
     addEditConsultationView->deleteLater();
 }
+
+void CuCare::showFullPatientListing()
+{
+    fullPatientListing = new PatientListView();
+    fullPatientListing->setWindowTitle("Patient Listing");
+    fullPatientListing->setModal(true);
+    fullPatientListing->setFixedSize(fullPatientListing->width(), fullPatientListing->height());
+
+
+    //Need to be sending an object pointer for a new patient to the next window
+    //so that information can be passed back for processing
+
+    //If they pressed okay then process data from object and send request to server
+    if(fullPatientListing->exec() == 1){
+
+        //Send update to server
+        //QByteArray message = currentConsultation->getEditMessage().toLocal8Bit();
+        //connection->write(message);
+    }
+    fullPatientListing->deleteLater();
+}
+
 void CuCare::viewPatientsAct()
 {
 
@@ -313,11 +352,18 @@ void CuCare::comboBoxChanged(int value)
         //Update Consultation List
         ui->consultationList->clear();
         currentPatientConsultations.clear();
+        currentPatientFollowUps.clear();
         for(int i=0; i<cuCareConsultations.size(); i++){
             if(cuCareConsultations[i]->getPatientId() == cuCarePatients[value]->getPatientId()){
                 QString name = "Date: " + cuCareConsultations[i]->getDate().toString() + " Time: " + cuCareConsultations[i]->getTime().toString();
                 new QListWidgetItem(tr(name.toStdString().c_str()), ui->consultationList);
                 currentPatientConsultations.push_back(cuCareConsultations[i]);
+
+                for(int j=0; j<cuCareFollowUps.size(); j++){
+                    if(cuCareConsultations[i]->getConsId() == cuCareFollowUps[j]->getConsId()){
+                        currentPatientFollowUps.push_back(cuCareFollowUps[j]);
+                    }
+                }
             }
         }
 
@@ -333,7 +379,13 @@ void CuCare::comboBoxChanged(int value)
 void CuCare::consultListChanged(int index)
 {
     if(currentPatientConsultations.size() != 0 && index != -1){
+        currentConsultationFollowUps.clear();
         currentConsultation = currentPatientConsultations[index];
+        for(int i=0; i<currentPatientFollowUps.size(); i++){
+            if(currentPatientFollowUps[i]->getConsId() == currentConsultation->getConsId()){
+                currentConsultationFollowUps.push_back(currentPatientFollowUps[i]);
+            }
+        }
     }
 }
 

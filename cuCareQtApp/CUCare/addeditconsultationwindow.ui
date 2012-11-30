@@ -29,12 +29,11 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>OHIP #:</string>
-          </property>
-         </widget>
+        <item row="0" column="1">
+         <widget class="QDateTimeEdit" name="dateTimeEdit"/>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="editOHIP"/>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label_4">
@@ -43,10 +42,17 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_3">
+        <item row="1" column="0">
+         <widget class="QLabel" name="label">
           <property name="text">
-           <string>Diagnosis:</string>
+           <string>OHIP #:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QPlainTextEdit" name="editDiagnosis">
+          <property name="enabled">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -57,18 +63,22 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QDateTimeEdit" name="dateTimeEdit"/>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="editOHIP"/>
-        </item>
-        <item row="3" column="1">
-         <widget class="QPlainTextEdit" name="editDiagnosis">
-          <property name="enabled">
-           <bool>true</bool>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Diagnosis:</string>
           </property>
          </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Actual Reason:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="editActualReason"/>
         </item>
        </layout>
       </item>
@@ -76,30 +86,40 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QGroupBox" name="groupBox_2">
+    <widget class="QGroupBox" name="groupBox_FollowUps">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="title">
       <string>Follow Ups</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
       <item row="1" column="0">
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pushButton_CreateFollowUp">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string>Create...</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="pushButton_EditFollowUp">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string>Edit...</string>
         </property>
        </widget>
       </item>
       <item row="0" column="0" colspan="2">
-       <widget class="QListWidget" name="listWidget"/>
+       <widget class="QListWidget" name="listWidget_FollowUps">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

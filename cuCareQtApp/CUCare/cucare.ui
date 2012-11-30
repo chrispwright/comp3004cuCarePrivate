@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page"/>
       <widget class="QWidget" name="page_3">
@@ -49,7 +49,7 @@
         <item row="0" column="3">
          <widget class="QPushButton" name="pushButton">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="text">
            <string>Sync Data</string>
@@ -203,6 +203,13 @@
               </size>
              </property>
             </spacer>
+           </item>
+           <item row="3" column="0">
+            <widget class="QPushButton" name="pushButton_FullPatientListing">
+             <property name="text">
+              <string>Full Patient Listing</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>

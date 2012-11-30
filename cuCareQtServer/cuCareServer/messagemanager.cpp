@@ -107,7 +107,9 @@ QString MessageManager::handleDataRequest(QTcpSocket *socket)
         returnData.append(TILDA_DELIMETER);
     }
     returnData.chop(1);
-    returnData.append("\n");
+    returnData.append("::");
+
+    patientsFile.close();
 
     //Consultation Info
     QFile consultsFile(CONSULTATIONS_DATABASE_FILE);
@@ -125,10 +127,30 @@ QString MessageManager::handleDataRequest(QTcpSocket *socket)
         returnData.append(TILDA_DELIMETER);
     }
     returnData.chop(1);
+    returnData.append("::");
+
+    consultsFile.close();
+
+    //FollowUp Info
+    QFile followUpsFile(FOLLOWUPS_DATABASE_FILE);
+    if(!followUpsFile.open(QIODevice::ReadOnly)) {
+        qDebug() << "error" << followUpsFile.errorString();
+    }
+
+    QTextStream followUpsFileIn(&followUpsFile);
+
+    QString line3;
+    while(!followUpsFileIn.atEnd()) {
+        line3 = followUpsFileIn.readLine();
+        line3.prepend(FOLLOWUP_HEADER);
+        returnData.append(line3);
+        returnData.append(TILDA_DELIMETER);
+    }
+    returnData.chop(1);
+    followUpsFile.close();
 
     socket->write(returnData);
 
-    consultsFile.close();
     return DATA_RETRIEVAL_SUCCESS;
 }
 
@@ -196,7 +218,7 @@ QString MessageManager::handleAddConsultation(QString incomingMessage, QTcpSocke
     QString addedConsultation = QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()) + PIPE_DELIMETER +
                                 QString::fromLocal8Bit(messageSplit.at(3).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(4).toLocal8Bit()) + PIPE_DELIMETER +
                                 QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(6).toLocal8Bit()) + PIPE_DELIMETER +
-                                QString::fromLocal8Bit(messageSplit.at(7).toLocal8Bit());
+                                QString::fromLocal8Bit(messageSplit.at(7).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(8).toLocal8Bit());
 
     consultsFileIn << addedConsultation.toStdString().c_str();
     consultsFileIn << "\n";
@@ -241,7 +263,7 @@ QString MessageManager::handleEditConsultation(QString incomingMessage)
             line = QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()) + PIPE_DELIMETER +
                    QString::fromLocal8Bit(messageSplit.at(3).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(4).toLocal8Bit()) + PIPE_DELIMETER +
                    QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(6).toLocal8Bit()) + PIPE_DELIMETER +
-                   QString::fromLocal8Bit(messageSplit.at(7).toLocal8Bit());
+                   QString::fromLocal8Bit(messageSplit.at(7).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(8).toLocal8Bit());
         }
         newFileContents.push_back(line);
     }

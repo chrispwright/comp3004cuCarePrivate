@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'addeditfollowups.ui'
 **
-** Created: Sun Nov 4 17:10:22 2012
+** Created: Fri Nov 30 13:58:23 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,6 +14,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QComboBox>
 #include <QtGui/QDateEdit>
 #include <QtGui/QDialog>
 #include <QtGui/QDialogButtonBox>
@@ -22,8 +23,7 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
-#include <QtGui/QListWidget>
-#include <QtGui/QPushButton>
+#include <QtGui/QPlainTextEdit>
 
 QT_BEGIN_NAMESPACE
 
@@ -34,21 +34,14 @@ public:
     QGroupBox *groupBox;
     QGridLayout *gridLayout_3;
     QGridLayout *gridLayout_2;
-    QLineEdit *lineEdit_4;
-    QLabel *label_2;
-    QLineEdit *lineEdit;
-    QLabel *label_3;
-    QLineEdit *lineEdit_2;
+    QLineEdit *lineEdit_Status;
     QLabel *label_4;
     QLabel *label;
-    QLineEdit *lineEdit_3;
-    QDateEdit *dateEdit;
     QLabel *label_5;
-    QGroupBox *groupBox_2;
-    QGridLayout *gridLayout_4;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QListWidget *listWidget;
+    QDateEdit *dateEdit;
+    QLabel *label_2;
+    QPlainTextEdit *plainTextEdit_Details;
+    QComboBox *comboBox_Type;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *AddEditFollowUps)
@@ -64,85 +57,53 @@ public:
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        lineEdit_4 = new QLineEdit(groupBox);
-        lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
-        lineEdit_4->setReadOnly(true);
+        lineEdit_Status = new QLineEdit(groupBox);
+        lineEdit_Status->setObjectName(QString::fromUtf8("lineEdit_Status"));
+        lineEdit_Status->setEnabled(false);
+        lineEdit_Status->setReadOnly(true);
 
-        gridLayout_2->addWidget(lineEdit_4, 3, 1, 1, 1);
-
-        label_2 = new QLabel(groupBox);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        gridLayout_2->addWidget(label_2, 1, 0, 1, 1);
-
-        lineEdit = new QLineEdit(groupBox);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-
-        gridLayout_2->addWidget(lineEdit, 0, 1, 1, 1);
-
-        label_3 = new QLabel(groupBox);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        gridLayout_2->addWidget(label_3, 2, 0, 1, 1);
-
-        lineEdit_2 = new QLineEdit(groupBox);
-        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
-
-        gridLayout_2->addWidget(lineEdit_2, 1, 1, 1, 1);
+        gridLayout_2->addWidget(lineEdit_Status, 4, 3, 1, 1);
 
         label_4 = new QLabel(groupBox);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
-        gridLayout_2->addWidget(label_4, 3, 0, 1, 1);
+        gridLayout_2->addWidget(label_4, 4, 1, 1, 1);
 
         label = new QLabel(groupBox);
         label->setObjectName(QString::fromUtf8("label"));
 
-        gridLayout_2->addWidget(label, 0, 0, 1, 1);
-
-        lineEdit_3 = new QLineEdit(groupBox);
-        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
-
-        gridLayout_2->addWidget(lineEdit_3, 2, 1, 1, 1);
-
-        dateEdit = new QDateEdit(groupBox);
-        dateEdit->setObjectName(QString::fromUtf8("dateEdit"));
-
-        gridLayout_2->addWidget(dateEdit, 4, 1, 1, 1);
+        gridLayout_2->addWidget(label, 0, 1, 1, 1);
 
         label_5 = new QLabel(groupBox);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
-        gridLayout_2->addWidget(label_5, 4, 0, 1, 1);
+        gridLayout_2->addWidget(label_5, 3, 1, 1, 1);
+
+        dateEdit = new QDateEdit(groupBox);
+        dateEdit->setObjectName(QString::fromUtf8("dateEdit"));
+
+        gridLayout_2->addWidget(dateEdit, 3, 3, 1, 1);
+
+        label_2 = new QLabel(groupBox);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        gridLayout_2->addWidget(label_2, 5, 1, 1, 1);
+
+        plainTextEdit_Details = new QPlainTextEdit(groupBox);
+        plainTextEdit_Details->setObjectName(QString::fromUtf8("plainTextEdit_Details"));
+
+        gridLayout_2->addWidget(plainTextEdit_Details, 5, 3, 1, 1);
+
+        comboBox_Type = new QComboBox(groupBox);
+        comboBox_Type->setObjectName(QString::fromUtf8("comboBox_Type"));
+
+        gridLayout_2->addWidget(comboBox_Type, 0, 3, 1, 1);
 
 
         gridLayout_3->addLayout(gridLayout_2, 0, 0, 1, 1);
 
 
         gridLayout->addWidget(groupBox, 0, 0, 1, 1);
-
-        groupBox_2 = new QGroupBox(AddEditFollowUps);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setEnabled(false);
-        gridLayout_4 = new QGridLayout(groupBox_2);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        pushButton = new QPushButton(groupBox_2);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-
-        gridLayout_4->addWidget(pushButton, 1, 0, 1, 1);
-
-        pushButton_2 = new QPushButton(groupBox_2);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-
-        gridLayout_4->addWidget(pushButton_2, 1, 1, 1, 1);
-
-        listWidget = new QListWidget(groupBox_2);
-        listWidget->setObjectName(QString::fromUtf8("listWidget"));
-
-        gridLayout_4->addWidget(listWidget, 0, 0, 1, 2);
-
-
-        gridLayout->addWidget(groupBox_2, 0, 1, 1, 1);
 
         buttonBox = new QDialogButtonBox(AddEditFollowUps);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
@@ -163,15 +124,18 @@ public:
     {
         AddEditFollowUps->setWindowTitle(QApplication::translate("AddEditFollowUps", "Dialog", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("AddEditFollowUps", "Follow Up Info", 0, QApplication::UnicodeUTF8));
-        lineEdit_4->setText(QApplication::translate("AddEditFollowUps", "Pending", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("AddEditFollowUps", "Renewals:", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("AddEditFollowUps", "Referral:", 0, QApplication::UnicodeUTF8));
+        lineEdit_Status->setText(QApplication::translate("AddEditFollowUps", "Pending", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("AddEditFollowUps", "Status:", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("AddEditFollowUps", "Medical Tests:", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("AddEditFollowUps", "Type:", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("AddEditFollowUps", "Due Date:", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("AddEditFollowUps", "Follow Up Consultations", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("AddEditFollowUps", "Create...", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("AddEditFollowUps", "Edit...", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("AddEditFollowUps", "Details:", 0, QApplication::UnicodeUTF8));
+        comboBox_Type->clear();
+        comboBox_Type->insertItems(0, QStringList()
+         << QApplication::translate("AddEditFollowUps", "Return Consultation", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("AddEditFollowUps", "Prescription Renewal", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("AddEditFollowUps", "Referral", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("AddEditFollowUps", "Medical Test", 0, QApplication::UnicodeUTF8)
+        );
     } // retranslateUi
 
 };

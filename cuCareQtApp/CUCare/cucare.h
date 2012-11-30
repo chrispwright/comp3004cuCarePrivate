@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include "addeditconsultationwindow.h"
 #include "addeditpatientwindow.h"
+#include "patientlistview.h"
 #include "loginscreen.h"
 #include "user.h"
 #include "patient.h"
@@ -38,6 +39,7 @@ private slots:
     void editPatientAct();
     void deletePatientAct();
     void createPatientRecordAct();
+    void showFullPatientListing();
     void editPatientRecordAct();
     void viewPatientsAct();
     void runQueryAct();
@@ -51,6 +53,7 @@ private:
     //Windows
     AddEditConsultationWindow *addEditConsultationView;
     AddEditPatientWindow *addEditPatientView;
+    PatientListView *fullPatientListing;
     LoginScreen *loginScreen;
 
     //Actions
@@ -75,6 +78,9 @@ private:
     QVector<Patient*> cuCarePatients;
     QVector<Consultation*> cuCareConsultations;
     QVector<Consultation*> currentPatientConsultations;
+    QVector<FollowUp*> cuCareFollowUps;
+    QVector<FollowUp*> currentPatientFollowUps;
+    QVector<FollowUp*> currentConsultationFollowUps;
     Patient *currentPatient;
     Consultation *currentConsultation;
     int currentPatientIndex;

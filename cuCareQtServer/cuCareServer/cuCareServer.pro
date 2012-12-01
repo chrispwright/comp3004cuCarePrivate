@@ -19,11 +19,11 @@ SOURCES += main.cpp \
     server.cpp \
     connectionthread.cpp \
     messagemanager.cpp \
-    auditthread.cpp
+    auditmanager.cpp
 
 HEADERS += \
     server.h \
     connectionthread.h \
     messagemanager.h \
     staticdefinitions.h \
-    auditthread.h
+    auditmanager.h

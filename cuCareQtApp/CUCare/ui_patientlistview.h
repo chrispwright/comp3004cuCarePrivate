@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'patientlistview.ui'
 **
-** Created: Sat Dec 1 13:20:35 2012
+** Created: Sat Dec 1 16:44:56 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -137,7 +137,7 @@ public:
         buttonBox = new QDialogButtonBox(PatientListView);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
-        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+        buttonBox->setStandardButtons(QDialogButtonBox::Ok);
 
         gridLayout_4->addWidget(buttonBox, 4, 2, 1, 4);
 

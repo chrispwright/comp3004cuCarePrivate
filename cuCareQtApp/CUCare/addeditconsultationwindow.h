@@ -2,6 +2,7 @@
 #define ADDEDITCONSULTATIONWINDOW_H
 
 #include <QDialog>
+#include <QTcpSocket>
 #include "addeditfollowups.h"
 #include "consultation.h"
 #include "followup.h"
@@ -20,9 +21,11 @@ public:
     ~AddEditConsultationWindow();
 
     Consultation* getPatientConsult();
+    int getLastFollowUpIndex();
     void setPatientConsult(Consultation *pConsult);
     void setCurrentUser(User *user);
     void setPatientConsultFollowUps(QVector<FollowUp*>);
+    void setConnection(QTcpSocket*);
 
     void updateFields();
     void updateAccess();
@@ -45,6 +48,10 @@ private:
     FollowUp *currentFollowUp;
 
     AddEditFollowUps *addEditFollowUpView;
+
+    QTcpSocket *connection;
+
+    int lastFollowUpIndex;
 };
 
 #endif // ADDEDITCONSULTATIONWINDOW_H

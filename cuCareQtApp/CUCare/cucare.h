@@ -84,6 +84,7 @@ private:
     Patient *currentPatient;
     Consultation *currentConsultation;
     int currentPatientIndex;
+    QVector<QString> cuCarePhysicians;
 };
 
 #endif // CUCARE_H

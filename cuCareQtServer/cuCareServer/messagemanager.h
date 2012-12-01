@@ -23,7 +23,10 @@ public:
    //QString deletepatient();
    QString handleAddConsultation(QString incomingMessage, QTcpSocket *socket);
    QString handleEditConsultation(QString incomingMessage);
+   QString handleAddFollowUp(QString incomingMessage, QTcpSocket *socket);
+   QString handleEditFollowUp(QString incomingMessage, QTcpSocket *socket);
 
+   QString getUniqueId(QString type, QString header);
 };
 
 #endif // MESSAGEMANAGER_H

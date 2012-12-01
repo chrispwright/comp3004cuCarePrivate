@@ -27,11 +27,12 @@ void AddEditFollowUps::updateFields()
         ui->comboBox_Type->setCurrentIndex(1);
     else if(consultationFollowUp->getType() == "Referral")
         ui->comboBox_Type->setCurrentIndex(2);
-    else if(consultationFollowUp->getType() == "Return Consultation")
+    else if(consultationFollowUp->getType() == "Medical Test")
         ui->comboBox_Type->setCurrentIndex(3);
 
 
-    ui->dateEdit->setDate(consultationFollowUp->getDate());
+    ui->dateTimeEdit->setDate(consultationFollowUp->getDate());
+    ui->dateTimeEdit->setTime(consultationFollowUp->getTime());
     ui->lineEdit_Status->setReadOnly(false);
     ui->lineEdit_Status->setEnabled(true);
     ui->lineEdit_Status->setText(consultationFollowUp->getStatus());
@@ -41,7 +42,8 @@ void AddEditFollowUps::updateFields()
 void AddEditFollowUps::saveFollowUp()
 {
     consultationFollowUp->setType(ui->comboBox_Type->currentText());
-    consultationFollowUp->setDate(ui->dateEdit->date());
+    consultationFollowUp->setDate(ui->dateTimeEdit->date());
+    consultationFollowUp->setTime(ui->dateTimeEdit->time());
     consultationFollowUp->setStatus(ui->lineEdit_Status->text());
     consultationFollowUp->setDetails(ui->plainTextEdit_Details->toPlainText());
 }

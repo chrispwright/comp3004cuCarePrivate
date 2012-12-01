@@ -10,6 +10,8 @@ static QString EDIT_PATIENT_REQUEST = "editpatient";
 static QString DELETE_PATIENT_REQUEST = "deletepatient";
 static QString ADD_CONSULTATION_REQUEST = "addconsultation";
 static QString EDIT_CONSULTATION_REQUEST = "editconsultation";
+static QString ADD_FOLLOWUP_REQUEST = "addfollowup";
+static QString EDIT_FOLLOWUP_REQUEST = "editfollowup";
 
 static QString USERS_DATABASE_FILE = "users.database";
 static QString PATIENTS_DATABASE_FILE = "patients.database";
@@ -21,6 +23,7 @@ static QString PATIENT_HEADER = "patientdata|";
 static QString CONSULTATION_HEADER = "consultationdata|";
 static QString CONSULTATION_ID_HEADER = "consultationid|";
 static QString FOLLOWUP_HEADER = "followupdata|";
+static QString FOLLOWUP_ID_HEADER = "followupid|";
 static QString VALID_USER_HEADER = "validuser|";
 static QString INVALID_USER_HEADER = "invaliduser|";
 static QString DATA_RETRIEVAL_SUCCESS = "dataretrievalsuccessful";

@@ -47,6 +47,14 @@ QByteArray MessageManager::dispatchHandler(QString incomingMessage, QTcpSocket *
             QByteArray result = handleEditConsultation(incomingMessage).toLocal8Bit();
             return result;
         }
+        else if(messageType == ADD_FOLLOWUP_REQUEST){
+            QByteArray result = handleAddFollowUp(incomingMessage, socket).toLocal8Bit();
+            return result;
+        }
+        else if(messageType == EDIT_FOLLOWUP_REQUEST){
+            QByteArray result = handleEditFollowUp(incomingMessage, socket).toLocal8Bit();
+            return result;
+        }
     }
     return INVALID_MESSAGE_TYPE.toLocal8Bit();
 }
@@ -156,47 +164,7 @@ QString MessageManager::handleDataRequest(QTcpSocket *socket)
 
 QString MessageManager::handleAddConsultation(QString incomingMessage, QTcpSocket *socket)
 {
-    QString newConsultId; //New Unique Id for Consultation
-
-    //Unique ID Access
-    QFile uniqueIdsFile(UNIQUEIDS_DATABASE_FILE);
-    if(!uniqueIdsFile.open(QIODevice::ReadOnly)) {
-        qDebug() << "error" << uniqueIdsFile.errorString();
-    }
-
-    QTextStream uniqueIdsFileIn(&uniqueIdsFile);
-
-    QString line;
-    QVector<QString> newIdFileContents;
-    while(!uniqueIdsFileIn.atEnd()) {
-        line = uniqueIdsFileIn.readLine();
-        QStringList split = line.split(PIPE_DELIMETER);
-        if(QString::fromLocal8Bit(split.at(0).toLocal8Bit()) == "consultationid"){
-            newConsultId = QString::fromLocal8Bit(split.at(1).toLocal8Bit());
-            line = CONSULTATION_ID_HEADER;
-            int newConsultIdUpdated = newConsultId.toInt();
-            newConsultIdUpdated++;
-            QString newConsultIdUpdatedString = QString::number(newConsultIdUpdated);
-            line.append(newConsultIdUpdatedString);
-        }
-        newIdFileContents.push_back(line);
-    }
-
-    uniqueIdsFile.close();
-
-    //Update ID's
-    QFile uniqueIdsFileWrite(UNIQUEIDS_DATABASE_FILE);
-    if(!uniqueIdsFileWrite.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        qDebug() << "error" << uniqueIdsFileWrite.errorString();
-    }
-
-    QTextStream uniqueIdsFileWriteOut(&uniqueIdsFileWrite);
-
-    for(int i=0; i<newIdFileContents.size(); i++){
-        uniqueIdsFileWriteOut << newIdFileContents[i] << "\n";
-    }
-
-    uniqueIdsFileWrite.close();
+    QString newConsultId = getUniqueId("consultationid", CONSULTATION_ID_HEADER);
 
     QStringList messageSplit = incomingMessage.split(PIPE_DELIMETER);
     messageSplit[2] = newConsultId;
@@ -284,4 +252,153 @@ QString MessageManager::handleEditConsultation(QString incomingMessage)
     consultsFileWrite.close();
 
     return EDIT_CONSULTATION_SUCCESS;
+}
+
+QString MessageManager::handleAddFollowUp(QString incomingMessage, QTcpSocket *socket)
+{
+    QString newFollowUpId = getUniqueId("followupid", FOLLOWUP_ID_HEADER);
+
+    QStringList messageSplit = incomingMessage.split(PIPE_DELIMETER);
+    messageSplit[2] = newFollowUpId;
+
+    //Add followup
+    QFile followUpsFile(FOLLOWUPS_DATABASE_FILE);
+    if(!followUpsFile.open(QIODevice::ReadWrite)) {
+        qDebug() << "error" << followUpsFile.errorString();
+    }
+
+    QTextStream followUpsFileIn(&followUpsFile);
+
+    QString line2;
+    QVector<QString> newFileContents;
+    while(!followUpsFileIn.atEnd()) {
+        line2 = followUpsFileIn.readLine();
+        newFileContents.push_back(line2);
+    }
+    QString addedFollowUp = QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()) + PIPE_DELIMETER +
+                            QString::fromLocal8Bit(messageSplit.at(3).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(4).toLocal8Bit()) + PIPE_DELIMETER +
+                            QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(6).toLocal8Bit()) + PIPE_DELIMETER +
+                            QString::fromLocal8Bit(messageSplit.at(7).toLocal8Bit());
+
+    followUpsFileIn << addedFollowUp.toStdString().c_str();
+    followUpsFileIn << "\n";
+
+    newFileContents.push_back(addedFollowUp);
+
+    followUpsFile.close();
+
+    //Return message with all followups
+    QString message;
+    for(int i=0; i<newFileContents.size(); i++){
+        message.append(FOLLOWUP_HEADER);
+        message.append(newFileContents[i]);
+        message.append(TILDA_DELIMETER);
+    }
+    message.chop(1);
+
+    socket->write(message.toLocal8Bit());
+    return DATA_UPDATED;
+}
+
+QString MessageManager::handleEditFollowUp(QString incomingMessage, QTcpSocket *socket)
+{
+    QStringList messageSplit = incomingMessage.split(PIPE_DELIMETER);
+    QString followUpId = QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit());
+
+    //FollowUp Info
+    QFile followUpsFile(FOLLOWUPS_DATABASE_FILE);
+    if(!followUpsFile.open(QIODevice::ReadOnly)) {
+        qDebug() << "error" << followUpsFile.errorString();
+    }
+
+    QTextStream followUpsFileIn(&followUpsFile);
+
+    QString line;
+    QVector<QString> newFileContents;
+    while(!followUpsFileIn.atEnd()) {
+        line = followUpsFileIn.readLine();
+        QStringList fileLineSplit = line.split(PIPE_DELIMETER);
+        //If the consultation ids match then update the line
+        if(QString::fromLocal8Bit(fileLineSplit.at(1).toLocal8Bit()) == followUpId){
+            line = QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()) + PIPE_DELIMETER +
+                   QString::fromLocal8Bit(messageSplit.at(3).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(4).toLocal8Bit()) + PIPE_DELIMETER +
+                   QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(6).toLocal8Bit()) + PIPE_DELIMETER +
+                   QString::fromLocal8Bit(messageSplit.at(7).toLocal8Bit());
+        }
+        newFileContents.push_back(line);
+    }
+
+    followUpsFile.close();
+
+    QFile followUpsFileWrite(FOLLOWUPS_DATABASE_FILE);
+    if(!followUpsFileWrite.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+        qDebug() << "error" << followUpsFileWrite.errorString();
+    }
+
+    QTextStream followUpsFileOut(&followUpsFileWrite);
+
+    for(int i=0; i<newFileContents.size(); i++){
+        followUpsFileOut << newFileContents[i] << "\n";
+    }
+
+    followUpsFileWrite.close();
+
+    //Return message with all followups
+    QString message;
+    for(int i=0; i<newFileContents.size(); i++){
+        message.append(FOLLOWUP_HEADER);
+        message.append(newFileContents[i]);
+        message.append(TILDA_DELIMETER);
+    }
+    message.chop(1);
+
+    socket->write(message.toLocal8Bit());
+    return DATA_UPDATED;
+}
+
+QString MessageManager::getUniqueId(QString type, QString header)
+{
+    QString returnId;
+
+    //Unique ID Access
+    QFile uniqueIdsFile(UNIQUEIDS_DATABASE_FILE);
+    if(!uniqueIdsFile.open(QIODevice::ReadOnly)) {
+        qDebug() << "error" << uniqueIdsFile.errorString();
+    }
+
+    QTextStream uniqueIdsFileIn(&uniqueIdsFile);
+
+    QString line;
+    QVector<QString> newIdFileContents;
+    while(!uniqueIdsFileIn.atEnd()) {
+        line = uniqueIdsFileIn.readLine();
+        QStringList split = line.split(PIPE_DELIMETER);
+        if(QString::fromLocal8Bit(split.at(0).toLocal8Bit()) == type){
+            returnId = QString::fromLocal8Bit(split.at(1).toLocal8Bit());
+            line = header;
+            int returnIdUpdated = returnId.toInt();
+            returnIdUpdated++;
+            QString newIdUpdatedString = QString::number(returnIdUpdated);
+            line.append(newIdUpdatedString);
+        }
+        newIdFileContents.push_back(line);
+    }
+
+    uniqueIdsFile.close();
+
+    //Update ID's
+    QFile uniqueIdsFileWrite(UNIQUEIDS_DATABASE_FILE);
+    if(!uniqueIdsFileWrite.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+        qDebug() << "error" << uniqueIdsFileWrite.errorString();
+    }
+
+    QTextStream uniqueIdsFileWriteOut(&uniqueIdsFileWrite);
+
+    for(int i=0; i<newIdFileContents.size(); i++){
+        uniqueIdsFileWriteOut << newIdFileContents[i] << "\n";
+    }
+
+    uniqueIdsFileWrite.close();
+
+    return returnId;
 }

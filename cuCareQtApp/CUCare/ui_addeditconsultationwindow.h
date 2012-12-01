@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'addeditconsultationwindow.ui'
 **
-** Created: Fri Nov 30 13:58:23 2012
+** Created: Fri Nov 30 19:01:01 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

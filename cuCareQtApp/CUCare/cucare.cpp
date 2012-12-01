@@ -136,11 +136,14 @@ void CuCare::readResponse()
                 QStringList followUpInfo = followUpSplit.at(i).split(PIPE_DELIMETER);
                 FollowUp *f = new FollowUp();
                 f->setConsId(QString::fromLocal8Bit(followUpInfo.at(1).toLocal8Bit()));
-                f->setType(QString::fromLocal8Bit(followUpInfo.at(2).toLocal8Bit()));
-                QDate date = QDate::fromString(QString::fromLocal8Bit(followUpInfo.at(3).toLocal8Bit()),DATE_FORMAT);
+                f->setFollowUpId(QString::fromLocal8Bit(followUpInfo.at(2).toLocal8Bit()));
+                f->setType(QString::fromLocal8Bit(followUpInfo.at(3).toLocal8Bit()));
+                QDate date = QDate::fromString(QString::fromLocal8Bit(followUpInfo.at(4).toLocal8Bit()),DATE_FORMAT);
                 f->setDate(date);
-                f->setStatus(QString::fromLocal8Bit(followUpInfo.at(4).toLocal8Bit()));
-                f->setDetails(QString::fromLocal8Bit(followUpInfo.at(5).toLocal8Bit()));
+                QTime time = QTime::fromString(QString::fromLocal8Bit(followUpInfo.at(5).toLocal8Bit()),TIME_FORMAT);
+                f->setTime(time);
+                f->setStatus(QString::fromLocal8Bit(followUpInfo.at(6).toLocal8Bit()));
+                f->setDetails(QString::fromLocal8Bit(followUpInfo.at(7).toLocal8Bit()));
                 cuCareFollowUps.push_back(f);
             }
 
@@ -181,6 +184,35 @@ void CuCare::readResponse()
             ui->textBrowser_AppOutput->append(appOutput->addConsultationRecord(currentPatient));
 
         }
+        else if(messageType == FOLLOWUP_DATA_TYPE){
+            int lastPatientIndex = ui->comboBox_Patients->currentIndex();
+            cuCareFollowUps.clear();
+            currentPatientFollowUps.clear();
+            QStringList followUpSplit = message.split(TILDA_DELIMETER);
+            for(int i = 0; i<followUpSplit.size(); i++){
+                QStringList followUpInfo = followUpSplit.at(i).split(PIPE_DELIMETER);
+                FollowUp *f = new FollowUp();
+                f->setConsId(QString::fromLocal8Bit(followUpInfo.at(1).toLocal8Bit()));
+                f->setFollowUpId(QString::fromLocal8Bit(followUpInfo.at(2).toLocal8Bit()));
+                f->setType(QString::fromLocal8Bit(followUpInfo.at(3).toLocal8Bit()));
+                QDate date = QDate::fromString(QString::fromLocal8Bit(followUpInfo.at(4).toLocal8Bit()),DATE_FORMAT);
+                f->setDate(date);
+                QTime time = QTime::fromString(QString::fromLocal8Bit(followUpInfo.at(5).toLocal8Bit()),TIME_FORMAT);
+                f->setTime(time);
+                f->setStatus(QString::fromLocal8Bit(followUpInfo.at(6).toLocal8Bit()));
+                f->setDetails(QString::fromLocal8Bit(followUpInfo.at(7).toLocal8Bit()));
+                cuCareFollowUps.push_back(f);
+            }
+
+            ui->comboBox_Patients->clear();
+            setUpComboBox();
+            ui->comboBox_Patients->setCurrentIndex(lastPatientIndex);
+            if(currentPatientConsultations.size() > 0){
+                ui->consultationList->setCurrentRow(0);
+            }
+
+            ui->textBrowser_AppOutput->append(appOutput->updatedFollowUp(currentPatient, currentConsultation));
+        }
         else if(messageType == EDIT_CONSULTATION_SUCCESSFUL_TYPE){
             ui->textBrowser_AppOutput->append(appOutput->editConsultationSuccess(currentPatient));
         }
@@ -189,7 +221,7 @@ void CuCare::readResponse()
 
 void CuCare::createPatientAct()
 {
-    addEditPatientView = new AddEditPatientWindow();
+    addEditPatientView = new AddEditPatientWindow(this);
     addEditPatientView->setWindowTitle("Create Patient Record");
     addEditPatientView->setModal(true);
     addEditPatientView->setFixedSize(addEditPatientView->width(), addEditPatientView->height());
@@ -206,7 +238,7 @@ void CuCare::createPatientAct()
 
 void CuCare::editPatientAct()
 {
-    addEditPatientView = new AddEditPatientWindow();
+    addEditPatientView = new AddEditPatientWindow(this);
     addEditPatientView->setWindowTitle("Edit Patient Record");
     addEditPatientView->setModal(true);
     addEditPatientView->setFixedSize(addEditPatientView->width(), addEditPatientView->height());
@@ -231,12 +263,13 @@ void CuCare::deletePatientAct()
 }
 void CuCare::createPatientRecordAct()
 {
-    addEditConsultationView = new AddEditConsultationWindow();
+    addEditConsultationView = new AddEditConsultationWindow(this);
     addEditConsultationView->setWindowTitle("Add Consultation Record");
     addEditConsultationView->setModal(true);
     addEditConsultationView->setFixedSize(addEditConsultationView->width(), addEditConsultationView->height());
     addEditConsultationView->setPatientConsult(new Consultation());
     addEditConsultationView->setCurrentUser(cuCareUser);
+    addEditConsultationView->setConnection(connection);
     addEditConsultationView->updateAccess();
 
     //Need to be sending an object pointer for a new patient to the next window
@@ -256,7 +289,7 @@ void CuCare::createPatientRecordAct()
 }
 void CuCare::editPatientRecordAct()
 {
-    addEditConsultationView = new AddEditConsultationWindow();
+    addEditConsultationView = new AddEditConsultationWindow(this);
     addEditConsultationView->setWindowTitle("Edit Consultation Record");
     addEditConsultationView->setModal(true);
     addEditConsultationView->setFixedSize(addEditConsultationView->width(), addEditConsultationView->height());
@@ -265,6 +298,7 @@ void CuCare::editPatientRecordAct()
     addEditConsultationView->setPatientConsult(currentConsultation);
     addEditConsultationView->setCurrentUser(cuCareUser);
     addEditConsultationView->setPatientConsultFollowUps(currentConsultationFollowUps);
+    addEditConsultationView->setConnection(connection);
     addEditConsultationView->updateAccess();
     addEditConsultationView->updateFields();
     //Need to be sending an object pointer for a new patient to the next window
@@ -285,7 +319,7 @@ void CuCare::editPatientRecordAct()
 
 void CuCare::showFullPatientListing()
 {
-    fullPatientListing = new PatientListView();
+    fullPatientListing = new PatientListView(this);
     fullPatientListing->setWindowTitle("Patient Listing");
     fullPatientListing->setModal(true);
     fullPatientListing->setFixedSize(fullPatientListing->width(), fullPatientListing->height());

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'connectionthread.h'
 **
-** Created: Fri Nov 30 12:06:14 2012
+** Created: Fri Nov 30 19:00:51 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!

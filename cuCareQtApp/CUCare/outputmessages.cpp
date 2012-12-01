@@ -22,6 +22,14 @@ QString OutputMessages::editConsultationSuccess(Patient *patient)
     return message;
 }
 
+QString OutputMessages::updatedFollowUp(Patient *patient, Consultation *consultation)
+{
+    QString message = "Updated follow up records for patient " + patient->getFirstName() + " " +  patient->getLastName() + " corresponding to his/her consultation on " +
+            consultation->getDate().toString("yyyy/MM/dd") + " at " + consultation->getTime().toString("hh:mm:ss") + ". Server database was updated.";
+    return message;
+}
+
+
 QString OutputMessages::dataRetrievalSuccess()
 {
     return "Data loaded from the server successfully.";

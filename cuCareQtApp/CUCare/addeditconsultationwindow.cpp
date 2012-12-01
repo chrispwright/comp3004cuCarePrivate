@@ -16,6 +16,8 @@ AddEditConsultationWindow::AddEditConsultationWindow(QWidget *parent) :
     //Buttons
     connect(ui->pushButton_CreateFollowUp, SIGNAL(clicked()), this, SLOT(createFollowUpAct()));
     connect(ui->pushButton_EditFollowUp, SIGNAL(clicked()), this, SLOT(editFollowUpAct()));
+
+    lastFollowUpIndex = -1;
 }
 
 AddEditConsultationWindow::~AddEditConsultationWindow()
@@ -24,9 +26,11 @@ AddEditConsultationWindow::~AddEditConsultationWindow()
 }
 
 Consultation* AddEditConsultationWindow::getPatientConsult(){ return patientConsult; }
+int AddEditConsultationWindow::getLastFollowUpIndex(){ return lastFollowUpIndex; }
 void AddEditConsultationWindow::setPatientConsult(Consultation *pConsult) { patientConsult = pConsult; }
 void AddEditConsultationWindow::setCurrentUser(User *user){ currentUser = user; }
 void AddEditConsultationWindow::setPatientConsultFollowUps(QVector<FollowUp*> patConsFUps){ patientConsultFollowUps = patConsFUps; }
+void AddEditConsultationWindow::setConnection(QTcpSocket *conn){ connection = conn; }
 
 void AddEditConsultationWindow::updateFields()
 {
@@ -51,7 +55,6 @@ void AddEditConsultationWindow::updateAccess()
     }
 }
 
-
 void AddEditConsultationWindow::saveConsultation()
 {
     patientConsult->setDate(ui->dateTimeEdit->date());
@@ -74,7 +77,10 @@ void AddEditConsultationWindow::loadFollowUps()
     }
 
     if(patientConsultFollowUps.size() > 0){
-        ui->listWidget_FollowUps->setCurrentRow(0);
+        if(lastFollowUpIndex != -1)
+            ui->listWidget_FollowUps->setCurrentRow(lastFollowUpIndex);
+        else
+            ui->listWidget_FollowUps->setCurrentRow(0);
     }
 }
 
@@ -82,12 +88,13 @@ void AddEditConsultationWindow::followUpListChanged(int index)
 {
     if(patientConsultFollowUps.size() != 0 && index != -1){
         currentFollowUp = patientConsultFollowUps[index];
+        lastFollowUpIndex = index;
     }
 }
 
 void AddEditConsultationWindow::createFollowUpAct()
 {
-    addEditFollowUpView = new AddEditFollowUps();
+    addEditFollowUpView = new AddEditFollowUps(this);
     addEditFollowUpView->setWindowTitle("Add Follow Up");
     addEditFollowUpView->setModal(true);
     addEditFollowUpView->setFixedSize(addEditFollowUpView->width(), addEditFollowUpView->height());
@@ -101,10 +108,9 @@ void AddEditConsultationWindow::createFollowUpAct()
         patientConsultFollowUps.push_back(newFollowUp);
 
         //Send update to server
-        /*
+
         QByteArray message = newFollowUp->getAddMessage().toLocal8Bit();
         connection->write(message);
-        */
     }
     addEditFollowUpView->deleteLater();
 
@@ -114,7 +120,7 @@ void AddEditConsultationWindow::createFollowUpAct()
 
 void AddEditConsultationWindow::editFollowUpAct()
 {
-    addEditFollowUpView = new AddEditFollowUps();
+    addEditFollowUpView = new AddEditFollowUps(this);
     addEditFollowUpView->setWindowTitle("Edit Follow Up");
     addEditFollowUpView->setModal(true);
     addEditFollowUpView->setFixedSize(addEditFollowUpView->width(), addEditFollowUpView->height());
@@ -129,10 +135,9 @@ void AddEditConsultationWindow::editFollowUpAct()
         currentFollowUp = addEditFollowUpView->getConsultationFollowUp();
 
         //Send update to server
-        /*
-        QByteArray message = currentConsultation->getEditMessage().toLocal8Bit();
+
+        QByteArray message = currentFollowUp->getEditMessage().toLocal8Bit();
         connection->write(message);
-        */
     }
     addEditFollowUpView->deleteLater();
 

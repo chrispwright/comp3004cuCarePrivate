@@ -7,6 +7,7 @@ static QString VALID_USER_TYPE = "validuser";
 static QString INVALID_USER_TYPE = "invaliduser";
 static QString PATIENT_DATA_TYPE ="patientdata";
 static QString CONSULTATION_DATA_TYPE = "consultationdata";
+static QString FOLLOWUP_DATA_TYPE = "followupdata";
 static QString EDIT_CONSULTATION_SUCCESSFUL_TYPE = "editconsultationsuccessful";
 
 static QString PATIENT_DATA_REQUEST = "patientdatarequest|";

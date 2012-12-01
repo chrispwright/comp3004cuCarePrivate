@@ -18,10 +18,12 @@ TEMPLATE = app
 SOURCES += main.cpp \
     server.cpp \
     connectionthread.cpp \
-    messagemanager.cpp
+    messagemanager.cpp \
+    auditthread.cpp
 
 HEADERS += \
     server.h \
     connectionthread.h \
     messagemanager.h \
-    staticdefinitions.h
+    staticdefinitions.h \
+    auditthread.h

@@ -18,6 +18,7 @@ static QString PATIENTS_DATABASE_FILE = "patients.database";
 static QString CONSULTATIONS_DATABASE_FILE = "consultations.database";
 static QString FOLLOWUPS_DATABASE_FILE = "followups.database";
 static QString UNIQUEIDS_DATABASE_FILE =  "uniqueids.database";
+static QString AUDITCONFIG_DATABASE_FILE = "auditconfig.database";
 
 static QString PHYSICIAN_HEADER = "physiciandata|";
 static QString PATIENT_HEADER = "patientdata|";

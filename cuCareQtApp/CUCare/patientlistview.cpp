@@ -31,7 +31,7 @@ void PatientListView::patientTableClicked(int row,int col, int row1, int co1l)
 {
     if(row != -1){
         //Load consultations and follow ups that correspond to the patient that was clicked
-        currentPatient = cuCarePatients[row];
+        currentPatient = currentPatients[row];
         currentConsultations.clear();
         for(int i = 0; i<cuCareConsultations.size(); i++){
             if(cuCareConsultations[i]->getPatientId() == currentPatient->getPatientId()){
@@ -70,17 +70,6 @@ void PatientListView::patientTableClicked(int row,int col, int row1, int co1l)
                 }
             }
 
-            QVector<Consultation*> updatedConsultations;
-            for(int i = 0; i < currentPatients.size(); i++){
-                for(int j = 0; j < currentConsultations.size(); j++){
-                    if(currentConsultations[j]->getPatientId() == currentPatients[i]->getPatientId()){
-                        updatedConsultations.push_back(currentConsultations[j]);
-                    }
-                }
-            }
-            currentConsultations = updatedConsultations;
-
-            loadConsultationTable(currentConsultations);
             loadFollowUpTable(currentFollowUps);
         }
         ui->tableWidget_Consultations->setEnabled(true);
@@ -151,6 +140,8 @@ void PatientListView::loadPatientTable(QVector<Patient*> patients)
         ui->tableWidget_Patients->setItem(i,3,item4);
         ui->tableWidget_Patients->setItem(i,4,item5);
     }
+    currentPatients.clear();
+    currentPatients = patients;
 }
 
 void PatientListView::loadConsultationTable(QVector<Consultation*> consultations)
@@ -189,6 +180,8 @@ void PatientListView::loadConsultationTable(QVector<Consultation*> consultations
         ui->tableWidget_Consultations->setItem(i,6,item7);
         ui->tableWidget_Consultations->setItem(i,7,item8);
     }
+    currentConsultations.clear();
+    currentConsultations = consultations;
 }
 
 void PatientListView::loadFollowUpTable(QVector<FollowUp*> followUps)
@@ -224,11 +217,13 @@ void PatientListView::loadFollowUpTable(QVector<FollowUp*> followUps)
         ui->tableWidget_FollowUps->setItem(i,5,item6);
         ui->tableWidget_FollowUps->setItem(i,6,item7);
     }
+    currentFollowUps.clear();
+    currentFollowUps = followUps;
 }
 
 void PatientListView::filterByStatusComboChanged(int)
 {
-
+    filterByPhysiciansComboChanged(ui->comboBox_Physicians->currentIndex());
 }
 
 void PatientListView::filterByPhysiciansComboChanged(int)

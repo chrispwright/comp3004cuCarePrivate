@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'patientlistview.ui'
 **
-** Created: Sat Dec 1 02:00:22 2012
+** Created: Sat Dec 1 13:20:35 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -52,7 +52,7 @@ public:
     {
         if (PatientListView->objectName().isEmpty())
             PatientListView->setObjectName(QString::fromUtf8("PatientListView"));
-        PatientListView->resize(834, 654);
+        PatientListView->resize(965, 654);
         gridLayout_4 = new QGridLayout(PatientListView);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
         groupBox_2 = new QGroupBox(PatientListView);
@@ -60,8 +60,8 @@ public:
         gridLayout_3 = new QGridLayout(groupBox_2);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         tableWidget_Consultations = new QTableWidget(groupBox_2);
-        if (tableWidget_Consultations->columnCount() < 6)
-            tableWidget_Consultations->setColumnCount(6);
+        if (tableWidget_Consultations->columnCount() < 8)
+            tableWidget_Consultations->setColumnCount(8);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
         tableWidget_Consultations->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
@@ -74,6 +74,10 @@ public:
         tableWidget_Consultations->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
         tableWidget_Consultations->setHorizontalHeaderItem(5, __qtablewidgetitem5);
+        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        tableWidget_Consultations->setHorizontalHeaderItem(6, __qtablewidgetitem6);
+        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+        tableWidget_Consultations->setHorizontalHeaderItem(7, __qtablewidgetitem7);
         tableWidget_Consultations->setObjectName(QString::fromUtf8("tableWidget_Consultations"));
         tableWidget_Consultations->setEnabled(false);
         tableWidget_Consultations->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -94,18 +98,22 @@ public:
         gridLayout_2 = new QGridLayout(groupBox_3);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         tableWidget_FollowUps = new QTableWidget(groupBox_3);
-        if (tableWidget_FollowUps->columnCount() < 5)
-            tableWidget_FollowUps->setColumnCount(5);
-        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        tableWidget_FollowUps->setHorizontalHeaderItem(0, __qtablewidgetitem6);
-        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
-        tableWidget_FollowUps->setHorizontalHeaderItem(1, __qtablewidgetitem7);
+        if (tableWidget_FollowUps->columnCount() < 7)
+            tableWidget_FollowUps->setColumnCount(7);
         QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
-        tableWidget_FollowUps->setHorizontalHeaderItem(2, __qtablewidgetitem8);
+        tableWidget_FollowUps->setHorizontalHeaderItem(0, __qtablewidgetitem8);
         QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
-        tableWidget_FollowUps->setHorizontalHeaderItem(3, __qtablewidgetitem9);
+        tableWidget_FollowUps->setHorizontalHeaderItem(1, __qtablewidgetitem9);
         QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
-        tableWidget_FollowUps->setHorizontalHeaderItem(4, __qtablewidgetitem10);
+        tableWidget_FollowUps->setHorizontalHeaderItem(2, __qtablewidgetitem10);
+        QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
+        tableWidget_FollowUps->setHorizontalHeaderItem(3, __qtablewidgetitem11);
+        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
+        tableWidget_FollowUps->setHorizontalHeaderItem(4, __qtablewidgetitem12);
+        QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
+        tableWidget_FollowUps->setHorizontalHeaderItem(5, __qtablewidgetitem13);
+        QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
+        tableWidget_FollowUps->setHorizontalHeaderItem(6, __qtablewidgetitem14);
         tableWidget_FollowUps->setObjectName(QString::fromUtf8("tableWidget_FollowUps"));
         tableWidget_FollowUps->setEnabled(false);
         tableWidget_FollowUps->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -163,23 +171,25 @@ public:
         gridLayout = new QGridLayout(groupBox);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         tableWidget_Patients = new QTableWidget(groupBox);
-        if (tableWidget_Patients->columnCount() < 4)
-            tableWidget_Patients->setColumnCount(4);
-        QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
-        tableWidget_Patients->setHorizontalHeaderItem(0, __qtablewidgetitem11);
-        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
-        tableWidget_Patients->setHorizontalHeaderItem(1, __qtablewidgetitem12);
-        QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
-        tableWidget_Patients->setHorizontalHeaderItem(2, __qtablewidgetitem13);
-        QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
-        tableWidget_Patients->setHorizontalHeaderItem(3, __qtablewidgetitem14);
+        if (tableWidget_Patients->columnCount() < 5)
+            tableWidget_Patients->setColumnCount(5);
+        QTableWidgetItem *__qtablewidgetitem15 = new QTableWidgetItem();
+        tableWidget_Patients->setHorizontalHeaderItem(0, __qtablewidgetitem15);
+        QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
+        tableWidget_Patients->setHorizontalHeaderItem(1, __qtablewidgetitem16);
+        QTableWidgetItem *__qtablewidgetitem17 = new QTableWidgetItem();
+        tableWidget_Patients->setHorizontalHeaderItem(2, __qtablewidgetitem17);
+        QTableWidgetItem *__qtablewidgetitem18 = new QTableWidgetItem();
+        tableWidget_Patients->setHorizontalHeaderItem(3, __qtablewidgetitem18);
+        QTableWidgetItem *__qtablewidgetitem19 = new QTableWidgetItem();
+        tableWidget_Patients->setHorizontalHeaderItem(4, __qtablewidgetitem19);
         tableWidget_Patients->setObjectName(QString::fromUtf8("tableWidget_Patients"));
         tableWidget_Patients->setEditTriggers(QAbstractItemView::NoEditTriggers);
         tableWidget_Patients->setTabKeyNavigation(true);
         tableWidget_Patients->setSelectionMode(QAbstractItemView::SingleSelection);
         tableWidget_Patients->setSelectionBehavior(QAbstractItemView::SelectRows);
         tableWidget_Patients->setRowCount(0);
-        tableWidget_Patients->setColumnCount(4);
+        tableWidget_Patients->setColumnCount(5);
         tableWidget_Patients->horizontalHeader()->setVisible(true);
         tableWidget_Patients->horizontalHeader()->setStretchLastSection(true);
 
@@ -201,28 +211,36 @@ public:
         PatientListView->setWindowTitle(QApplication::translate("PatientListView", "Dialog", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QApplication::translate("PatientListView", "Consultations", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem = tableWidget_Consultations->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("PatientListView", "Date", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem->setText(QApplication::translate("PatientListView", "Patient ID", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget_Consultations->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("PatientListView", "Time", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem1->setText(QApplication::translate("PatientListView", "Consult ID", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget_Consultations->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("PatientListView", "OHIP #", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem2->setText(QApplication::translate("PatientListView", "Date", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget_Consultations->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("PatientListView", "Reason", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem3->setText(QApplication::translate("PatientListView", "Time", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem4 = tableWidget_Consultations->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QApplication::translate("PatientListView", "Actual Reason", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem4->setText(QApplication::translate("PatientListView", "OHIP #", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem5 = tableWidget_Consultations->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QApplication::translate("PatientListView", "Diagnosis", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem5->setText(QApplication::translate("PatientListView", "Reason", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem6 = tableWidget_Consultations->horizontalHeaderItem(6);
+        ___qtablewidgetitem6->setText(QApplication::translate("PatientListView", "Actual Reason", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem7 = tableWidget_Consultations->horizontalHeaderItem(7);
+        ___qtablewidgetitem7->setText(QApplication::translate("PatientListView", "Diagnosis", 0, QApplication::UnicodeUTF8));
         groupBox_3->setTitle(QApplication::translate("PatientListView", "Follow-Ups", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem6 = tableWidget_FollowUps->horizontalHeaderItem(0);
-        ___qtablewidgetitem6->setText(QApplication::translate("PatientListView", "Type", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem7 = tableWidget_FollowUps->horizontalHeaderItem(1);
-        ___qtablewidgetitem7->setText(QApplication::translate("PatientListView", "Due Date", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem8 = tableWidget_FollowUps->horizontalHeaderItem(2);
-        ___qtablewidgetitem8->setText(QApplication::translate("PatientListView", "Due Time", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem9 = tableWidget_FollowUps->horizontalHeaderItem(3);
-        ___qtablewidgetitem9->setText(QApplication::translate("PatientListView", "Status", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem10 = tableWidget_FollowUps->horizontalHeaderItem(4);
-        ___qtablewidgetitem10->setText(QApplication::translate("PatientListView", "Details", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem8 = tableWidget_FollowUps->horizontalHeaderItem(0);
+        ___qtablewidgetitem8->setText(QApplication::translate("PatientListView", "Consult Id", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem9 = tableWidget_FollowUps->horizontalHeaderItem(1);
+        ___qtablewidgetitem9->setText(QApplication::translate("PatientListView", "Follow Up ID", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem10 = tableWidget_FollowUps->horizontalHeaderItem(2);
+        ___qtablewidgetitem10->setText(QApplication::translate("PatientListView", "Type", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem11 = tableWidget_FollowUps->horizontalHeaderItem(3);
+        ___qtablewidgetitem11->setText(QApplication::translate("PatientListView", "Due Date", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem12 = tableWidget_FollowUps->horizontalHeaderItem(4);
+        ___qtablewidgetitem12->setText(QApplication::translate("PatientListView", "Due Time", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem13 = tableWidget_FollowUps->horizontalHeaderItem(5);
+        ___qtablewidgetitem13->setText(QApplication::translate("PatientListView", "Status", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem14 = tableWidget_FollowUps->horizontalHeaderItem(6);
+        ___qtablewidgetitem14->setText(QApplication::translate("PatientListView", "Details", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("PatientListView", "Generate Report", 0, QApplication::UnicodeUTF8));
         comboBox_FilterByStatus->clear();
         comboBox_FilterByStatus->insertItems(0, QStringList()
@@ -238,14 +256,16 @@ public:
         );
         label_2->setText(QApplication::translate("PatientListView", "Filter by Physician: ", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("PatientListView", "Patients", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem11 = tableWidget_Patients->horizontalHeaderItem(0);
-        ___qtablewidgetitem11->setText(QApplication::translate("PatientListView", "First Name", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem12 = tableWidget_Patients->horizontalHeaderItem(1);
-        ___qtablewidgetitem12->setText(QApplication::translate("PatientListView", "Last Name", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem13 = tableWidget_Patients->horizontalHeaderItem(2);
-        ___qtablewidgetitem13->setText(QApplication::translate("PatientListView", "Phone Number", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem14 = tableWidget_Patients->horizontalHeaderItem(3);
-        ___qtablewidgetitem14->setText(QApplication::translate("PatientListView", "Primary Physician", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem15 = tableWidget_Patients->horizontalHeaderItem(0);
+        ___qtablewidgetitem15->setText(QApplication::translate("PatientListView", "Patient ID", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem16 = tableWidget_Patients->horizontalHeaderItem(1);
+        ___qtablewidgetitem16->setText(QApplication::translate("PatientListView", "First Name", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem17 = tableWidget_Patients->horizontalHeaderItem(2);
+        ___qtablewidgetitem17->setText(QApplication::translate("PatientListView", "Last Name", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem18 = tableWidget_Patients->horizontalHeaderItem(3);
+        ___qtablewidgetitem18->setText(QApplication::translate("PatientListView", "Phone #", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem19 = tableWidget_Patients->horizontalHeaderItem(4);
+        ___qtablewidgetitem19->setText(QApplication::translate("PatientListView", "Primary Physician", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

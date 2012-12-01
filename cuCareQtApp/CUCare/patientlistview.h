@@ -31,6 +31,8 @@ public slots:
     void patientTableClicked(int,int,int,int);
     void consultationTableClicked(int,int,int,int);
     void followUpTableClicked(int,int,int,int);
+    void filterByStatusComboChanged(int);
+    void filterByPhysiciansComboChanged(int);
 
 private slots:
     void loadPatientTable(QVector<Patient*> patients);

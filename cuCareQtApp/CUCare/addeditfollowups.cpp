@@ -30,12 +30,16 @@ void AddEditFollowUps::updateFields()
     else if(consultationFollowUp->getType() == "Medical Test")
         ui->comboBox_Type->setCurrentIndex(3);
 
+    ui->comboBox_Status->setEnabled(true);
+    if(consultationFollowUp->getStatus() == "Pending")
+        ui->comboBox_Status->setCurrentIndex(0);
+    else if(consultationFollowUp->getStatus() == "Completed")
+        ui->comboBox_Status->setCurrentIndex(1);
+    else if(consultationFollowUp->getStatus() == "Overdue")
+        ui->comboBox_Status->setCurrentIndex(2);
 
     ui->dateTimeEdit->setDate(consultationFollowUp->getDate());
     ui->dateTimeEdit->setTime(consultationFollowUp->getTime());
-    ui->lineEdit_Status->setReadOnly(false);
-    ui->lineEdit_Status->setEnabled(true);
-    ui->lineEdit_Status->setText(consultationFollowUp->getStatus());
     ui->plainTextEdit_Details->setPlainText(consultationFollowUp->getDetails());
 }
 
@@ -44,6 +48,6 @@ void AddEditFollowUps::saveFollowUp()
     consultationFollowUp->setType(ui->comboBox_Type->currentText());
     consultationFollowUp->setDate(ui->dateTimeEdit->date());
     consultationFollowUp->setTime(ui->dateTimeEdit->time());
-    consultationFollowUp->setStatus(ui->lineEdit_Status->text());
+    consultationFollowUp->setStatus(ui->comboBox_Status->currentText());
     consultationFollowUp->setDetails(ui->plainTextEdit_Details->toPlainText());
 }

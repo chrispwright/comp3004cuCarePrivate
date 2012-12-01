@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QTcpSocket>
 #include "addeditfollowups.h"
+#include "patient.h"
 #include "consultation.h"
 #include "followup.h"
 #include "user.h"
@@ -22,6 +23,7 @@ public:
 
     Consultation* getPatientConsult();
     int getLastFollowUpIndex();
+    void setCurrentPatient(Patient *patient);
     void setPatientConsult(Consultation *pConsult);
     void setCurrentUser(User *user);
     void setPatientConsultFollowUps(QVector<FollowUp*>);
@@ -42,6 +44,7 @@ public slots:
     
 private:
     Ui::AddEditConsultationWindow *ui;
+    Patient *currentPatient;
     Consultation *patientConsult;
     User *currentUser;
     QVector<FollowUp*> patientConsultFollowUps;

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'cucare.ui'
 **
-** Created: Fri Nov 30 19:01:01 2012
+** Created: Fri Nov 30 22:56:00 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -111,7 +111,7 @@ public:
     {
         if (CuCare->objectName().isEmpty())
             CuCare->setObjectName(QString::fromUtf8("CuCare"));
-        CuCare->resize(817, 607);
+        CuCare->resize(962, 700);
         actionAdd_Patient = new QAction(CuCare);
         actionAdd_Patient->setObjectName(QString::fromUtf8("actionAdd_Patient"));
         actionEdit_Patient = new QAction(CuCare);
@@ -399,7 +399,7 @@ public:
         menuBar = new QMenuBar(CuCare);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
         menuBar->setEnabled(false);
-        menuBar->setGeometry(QRect(0, 0, 817, 25));
+        menuBar->setGeometry(QRect(0, 0, 962, 25));
         menuBar->setDefaultUp(false);
         menuBar->setNativeMenuBar(false);
         menuFile = new QMenu(menuBar);

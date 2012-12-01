@@ -27,6 +27,7 @@ AddEditConsultationWindow::~AddEditConsultationWindow()
 
 Consultation* AddEditConsultationWindow::getPatientConsult(){ return patientConsult; }
 int AddEditConsultationWindow::getLastFollowUpIndex(){ return lastFollowUpIndex; }
+void AddEditConsultationWindow::setCurrentPatient(Patient *patient) { currentPatient = patient; }
 void AddEditConsultationWindow::setPatientConsult(Consultation *pConsult) { patientConsult = pConsult; }
 void AddEditConsultationWindow::setCurrentUser(User *user){ currentUser = user; }
 void AddEditConsultationWindow::setPatientConsultFollowUps(QVector<FollowUp*> patConsFUps){ patientConsultFollowUps = patConsFUps; }
@@ -95,7 +96,7 @@ void AddEditConsultationWindow::followUpListChanged(int index)
 void AddEditConsultationWindow::createFollowUpAct()
 {
     addEditFollowUpView = new AddEditFollowUps(this);
-    addEditFollowUpView->setWindowTitle("Add Follow Up");
+    addEditFollowUpView->setWindowTitle("Add Follow Up (" + currentPatient->getFirstName() + " " + currentPatient->getLastName() + ")");
     addEditFollowUpView->setModal(true);
     addEditFollowUpView->setFixedSize(addEditFollowUpView->width(), addEditFollowUpView->height());
     addEditFollowUpView->setConsultationFollowUp(new FollowUp());
@@ -121,7 +122,7 @@ void AddEditConsultationWindow::createFollowUpAct()
 void AddEditConsultationWindow::editFollowUpAct()
 {
     addEditFollowUpView = new AddEditFollowUps(this);
-    addEditFollowUpView->setWindowTitle("Edit Follow Up");
+    addEditFollowUpView->setWindowTitle("Edit Follow Up (" + currentPatient->getFirstName() + " " + currentPatient->getLastName() + ")");
     addEditFollowUpView->setModal(true);
     addEditFollowUpView->setFixedSize(addEditFollowUpView->width(), addEditFollowUpView->height());
 

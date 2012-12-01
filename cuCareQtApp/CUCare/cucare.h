@@ -81,10 +81,10 @@ private:
     QVector<FollowUp*> cuCareFollowUps;
     QVector<FollowUp*> currentPatientFollowUps;
     QVector<FollowUp*> currentConsultationFollowUps;
+    QVector<User*> cuCarePhysicians;
     Patient *currentPatient;
     Consultation *currentConsultation;
     int currentPatientIndex;
-    QVector<QString> cuCarePhysicians;
 };
 
 #endif // CUCARE_H

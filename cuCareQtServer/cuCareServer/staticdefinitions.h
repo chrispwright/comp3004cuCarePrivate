@@ -19,6 +19,7 @@ static QString CONSULTATIONS_DATABASE_FILE = "consultations.database";
 static QString FOLLOWUPS_DATABASE_FILE = "followups.database";
 static QString UNIQUEIDS_DATABASE_FILE =  "uniqueids.database";
 
+static QString PHYSICIAN_HEADER = "physiciandata|";
 static QString PATIENT_HEADER = "patientdata|";
 static QString CONSULTATION_HEADER = "consultationdata|";
 static QString CONSULTATION_ID_HEADER = "consultationid|";

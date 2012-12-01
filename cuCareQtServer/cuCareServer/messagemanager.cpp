@@ -155,7 +155,29 @@ QString MessageManager::handleDataRequest(QTcpSocket *socket)
         returnData.append(TILDA_DELIMETER);
     }
     returnData.chop(1);
+    returnData.append("::");
     followUpsFile.close();
+
+    //Physician Info
+    QFile usersFile(USERS_DATABASE_FILE);
+    if(!usersFile.open(QIODevice::ReadOnly)) {
+        qDebug() << "error" << usersFile.errorString();
+    }
+
+    QTextStream usersFileIn(&usersFile);
+
+    QString line4;
+    while(!usersFileIn.atEnd()) {
+        line4 = usersFileIn.readLine();
+        QStringList lineSplit = line4.split(PIPE_DELIMETER);
+        if(QString::fromLocal8Bit(lineSplit.at(4).toLocal8Bit()) == "Physician"){
+            line4.prepend(PHYSICIAN_HEADER);
+            returnData.append(line4);
+            returnData.append(TILDA_DELIMETER);
+        }
+    }
+    returnData.chop(1);
+    usersFile.close();
 
     socket->write(returnData);
 

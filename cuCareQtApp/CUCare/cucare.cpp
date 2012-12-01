@@ -99,6 +99,7 @@ void CuCare::readResponse()
             QStringList patientSplit = QString::fromLocal8Bit(patientConsultSplit.at(0).toLocal8Bit()).split(TILDA_DELIMETER);
             QStringList consultSplit = QString::fromLocal8Bit(patientConsultSplit.at(1).toLocal8Bit()).split(TILDA_DELIMETER);
             QStringList followUpSplit = QString::fromLocal8Bit(patientConsultSplit.at(2).toLocal8Bit()).split(TILDA_DELIMETER);
+            QStringList physicianSplit = QString::fromLocal8Bit(patientConsultSplit.at(3).toLocal8Bit()).split(TILDA_DELIMETER);
 
             //Patient data
             for(int i = 0; i<patientSplit.size(); i++){
@@ -145,6 +146,18 @@ void CuCare::readResponse()
                 f->setStatus(QString::fromLocal8Bit(followUpInfo.at(6).toLocal8Bit()));
                 f->setDetails(QString::fromLocal8Bit(followUpInfo.at(7).toLocal8Bit()));
                 cuCareFollowUps.push_back(f);
+            }
+
+            //Physician data
+            for(int i = 0; i<physicianSplit.size(); i++){
+                QStringList physicianInfo = physicianSplit.at(i).split(PIPE_DELIMETER);
+                User *u = new User();
+                u->setUserId(QString::fromLocal8Bit(physicianInfo.at(1).toLocal8Bit()));
+                u->setUsername(QString::fromLocal8Bit(physicianInfo.at(2).toLocal8Bit()));
+                u->setFirstName(QString::fromLocal8Bit(physicianInfo.at(3).toLocal8Bit()));
+                u->setLastName(QString::fromLocal8Bit(physicianInfo.at(4).toLocal8Bit()));
+                u->setType(QString::fromLocal8Bit(physicianInfo.at(5).toLocal8Bit()));
+                cuCarePhysicians.push_back(u);
             }
 
             //Reload Combo Box
@@ -264,7 +277,7 @@ void CuCare::deletePatientAct()
 void CuCare::createPatientRecordAct()
 {
     addEditConsultationView = new AddEditConsultationWindow(this);
-    addEditConsultationView->setWindowTitle("Add Consultation Record");
+    addEditConsultationView->setWindowTitle("Add Consultation Record (" + currentPatient->getFirstName() + " " + currentPatient->getLastName() + ")");
     addEditConsultationView->setModal(true);
     addEditConsultationView->setFixedSize(addEditConsultationView->width(), addEditConsultationView->height());
     addEditConsultationView->setPatientConsult(new Consultation());
@@ -290,7 +303,7 @@ void CuCare::createPatientRecordAct()
 void CuCare::editPatientRecordAct()
 {
     addEditConsultationView = new AddEditConsultationWindow(this);
-    addEditConsultationView->setWindowTitle("Edit Consultation Record");
+    addEditConsultationView->setWindowTitle("Edit Consultation Record (" + currentPatient->getFirstName() + " " + currentPatient->getLastName() + ")");
     addEditConsultationView->setModal(true);
     addEditConsultationView->setFixedSize(addEditConsultationView->width(), addEditConsultationView->height());
 
@@ -324,6 +337,12 @@ void CuCare::showFullPatientListing()
     fullPatientListing->setModal(true);
     fullPatientListing->setFixedSize(fullPatientListing->width(), fullPatientListing->height());
 
+    fullPatientListing->setCuCarePatients(cuCarePatients);
+    fullPatientListing->setCuCareConsultations(cuCareConsultations);
+    fullPatientListing->setCuCareFollowUps(cuCareFollowUps);
+    fullPatientListing->setCuCarePhysicians(cuCarePhysicians);
+    fullPatientListing->setupPhysiciansComboBox();
+    fullPatientListing->setupTables();
 
     //Need to be sending an object pointer for a new patient to the next window
     //so that information can be passed back for processing

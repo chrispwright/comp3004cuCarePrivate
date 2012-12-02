@@ -129,8 +129,9 @@ void CuCare::readResponse()
                 p->setLastName(QString::fromLocal8Bit(patientInfo.at(3).toLocal8Bit()));
                 p->setPhoneNumber(QString::fromLocal8Bit(patientInfo.at(4).toLocal8Bit()));
                 p->setPhys(QString::fromLocal8Bit(patientInfo.at(5).toLocal8Bit()));
-                QDate lastVisit = QDate::fromString(QString::fromLocal8Bit(patientInfo.at(6).toLocal8Bit()),DATE_FORMAT);
-                p->setLastConsult(lastVisit);
+                p->setAge(QString::fromLocal8Bit(patientInfo.at(6).toLocal8Bit()));
+                p->setGender(QString::fromLocal8Bit(patientInfo.at(7).toLocal8Bit()));
+                p->setAddress(QString::fromLocal8Bit(patientInfo.at(8).toLocal8Bit()));
                 cuCarePatients.push_back(p);
             }
 
@@ -425,9 +426,10 @@ void CuCare::comboBoxChanged(int value)
             ui->lineEdit_patFirstName->setText(cuCarePatients[value]->getFirstName());
             ui->lineEdit_patLastName->setText(cuCarePatients[value]->getLastName());
             ui->lineEdit_patPhoneNum->setText(cuCarePatients[value]->getPhoneNumber());
-            ui->dateEdit_PatLastConsult->setDate(cuCarePatients[value]->getLastConsult());
             ui->lineEdit_PatPrimaryPhysician->setText(cuCarePatients[value]->getPhys());
-
+            ui->lineEdit_Age->setText(cuCarePatients[value]->getAge());
+            ui->lineEdit_Gender->setText(cuCarePatients[value]->getGender());
+            ui->lineEdit_Address->setText(cuCarePatients[value]->getAddress());
         }
 
         //Update Consultation List

@@ -7,35 +7,37 @@ Patient::Patient()
     firstName = "NULL";
     lastName = "NULL";
     primaryPhysician = "NULL";
-    numOfConsults = 0;
-    lastConsult = tempDate;
     phoneNumber = "NULL";
+    age = "NULL";
+    gender = "NULL";
+    address = "NULL";
 }
 
-Patient::Patient(QString fName, QString lName, QString phys)
+Patient::Patient(QString fName, QString lName, QString phys, QString a, QString g, QString addr)
 {
-    QDate tempDate(0,0,0);
     patientId = "NULL";
     firstName = fName;
     lastName = lName;
     primaryPhysician = phys;
-    numOfConsults = 0;
-    lastConsult = tempDate;
+    age = a;
+    gender = g;
+    address = addr;
 }
 
 QString Patient::getPatientId() { return patientId; }
 QString Patient::getFirstName() { return firstName; }
 QString Patient::getLastName() { return lastName; }
 QString Patient::getPhys() { return primaryPhysician; }
-int Patient::getNumConsults() { return numOfConsults; }
-QDate Patient::getLastConsult() { return lastConsult; }
 QString Patient::getPhoneNumber() { return phoneNumber; }
+QString Patient::getAge() { return age; }
+QString Patient::getGender() { return gender; }
+QString Patient:: getAddress() { return address; }
 
-
+void Patient::setAge(QString a) { age = a; }
+void Patient::setGender(QString g) { gender = g; }
+void Patient::setAddress(QString addr) { address = addr; }
 void Patient::setPatientId(QString pId) { patientId = pId; }
 void Patient::setFirstName(QString fName) { firstName = fName; }
 void Patient::setLastName(QString lName) { lastName = lName; }
 void Patient::setPhys(QString phys) { primaryPhysician = phys; }
-void Patient::setNumConsults(int numCons) { numOfConsults = numCons; }
-void Patient::setLastConsult(QDate lastCons) { lastConsult = lastCons; }
 void Patient::setPhoneNumber(QString pNumber) { phoneNumber = pNumber; }

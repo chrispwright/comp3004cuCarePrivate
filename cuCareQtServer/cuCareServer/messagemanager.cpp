@@ -207,7 +207,7 @@ QString MessageManager::handleAddConsultation(QString incomingMessage, QTcpSocke
     }
     QString addedConsultation = QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()) + PIPE_DELIMETER +
                                 QString::fromLocal8Bit(messageSplit.at(3).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(4).toLocal8Bit()) + PIPE_DELIMETER +
-                                QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(6).toLocal8Bit()) + PIPE_DELIMETER +
+                                QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(6).toLocal8Bit()).replace("\n",";;;") + PIPE_DELIMETER +
                                 QString::fromLocal8Bit(messageSplit.at(7).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(8).toLocal8Bit());
 
     consultsFileIn << addedConsultation.toStdString().c_str();
@@ -252,7 +252,7 @@ QString MessageManager::handleEditConsultation(QString incomingMessage)
         if(QString::fromLocal8Bit(fileLineSplit.at(1).toLocal8Bit()) == consultationId){
             line = QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()) + PIPE_DELIMETER +
                    QString::fromLocal8Bit(messageSplit.at(3).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(4).toLocal8Bit()) + PIPE_DELIMETER +
-                   QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(6).toLocal8Bit()) + PIPE_DELIMETER +
+                   QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(6).toLocal8Bit()).replace(";;;","\n") + PIPE_DELIMETER +
                    QString::fromLocal8Bit(messageSplit.at(7).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(8).toLocal8Bit());
         }
         newFileContents.push_back(line);
@@ -300,7 +300,7 @@ QString MessageManager::handleAddFollowUp(QString incomingMessage, QTcpSocket *s
     QString addedFollowUp = QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()) + PIPE_DELIMETER +
                             QString::fromLocal8Bit(messageSplit.at(3).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(4).toLocal8Bit()) + PIPE_DELIMETER +
                             QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()) + PIPE_DELIMETER + QString::fromLocal8Bit(messageSplit.at(6).toLocal8Bit()) + PIPE_DELIMETER +
-                            QString::fromLocal8Bit(messageSplit.at(7).toLocal8Bit());
+                            QString::fromLocal8Bit(messageSplit.at(7).toLocal8Bit()).replace("\n",";;;");
 
     followUpsFileIn << addedFollowUp.toStdString().c_str();
     followUpsFileIn << "\n";
@@ -345,7 +345,7 @@ QString MessageManager::handleEditFollowUp(QString incomingMessage, QTcpSocket *
             line = QString::fromLocal8Bit(messageSplit.at(1).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(2).toLocal8Bit()) + PIPE_DELIMETER +
                    QString::fromLocal8Bit(messageSplit.at(3).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(4).toLocal8Bit()) + PIPE_DELIMETER +
                    QString::fromLocal8Bit(messageSplit.at(5).toLocal8Bit()) + PIPE_DELIMETER +  QString::fromLocal8Bit(messageSplit.at(6).toLocal8Bit()) + PIPE_DELIMETER +
-                   QString::fromLocal8Bit(messageSplit.at(7).toLocal8Bit());
+                   QString::fromLocal8Bit(messageSplit.at(7).toLocal8Bit()).replace(";;;","\n");
         }
         newFileContents.push_back(line);
     }

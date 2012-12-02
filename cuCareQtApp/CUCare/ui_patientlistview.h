@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'patientlistview.ui'
 **
-** Created: Sat Dec 1 16:44:56 2012
+** Created: Sun Dec 2 01:24:32 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -171,8 +171,8 @@ public:
         gridLayout = new QGridLayout(groupBox);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         tableWidget_Patients = new QTableWidget(groupBox);
-        if (tableWidget_Patients->columnCount() < 5)
-            tableWidget_Patients->setColumnCount(5);
+        if (tableWidget_Patients->columnCount() < 8)
+            tableWidget_Patients->setColumnCount(8);
         QTableWidgetItem *__qtablewidgetitem15 = new QTableWidgetItem();
         tableWidget_Patients->setHorizontalHeaderItem(0, __qtablewidgetitem15);
         QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
@@ -183,13 +183,19 @@ public:
         tableWidget_Patients->setHorizontalHeaderItem(3, __qtablewidgetitem18);
         QTableWidgetItem *__qtablewidgetitem19 = new QTableWidgetItem();
         tableWidget_Patients->setHorizontalHeaderItem(4, __qtablewidgetitem19);
+        QTableWidgetItem *__qtablewidgetitem20 = new QTableWidgetItem();
+        tableWidget_Patients->setHorizontalHeaderItem(5, __qtablewidgetitem20);
+        QTableWidgetItem *__qtablewidgetitem21 = new QTableWidgetItem();
+        tableWidget_Patients->setHorizontalHeaderItem(6, __qtablewidgetitem21);
+        QTableWidgetItem *__qtablewidgetitem22 = new QTableWidgetItem();
+        tableWidget_Patients->setHorizontalHeaderItem(7, __qtablewidgetitem22);
         tableWidget_Patients->setObjectName(QString::fromUtf8("tableWidget_Patients"));
         tableWidget_Patients->setEditTriggers(QAbstractItemView::NoEditTriggers);
         tableWidget_Patients->setTabKeyNavigation(true);
         tableWidget_Patients->setSelectionMode(QAbstractItemView::SingleSelection);
         tableWidget_Patients->setSelectionBehavior(QAbstractItemView::SelectRows);
         tableWidget_Patients->setRowCount(0);
-        tableWidget_Patients->setColumnCount(5);
+        tableWidget_Patients->setColumnCount(8);
         tableWidget_Patients->horizontalHeader()->setVisible(true);
         tableWidget_Patients->horizontalHeader()->setStretchLastSection(true);
 
@@ -265,7 +271,13 @@ public:
         QTableWidgetItem *___qtablewidgetitem18 = tableWidget_Patients->horizontalHeaderItem(3);
         ___qtablewidgetitem18->setText(QApplication::translate("PatientListView", "Phone #", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem19 = tableWidget_Patients->horizontalHeaderItem(4);
-        ___qtablewidgetitem19->setText(QApplication::translate("PatientListView", "Primary Physician", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem19->setText(QApplication::translate("PatientListView", "Age", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem20 = tableWidget_Patients->horizontalHeaderItem(5);
+        ___qtablewidgetitem20->setText(QApplication::translate("PatientListView", "Gender", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem21 = tableWidget_Patients->horizontalHeaderItem(6);
+        ___qtablewidgetitem21->setText(QApplication::translate("PatientListView", "Address", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem22 = tableWidget_Patients->horizontalHeaderItem(7);
+        ___qtablewidgetitem22->setText(QApplication::translate("PatientListView", "Primary Physician", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

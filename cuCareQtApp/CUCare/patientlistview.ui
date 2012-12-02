@@ -270,7 +270,7 @@
          <number>0</number>
         </property>
         <property name="columnCount">
-         <number>5</number>
+         <number>8</number>
         </property>
         <attribute name="horizontalHeaderVisible">
          <bool>true</bool>
@@ -296,6 +296,21 @@
         <column>
          <property name="text">
           <string>Phone #</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Age</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Gender</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Address</string>
          </property>
         </column>
         <column>

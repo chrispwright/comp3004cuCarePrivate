@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'cucare.ui'
 **
-** Created: Sun Dec 2 00:01:22 2012
+** Created: Sun Dec 2 01:48:52 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -15,7 +15,6 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QComboBox>
-#include <QtGui/QDateEdit>
 #include <QtGui/QGridLayout>
 #include <QtGui/QGroupBox>
 #include <QtGui/QHeaderView>
@@ -55,33 +54,37 @@ public:
     QWidget *page;
     QWidget *page_3;
     QGridLayout *gridLayout_10;
-    QLabel *label;
-    QComboBox *comboBox_Patients;
-    QPushButton *pushButton_SyncData;
-    QGroupBox *groupBox_ConsultationInfo;
-    QGridLayout *gridLayout_5;
-    QListWidget *consultationList;
-    QPushButton *pushButton_AddConsultation;
-    QPushButton *pushButton_EditConsultation;
     QGroupBox *groupBox_3;
     QGridLayout *gridLayout_4;
     QTextBrowser *textBrowser_AppOutput;
     QGroupBox *groupBox_PatientInfo;
     QGridLayout *gridLayout_3;
-    QSpacerItem *verticalSpacer;
+    QSpacerItem *horizontalSpacer_3;
     QGridLayout *gridLayout_2;
-    QLabel *label_2;
-    QLineEdit *lineEdit_patFirstName;
     QLabel *label_3;
-    QLineEdit *lineEdit_patLastName;
+    QLineEdit *lineEdit_Address;
     QLabel *label_5;
-    QLineEdit *lineEdit_patPhoneNum;
-    QLabel *label_4;
+    QLabel *label_9;
+    QLineEdit *lineEdit_patFirstName;
+    QLabel *label_2;
+    QLabel *label_8;
     QLineEdit *lineEdit_PatPrimaryPhysician;
+    QLineEdit *lineEdit_patLastName;
+    QLineEdit *lineEdit_patPhoneNum;
+    QLineEdit *lineEdit_Gender;
     QLabel *label_6;
-    QDateEdit *dateEdit_PatLastConsult;
-    QSpacerItem *horizontalSpacer;
+    QLineEdit *lineEdit_Age;
+    QLabel *label_4;
+    QLabel *label;
+    QComboBox *comboBox_Patients;
+    QSpacerItem *verticalSpacer;
     QPushButton *pushButton_FullPatientListing;
+    QGroupBox *groupBox_ConsultationInfo;
+    QGridLayout *gridLayout_5;
+    QListWidget *consultationList;
+    QPushButton *pushButton_AddConsultation;
+    QPushButton *pushButton_EditConsultation;
+    QPushButton *pushButton_SyncData;
     QPushButton *pushButton_SwitchUser;
     QPushButton *pushButton_6;
     QWidget *page_4;
@@ -151,23 +154,146 @@ public:
         gridLayout_10->setSpacing(6);
         gridLayout_10->setContentsMargins(11, 11, 11, 11);
         gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
-        label = new QLabel(page_3);
+        groupBox_3 = new QGroupBox(page_3);
+        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        gridLayout_4 = new QGridLayout(groupBox_3);
+        gridLayout_4->setSpacing(6);
+        gridLayout_4->setContentsMargins(11, 11, 11, 11);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        textBrowser_AppOutput = new QTextBrowser(groupBox_3);
+        textBrowser_AppOutput->setObjectName(QString::fromUtf8("textBrowser_AppOutput"));
+
+        gridLayout_4->addWidget(textBrowser_AppOutput, 0, 0, 1, 1);
+
+
+        gridLayout_10->addWidget(groupBox_3, 3, 0, 1, 4);
+
+        groupBox_PatientInfo = new QGroupBox(page_3);
+        groupBox_PatientInfo->setObjectName(QString::fromUtf8("groupBox_PatientInfo"));
+        groupBox_PatientInfo->setEnabled(false);
+        groupBox_PatientInfo->setMinimumSize(QSize(500, 0));
+        gridLayout_3 = new QGridLayout(groupBox_PatientInfo);
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setContentsMargins(11, 11, 11, 11);
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_3->addItem(horizontalSpacer_3, 2, 4, 1, 1);
+
+        gridLayout_2 = new QGridLayout();
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        label_3 = new QLabel(groupBox_PatientInfo);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        gridLayout_2->addWidget(label_3, 4, 0, 1, 1);
+
+        lineEdit_Address = new QLineEdit(groupBox_PatientInfo);
+        lineEdit_Address->setObjectName(QString::fromUtf8("lineEdit_Address"));
+        lineEdit_Address->setEnabled(false);
+
+        gridLayout_2->addWidget(lineEdit_Address, 8, 1, 1, 3);
+
+        label_5 = new QLabel(groupBox_PatientInfo);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+
+        gridLayout_2->addWidget(label_5, 6, 0, 1, 1);
+
+        label_9 = new QLabel(groupBox_PatientInfo);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        gridLayout_2->addWidget(label_9, 8, 0, 1, 1);
+
+        lineEdit_patFirstName = new QLineEdit(groupBox_PatientInfo);
+        lineEdit_patFirstName->setObjectName(QString::fromUtf8("lineEdit_patFirstName"));
+        lineEdit_patFirstName->setEnabled(false);
+        lineEdit_patFirstName->setMaximumSize(QSize(16777215, 16777215));
+        lineEdit_patFirstName->setReadOnly(true);
+
+        gridLayout_2->addWidget(lineEdit_patFirstName, 2, 1, 1, 1);
+
+        label_2 = new QLabel(groupBox_PatientInfo);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        gridLayout_2->addWidget(label_2, 2, 0, 1, 1);
+
+        label_8 = new QLabel(groupBox_PatientInfo);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        gridLayout_2->addWidget(label_8, 4, 2, 1, 1);
+
+        lineEdit_PatPrimaryPhysician = new QLineEdit(groupBox_PatientInfo);
+        lineEdit_PatPrimaryPhysician->setObjectName(QString::fromUtf8("lineEdit_PatPrimaryPhysician"));
+        lineEdit_PatPrimaryPhysician->setEnabled(false);
+        lineEdit_PatPrimaryPhysician->setReadOnly(true);
+
+        gridLayout_2->addWidget(lineEdit_PatPrimaryPhysician, 6, 3, 1, 1);
+
+        lineEdit_patLastName = new QLineEdit(groupBox_PatientInfo);
+        lineEdit_patLastName->setObjectName(QString::fromUtf8("lineEdit_patLastName"));
+        lineEdit_patLastName->setEnabled(false);
+        lineEdit_patLastName->setMaximumSize(QSize(16777215, 16777215));
+        lineEdit_patLastName->setReadOnly(true);
+
+        gridLayout_2->addWidget(lineEdit_patLastName, 4, 1, 1, 1);
+
+        lineEdit_patPhoneNum = new QLineEdit(groupBox_PatientInfo);
+        lineEdit_patPhoneNum->setObjectName(QString::fromUtf8("lineEdit_patPhoneNum"));
+        lineEdit_patPhoneNum->setEnabled(false);
+        lineEdit_patPhoneNum->setMaximumSize(QSize(16777215, 16777215));
+        lineEdit_patPhoneNum->setReadOnly(true);
+
+        gridLayout_2->addWidget(lineEdit_patPhoneNum, 6, 1, 1, 1);
+
+        lineEdit_Gender = new QLineEdit(groupBox_PatientInfo);
+        lineEdit_Gender->setObjectName(QString::fromUtf8("lineEdit_Gender"));
+        lineEdit_Gender->setEnabled(false);
+
+        gridLayout_2->addWidget(lineEdit_Gender, 4, 3, 1, 1);
+
+        label_6 = new QLabel(groupBox_PatientInfo);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        gridLayout_2->addWidget(label_6, 2, 2, 1, 1);
+
+        lineEdit_Age = new QLineEdit(groupBox_PatientInfo);
+        lineEdit_Age->setObjectName(QString::fromUtf8("lineEdit_Age"));
+        lineEdit_Age->setEnabled(false);
+
+        gridLayout_2->addWidget(lineEdit_Age, 2, 3, 1, 1);
+
+        label_4 = new QLabel(groupBox_PatientInfo);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        gridLayout_2->addWidget(label_4, 6, 2, 1, 1);
+
+        label = new QLabel(groupBox_PatientInfo);
         label->setObjectName(QString::fromUtf8("label"));
         label->setMaximumSize(QSize(100, 16777215));
 
-        gridLayout_10->addWidget(label, 1, 0, 1, 1);
+        gridLayout_2->addWidget(label, 1, 0, 1, 1);
 
-        comboBox_Patients = new QComboBox(page_3);
+        comboBox_Patients = new QComboBox(groupBox_PatientInfo);
         comboBox_Patients->setObjectName(QString::fromUtf8("comboBox_Patients"));
-        comboBox_Patients->setMaximumSize(QSize(200, 16777215));
+        comboBox_Patients->setMaximumSize(QSize(16777215, 16777215));
 
-        gridLayout_10->addWidget(comboBox_Patients, 1, 1, 1, 1);
+        gridLayout_2->addWidget(comboBox_Patients, 1, 1, 1, 3);
 
-        pushButton_SyncData = new QPushButton(page_3);
-        pushButton_SyncData->setObjectName(QString::fromUtf8("pushButton_SyncData"));
-        pushButton_SyncData->setEnabled(true);
 
-        gridLayout_10->addWidget(pushButton_SyncData, 1, 3, 1, 1);
+        gridLayout_3->addLayout(gridLayout_2, 0, 0, 1, 2);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_3->addItem(verticalSpacer, 1, 1, 1, 1);
+
+        pushButton_FullPatientListing = new QPushButton(groupBox_PatientInfo);
+        pushButton_FullPatientListing->setObjectName(QString::fromUtf8("pushButton_FullPatientListing"));
+        pushButton_FullPatientListing->setMaximumSize(QSize(239, 16777215));
+
+        gridLayout_3->addWidget(pushButton_FullPatientListing, 2, 0, 1, 1);
+
+
+        gridLayout_10->addWidget(groupBox_PatientInfo, 2, 0, 1, 3);
 
         groupBox_ConsultationInfo = new QGroupBox(page_3);
         groupBox_ConsultationInfo->setObjectName(QString::fromUtf8("groupBox_ConsultationInfo"));
@@ -197,123 +323,22 @@ public:
 
         gridLayout_10->addWidget(groupBox_ConsultationInfo, 2, 3, 1, 1);
 
-        groupBox_3 = new QGroupBox(page_3);
-        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        gridLayout_4 = new QGridLayout(groupBox_3);
-        gridLayout_4->setSpacing(6);
-        gridLayout_4->setContentsMargins(11, 11, 11, 11);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        textBrowser_AppOutput = new QTextBrowser(groupBox_3);
-        textBrowser_AppOutput->setObjectName(QString::fromUtf8("textBrowser_AppOutput"));
+        pushButton_SyncData = new QPushButton(page_3);
+        pushButton_SyncData->setObjectName(QString::fromUtf8("pushButton_SyncData"));
+        pushButton_SyncData->setEnabled(true);
 
-        gridLayout_4->addWidget(textBrowser_AppOutput, 0, 0, 1, 1);
-
-
-        gridLayout_10->addWidget(groupBox_3, 3, 0, 1, 4);
-
-        groupBox_PatientInfo = new QGroupBox(page_3);
-        groupBox_PatientInfo->setObjectName(QString::fromUtf8("groupBox_PatientInfo"));
-        groupBox_PatientInfo->setEnabled(false);
-        groupBox_PatientInfo->setMinimumSize(QSize(500, 0));
-        gridLayout_3 = new QGridLayout(groupBox_PatientInfo);
-        gridLayout_3->setSpacing(6);
-        gridLayout_3->setContentsMargins(11, 11, 11, 11);
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_3->addItem(verticalSpacer, 2, 0, 1, 1);
-
-        gridLayout_2 = new QGridLayout();
-        gridLayout_2->setSpacing(6);
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        label_2 = new QLabel(groupBox_PatientInfo);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        gridLayout_2->addWidget(label_2, 0, 0, 1, 1);
-
-        lineEdit_patFirstName = new QLineEdit(groupBox_PatientInfo);
-        lineEdit_patFirstName->setObjectName(QString::fromUtf8("lineEdit_patFirstName"));
-        lineEdit_patFirstName->setEnabled(false);
-        lineEdit_patFirstName->setMaximumSize(QSize(16777215, 16777215));
-        lineEdit_patFirstName->setReadOnly(true);
-
-        gridLayout_2->addWidget(lineEdit_patFirstName, 0, 1, 1, 1);
-
-        label_3 = new QLabel(groupBox_PatientInfo);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        gridLayout_2->addWidget(label_3, 1, 0, 1, 1);
-
-        lineEdit_patLastName = new QLineEdit(groupBox_PatientInfo);
-        lineEdit_patLastName->setObjectName(QString::fromUtf8("lineEdit_patLastName"));
-        lineEdit_patLastName->setEnabled(false);
-        lineEdit_patLastName->setMaximumSize(QSize(16777215, 16777215));
-        lineEdit_patLastName->setReadOnly(true);
-
-        gridLayout_2->addWidget(lineEdit_patLastName, 1, 1, 1, 1);
-
-        label_5 = new QLabel(groupBox_PatientInfo);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-
-        gridLayout_2->addWidget(label_5, 2, 0, 1, 1);
-
-        lineEdit_patPhoneNum = new QLineEdit(groupBox_PatientInfo);
-        lineEdit_patPhoneNum->setObjectName(QString::fromUtf8("lineEdit_patPhoneNum"));
-        lineEdit_patPhoneNum->setEnabled(false);
-        lineEdit_patPhoneNum->setMaximumSize(QSize(16777215, 16777215));
-        lineEdit_patPhoneNum->setReadOnly(true);
-
-        gridLayout_2->addWidget(lineEdit_patPhoneNum, 2, 1, 1, 1);
-
-        label_4 = new QLabel(groupBox_PatientInfo);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-
-        gridLayout_2->addWidget(label_4, 3, 0, 1, 1);
-
-        lineEdit_PatPrimaryPhysician = new QLineEdit(groupBox_PatientInfo);
-        lineEdit_PatPrimaryPhysician->setObjectName(QString::fromUtf8("lineEdit_PatPrimaryPhysician"));
-        lineEdit_PatPrimaryPhysician->setEnabled(false);
-        lineEdit_PatPrimaryPhysician->setReadOnly(true);
-
-        gridLayout_2->addWidget(lineEdit_PatPrimaryPhysician, 3, 1, 1, 1);
-
-        label_6 = new QLabel(groupBox_PatientInfo);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-
-        gridLayout_2->addWidget(label_6, 4, 0, 1, 1);
-
-        dateEdit_PatLastConsult = new QDateEdit(groupBox_PatientInfo);
-        dateEdit_PatLastConsult->setObjectName(QString::fromUtf8("dateEdit_PatLastConsult"));
-        dateEdit_PatLastConsult->setEnabled(false);
-        dateEdit_PatLastConsult->setReadOnly(true);
-
-        gridLayout_2->addWidget(dateEdit_PatLastConsult, 4, 1, 1, 1);
-
-
-        gridLayout_3->addLayout(gridLayout_2, 1, 0, 1, 1);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_3->addItem(horizontalSpacer, 1, 1, 1, 1);
-
-        pushButton_FullPatientListing = new QPushButton(groupBox_PatientInfo);
-        pushButton_FullPatientListing->setObjectName(QString::fromUtf8("pushButton_FullPatientListing"));
-
-        gridLayout_3->addWidget(pushButton_FullPatientListing, 3, 0, 1, 1);
-
-
-        gridLayout_10->addWidget(groupBox_PatientInfo, 2, 0, 1, 3);
+        gridLayout_10->addWidget(pushButton_SyncData, 1, 3, 1, 1);
 
         pushButton_SwitchUser = new QPushButton(page_3);
         pushButton_SwitchUser->setObjectName(QString::fromUtf8("pushButton_SwitchUser"));
 
-        gridLayout_10->addWidget(pushButton_SwitchUser, 0, 0, 1, 1);
+        gridLayout_10->addWidget(pushButton_SwitchUser, 1, 0, 1, 1);
 
         pushButton_6 = new QPushButton(page_3);
         pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
         pushButton_6->setEnabled(false);
 
-        gridLayout_10->addWidget(pushButton_6, 0, 1, 1, 1);
+        gridLayout_10->addWidget(pushButton_6, 1, 1, 1, 1);
 
         stackedWidget->addWidget(page_3);
         page_4 = new QWidget();
@@ -458,20 +483,22 @@ public:
         actionAdd->setText(QApplication::translate("CuCare", "Add...", 0, QApplication::UnicodeUTF8));
         actionEdit->setText(QApplication::translate("CuCare", "Edit...", 0, QApplication::UnicodeUTF8));
         actionConfigure_Audit->setText(QApplication::translate("CuCare", "Configure Audit...", 0, QApplication::UnicodeUTF8));
+        groupBox_3->setTitle(QApplication::translate("CuCare", "Application Output:", 0, QApplication::UnicodeUTF8));
+        groupBox_PatientInfo->setTitle(QApplication::translate("CuCare", "Patient Info", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("CuCare", "Last Name:", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("CuCare", "Phone Number:", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("CuCare", "Address:", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("CuCare", "First Name:", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QApplication::translate("CuCare", "Gender:", 0, QApplication::UnicodeUTF8));
+        lineEdit_patLastName->setText(QString());
+        label_6->setText(QApplication::translate("CuCare", "Age:", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("CuCare", "Primary Physician: ", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("CuCare", "Select Patient:", 0, QApplication::UnicodeUTF8));
-        pushButton_SyncData->setText(QApplication::translate("CuCare", "Sync Data", 0, QApplication::UnicodeUTF8));
+        pushButton_FullPatientListing->setText(QApplication::translate("CuCare", "Full Patient Listing", 0, QApplication::UnicodeUTF8));
         groupBox_ConsultationInfo->setTitle(QApplication::translate("CuCare", "Consultation Records", 0, QApplication::UnicodeUTF8));
         pushButton_AddConsultation->setText(QApplication::translate("CuCare", "Create...", 0, QApplication::UnicodeUTF8));
         pushButton_EditConsultation->setText(QApplication::translate("CuCare", "Edit...", 0, QApplication::UnicodeUTF8));
-        groupBox_3->setTitle(QApplication::translate("CuCare", "Application Output:", 0, QApplication::UnicodeUTF8));
-        groupBox_PatientInfo->setTitle(QApplication::translate("CuCare", "Patient Info", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("CuCare", "First Name:", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("CuCare", "Last Name:", 0, QApplication::UnicodeUTF8));
-        lineEdit_patLastName->setText(QString());
-        label_5->setText(QApplication::translate("CuCare", "Phone Number:", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("CuCare", "Primary Physician: ", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("CuCare", "Last Consult:", 0, QApplication::UnicodeUTF8));
-        pushButton_FullPatientListing->setText(QApplication::translate("CuCare", "Full Patient Listing", 0, QApplication::UnicodeUTF8));
+        pushButton_SyncData->setText(QApplication::translate("CuCare", "Sync Data", 0, QApplication::UnicodeUTF8));
         pushButton_SwitchUser->setText(QApplication::translate("CuCare", "Switch User...", 0, QApplication::UnicodeUTF8));
         pushButton_6->setText(QApplication::translate("CuCare", "Reconnect to Server...", 0, QApplication::UnicodeUTF8));
         groupBox_5->setTitle(QApplication::translate("CuCare", "CuCare Accounts", 0, QApplication::UnicodeUTF8));

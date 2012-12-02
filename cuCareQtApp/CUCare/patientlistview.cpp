@@ -116,7 +116,7 @@ void PatientListView::followUpTableClicked(int row,int col, int row1, int col1)
 void PatientListView::loadPatientTable(QVector<Patient*> patients)
 {
     QStringList headers;
-    headers << "Patient Id" <<"First Name" << "Last Name" << "Phone Number" << "Primary Physician";
+    headers << "Patient Id" << "First Name" << "Last Name" << "Phone Number" << "Age" << "Gender" << "Address" << "Primary Physician";
     ui->tableWidget_Patients->clear();
     ui->tableWidget_Patients->setRowCount(patients.size());
     ui->tableWidget_Patients->setHorizontalHeaderLabels(headers);
@@ -127,18 +127,27 @@ void PatientListView::loadPatientTable(QVector<Patient*> patients)
         QTableWidgetItem* item3 = new QTableWidgetItem();
         QTableWidgetItem* item4 = new QTableWidgetItem();
         QTableWidgetItem* item5 = new QTableWidgetItem();
+        QTableWidgetItem* item6 = new QTableWidgetItem();
+        QTableWidgetItem* item7 = new QTableWidgetItem();
+        QTableWidgetItem* item8 = new QTableWidgetItem();
 
         item1->setText(patients[i]->getPatientId());
         item2->setText(patients[i]->getFirstName());
         item3->setText(patients[i]->getLastName());
         item4->setText(patients[i]->getPhoneNumber());
-        item5->setText(patients[i]->getPhys());
+        item5->setText(patients[i]->getAge());
+        item6->setText(patients[i]->getGender());
+        item7->setText(patients[i]->getAddress());
+        item8->setText(patients[i]->getPhys());
 
         ui->tableWidget_Patients->setItem(i,0,item1);
         ui->tableWidget_Patients->setItem(i,1,item2);
         ui->tableWidget_Patients->setItem(i,2,item3);
         ui->tableWidget_Patients->setItem(i,3,item4);
         ui->tableWidget_Patients->setItem(i,4,item5);
+        ui->tableWidget_Patients->setItem(i,5,item6);
+        ui->tableWidget_Patients->setItem(i,6,item7);
+        ui->tableWidget_Patients->setItem(i,7,item8);
     }
     currentPatients.clear();
     currentPatients = patients;

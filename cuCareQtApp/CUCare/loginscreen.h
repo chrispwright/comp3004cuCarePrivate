@@ -4,6 +4,7 @@
 #include "user.h"
 #include <QDialog>
 #include <QTcpSocket>
+#include <QAbstractButton>
 
 namespace Ui {
 class LoginScreen;
@@ -22,7 +23,7 @@ public:
     User *getUser();
 
 public slots:
-    void updateUsername();
+    void updateUsername(QAbstractButton*);
     
 private:
     Ui::LoginScreen *ui;

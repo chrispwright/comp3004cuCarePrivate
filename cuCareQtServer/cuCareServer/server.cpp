@@ -16,7 +16,7 @@ Server::~Server()
 
 void Server::startServer()
 {
-    if(!this->listen(QHostAddress::Any,8001))
+    if(!this->listen(QHostAddress::Any,60002))
     {
         qDebug() << "Server could not start!";
     }
@@ -79,7 +79,7 @@ void Server::startAuditTimer()
     QTime currentTime = QTime::currentTime();
     int interval = currentTime.msecsTo(auditTime);
     if(interval < 0){
-        interval = 3600000 + interval;
+        interval = 86400000 + interval;
     }
 
     qDebug() << "Milliseconds till next audit: " << interval;

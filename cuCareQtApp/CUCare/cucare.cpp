@@ -22,15 +22,19 @@ CuCare::CuCare(QWidget *parent) :
     connect(ui->pushButton_AddConsultation, SIGNAL(clicked()), this, SLOT(createPatientRecordAct()));
     connect(ui->pushButton_EditConsultation, SIGNAL(clicked()), this, SLOT(editPatientRecordAct()));
     connect(ui->pushButton_FullPatientListing, SIGNAL(clicked()), this, SLOT(showFullPatientListing()));
+    connect(ui->pushButton_SwitchUser, SIGNAL(clicked()), this, SLOT(switchUser()));
+    connect(ui->pushButton_SyncData, SIGNAL(clicked()), this, SLOT(syncData()));
+
     //Combo Box Actions
     connect(ui->comboBox_Patients, SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxChanged(int)));
     connect(ui->consultationList, SIGNAL(currentRowChanged(int)), this, SLOT(consultListChanged(int)));
 
-    //Add signals for deleting patient and value changed for patient combobox
-
     connect(connection, SIGNAL(readyRead()), this, SLOT(readResponse()));
 
-    connection->connectToHost(QHostAddress::LocalHost, 8001);
+    QHostAddress address;
+    address.setAddress("192.168.0.11");
+
+    connection->connectToHost(QHostAddress::LocalHost, 60002);
     loginScreen = new LoginScreen(this, connection);
     loginScreen->setFixedSize(loginScreen->width(), loginScreen->height());
     openLogin();
@@ -52,6 +56,20 @@ void CuCare::openLogin()
     else{
         exit(0);
     }
+}
+
+void CuCare::switchUser()
+{
+    loginScreen = new LoginScreen(this, connection);
+    loginScreen->setFixedSize(loginScreen->width(), loginScreen->height());
+    if(loginScreen->exec() == 1){
+        loginScreen->close();
+    }
+}
+
+void CuCare::syncData()
+{
+     connection->write(PATIENT_DATA_REQUEST.toLocal8Bit());
 }
 
 void CuCare::readResponse()
@@ -101,6 +119,7 @@ void CuCare::readResponse()
             QStringList followUpSplit = QString::fromLocal8Bit(patientConsultSplit.at(2).toLocal8Bit()).split(TILDA_DELIMETER);
             QStringList physicianSplit = QString::fromLocal8Bit(patientConsultSplit.at(3).toLocal8Bit()).split(TILDA_DELIMETER);
 
+            cuCarePatients.clear();
             //Patient data
             for(int i = 0; i<patientSplit.size(); i++){
                 QStringList patientInfo = patientSplit.at(i).split(PIPE_DELIMETER);
@@ -115,6 +134,7 @@ void CuCare::readResponse()
                 cuCarePatients.push_back(p);
             }
 
+            cuCareConsultations.clear();
             //Consultation data
             for(int i = 0; i<consultSplit.size(); i++){
                 QStringList consultInfo = consultSplit.at(i).split(PIPE_DELIMETER);
@@ -132,6 +152,7 @@ void CuCare::readResponse()
                 cuCareConsultations.push_back(c);
             }
 
+            cuCareFollowUps.clear();
             //FollowUp data
             for(int i = 0; i<followUpSplit.size(); i++){
                 QStringList followUpInfo = followUpSplit.at(i).split(PIPE_DELIMETER);
@@ -148,6 +169,7 @@ void CuCare::readResponse()
                 cuCareFollowUps.push_back(f);
             }
 
+            cuCarePhysicians.clear();
             //Physician data
             for(int i = 0; i<physicianSplit.size(); i++){
                 QStringList physicianInfo = physicianSplit.at(i).split(PIPE_DELIMETER);
@@ -167,6 +189,8 @@ void CuCare::readResponse()
             }
             ui->textBrowser_AppOutput->append(appOutput->dataRetrievalSuccess());
 
+            ui->groupBox_PatientInfo->setEnabled(true);
+            ui->groupBox_ConsultationInfo->setEnabled(true);
         }
         else if(messageType == CONSULTATION_DATA_TYPE){
             int lastPatientIndex = ui->comboBox_Patients->currentIndex();
@@ -380,6 +404,7 @@ void CuCare::contextMenuEvent(QContextMenuEvent *event)
 
 void CuCare::setUpComboBox()
 {
+    ui->comboBox_Patients->clear();
     QComboBox *comboBoxPatients = ui->comboBox_Patients;
 
     QStringList names;
@@ -428,6 +453,10 @@ void CuCare::comboBoxChanged(int value)
 
         if(currentPatientConsultations.size() > 0){
             ui->consultationList->setCurrentRow(0);
+            ui->pushButton_EditConsultation->setEnabled(true);
+        }
+        else{
+            ui->pushButton_EditConsultation->setEnabled(false);
         }
     }
 }

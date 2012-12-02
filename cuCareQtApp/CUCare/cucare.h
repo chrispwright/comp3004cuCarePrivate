@@ -48,6 +48,8 @@ private slots:
     void comboBoxChanged(int);
     void consultListChanged(int);
     void readResponse();
+    void switchUser();
+    void syncData();
     
 private:
     //Windows

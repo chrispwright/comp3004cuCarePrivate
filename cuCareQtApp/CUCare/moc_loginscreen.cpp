@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'loginscreen.h'
 **
-** Created: Fri Nov 30 19:01:24 2012
+** Created: Sat Dec 1 23:55:21 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -37,7 +37,7 @@ static const uint qt_meta_data_LoginScreen[] = {
 };
 
 static const char qt_meta_stringdata_LoginScreen[] = {
-    "LoginScreen\0\0updateUsername()\0"
+    "LoginScreen\0\0updateUsername(QAbstractButton*)\0"
 };
 
 void LoginScreen::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -46,11 +46,10 @@ void LoginScreen::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         Q_ASSERT(staticMetaObject.cast(_o));
         LoginScreen *_t = static_cast<LoginScreen *>(_o);
         switch (_id) {
-        case 0: _t->updateUsername(); break;
+        case 0: _t->updateUsername((*reinterpret_cast< QAbstractButton*(*)>(_a[1]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObjectExtraData LoginScreen::staticMetaObjectExtraData = {

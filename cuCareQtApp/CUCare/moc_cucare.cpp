@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'cucare.h'
 **
-** Created: Sat Dec 1 12:08:39 2012
+** Created: Sat Dec 1 20:15:17 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!

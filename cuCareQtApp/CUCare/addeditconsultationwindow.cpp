@@ -52,8 +52,13 @@ void AddEditConsultationWindow::updateAccess()
     if(currentUser->getType() == ADMIN_ASSISTANT){
         ui->editActualReason->setReadOnly(true);
         ui->editDiagnosis->setReadOnly(true);
-        ui->groupBox_FollowUps->setEnabled(false);
+        ui->pushButton_CreateFollowUp->setEnabled(false);
     }
+}
+
+void AddEditConsultationWindow::setFollowUpDisabled()
+{
+    ui->groupBox_FollowUps->setEnabled(false);
 }
 
 void AddEditConsultationWindow::saveConsultation()
@@ -125,7 +130,7 @@ void AddEditConsultationWindow::editFollowUpAct()
     addEditFollowUpView->setWindowTitle("Edit Follow Up (" + currentPatient->getFirstName() + " " + currentPatient->getLastName() + ")");
     addEditFollowUpView->setModal(true);
     addEditFollowUpView->setFixedSize(addEditFollowUpView->width(), addEditFollowUpView->height());
-
+    addEditFollowUpView->setCurrentUser(currentUser);
     addEditFollowUpView->setConsultationFollowUp(currentFollowUp);
     addEditFollowUpView->updateFields();
 

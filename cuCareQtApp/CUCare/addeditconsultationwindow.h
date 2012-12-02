@@ -31,6 +31,7 @@ public:
 
     void updateFields();
     void updateAccess();
+    void setFollowUpDisabled();
 
     void loadFollowUps();
 

@@ -1,6 +1,9 @@
 #include "addeditfollowups.h"
 #include "ui_addeditfollowups.h"
 
+static QString PHYSICIAN = "Physician";
+static QString ADMIN_ASSISTANT = "AdminAssistant";
+
 AddEditFollowUps::AddEditFollowUps(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddEditFollowUps)
@@ -16,7 +19,7 @@ AddEditFollowUps::~AddEditFollowUps()
 }
 
 void AddEditFollowUps::setConsultationFollowUp(FollowUp* consFUp) { consultationFollowUp = consFUp; }
-
+void AddEditFollowUps::setCurrentUser(User* u){ currentUser = u; }
 FollowUp* AddEditFollowUps::getConsultationFollowUp(){ return consultationFollowUp; }
 
 void AddEditFollowUps::updateFields()
@@ -40,7 +43,14 @@ void AddEditFollowUps::updateFields()
 
     ui->dateTimeEdit->setDate(consultationFollowUp->getDate());
     ui->dateTimeEdit->setTime(consultationFollowUp->getTime());
-    ui->plainTextEdit_Details->setPlainText(consultationFollowUp->getDetails());
+    if(currentUser->getType() == ADMIN_ASSISTANT){
+        ui->plainTextEdit_Details->setEnabled(false);
+        ui->comboBox_Type->setEnabled(false);
+        ui->dateTimeEdit->setEnabled(false);
+    }
+    else {
+        ui->plainTextEdit_Details->setPlainText(consultationFollowUp->getDetails());
+    }
 }
 
 void AddEditFollowUps::saveFollowUp()

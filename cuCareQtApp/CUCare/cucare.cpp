@@ -280,7 +280,9 @@ void CuCare::createPatientRecordAct()
     addEditConsultationView->setWindowTitle("Add Consultation Record (" + currentPatient->getFirstName() + " " + currentPatient->getLastName() + ")");
     addEditConsultationView->setModal(true);
     addEditConsultationView->setFixedSize(addEditConsultationView->width(), addEditConsultationView->height());
+    addEditConsultationView->setFollowUpDisabled();
     addEditConsultationView->setPatientConsult(new Consultation());
+    addEditConsultationView->setCurrentPatient(currentPatient);
     addEditConsultationView->setCurrentUser(cuCareUser);
     addEditConsultationView->setConnection(connection);
     addEditConsultationView->updateAccess();
@@ -309,6 +311,7 @@ void CuCare::editPatientRecordAct()
 
     //Get Index Of Selected Consultation
     addEditConsultationView->setPatientConsult(currentConsultation);
+    addEditConsultationView->setCurrentPatient(currentPatient);
     addEditConsultationView->setCurrentUser(cuCareUser);
     addEditConsultationView->setPatientConsultFollowUps(currentConsultationFollowUps);
     addEditConsultationView->setConnection(connection);

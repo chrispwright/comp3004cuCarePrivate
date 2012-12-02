@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "followup.h"
+#include "user.h"
 
 namespace Ui {
 class AddEditFollowUps;
@@ -20,6 +21,7 @@ public:
 
     FollowUp* getConsultationFollowUp();
 
+    void setCurrentUser(User*);
     void updateFields();
 private slots:
     void saveFollowUp();
@@ -27,6 +29,7 @@ private slots:
 private:
     Ui::AddEditFollowUps *ui;
     FollowUp *consultationFollowUp;
+    User *currentUser;
 };
 
 #endif // ADDEDITFOLLOWUPS_H
